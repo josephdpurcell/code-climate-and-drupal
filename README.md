@@ -10,13 +10,13 @@ As a result the speed and stability of development is improved through fewer bug
 
 # References
 
-<a name="footnote1">1</a>: The need for speed and stability of development is derived from the "[Drupal 8 Retrospective Suggestions](https://docs.google.com/document/d/11ZcXSSqvAGkI4AQ9-GxQmnMR3E9bo8Z9DUA58bY7_Sk/mobilebasic)" Google Doc survey results.
+<a name="footnote1">1</a>. The need for speed and stability of development is derived from the "[Drupal 8 Retrospective Suggestions](https://docs.google.com/document/d/11ZcXSSqvAGkI4AQ9-GxQmnMR3E9bo8Z9DUA58bY7_Sk/mobilebasic)" Google Doc survey results.
 
-<a name="footnote2">2</a>: For an explanation of SOLID software design, see the "[SOLID (object-oriented design)](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29)" article on WikiPedia.
+<a name="footnote2">2</a>. For an explanation of SOLID software design, see the "[SOLID (object-oriented design)](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29)" article on WikiPedia.
 
-<a name="footnote3">3</a>: To compute this, take the "bugs" column on the "Explore" tab of the [phpmetrics results for Drupal Core 8.0.6](phpmetrics-drupal-8.0.6.html) and multiply it by the number of files on the "Evaluation" tab. The math, then, is: 0.46 bugs * 3,373 files = 1,551.58 bugs.
+<a name="footnote3">3</a>. To compute this, take the "bugs" column on the "Explore" tab of the [phpmetrics results for Drupal Core 8.0.6](phpmetrics-drupal-8.0.6.html) and multiply it by the number of files on the "Evaluation" tab. The math, then, is: 0.46 bugs * 3,373 files = 1,551.58 bugs.
 
-<a name="footnote4">4</a>: "[Linux Kernel Developer Responses to Static Analysis Bug Reports](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html)" by Philip J. Guo and Dawson Engler, Stanford University
+<a name="footnote4">4</a>. "[Linux Kernel Developer Responses to Static Analysis Bug Reports](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html)" by Philip J. Guo and Dawson Engler, Stanford University
 
 # TODOs
 
