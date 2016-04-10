@@ -16,7 +16,7 @@ As a result the speed and stability of development is improved through fewer bug
 
 <a name="footnote3">3</a>. To compute this, take the "bugs" column on the "Explore" tab of the [phpmetrics results for Drupal Core 8.0.6](phpmetrics-drupal-8.0.6.html) and multiply it by the number of files on the "Evaluation" tab. The math, then, is: 0.46 bugs * 3,373 files = 1,551.58 bugs.
 
-<a name="footnote4">4</a>. "[Linux Kernel Developer Responses to Static Analysis Bug Reports](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html)" by Philip J. Guo and Dawson Engler, Stanford University
+<a name="footnote4">4</a>. The Linux kernel and Windows server teams found static analysis to have a 0.56 and 0.58 correlation with bug reports, see "[Linux Kernel Developer Responses to Static Analysis Bug Reports](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html)" by Philip J. Guo and Dawson Engler from Stanford University for details.
 
 # TODOs
 
