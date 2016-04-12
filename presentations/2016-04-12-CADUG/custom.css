@@ -1,0 +1,26 @@
+.background-color {
+  background: #636466;
+  background-color: #636466; }
+
+.reveal {
+  color: #d6d6d6; }
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    color: #e97724; }
+  .reveal section img {
+    border: none;
+    background: none;
+    box-shadow: none;
+    vertical-align: middle; }
+  .reveal a {
+    color: inherit; }
+
+.fa {
+  vertical-align: middle; }
+
+.fa-drupal {
+  color: #0678BE; }
+
+.fa-twitter {
+  color: #55acee; }
+
+/*# sourceMappingURL=custom.css.map */
