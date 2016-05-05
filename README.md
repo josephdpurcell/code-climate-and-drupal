@@ -33,7 +33,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 ## Add Code Climate Config to Drupal 8 Core
 
 ```
-wget https://gist.githubusercontent.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30/raw/92a9f2215dc99a29f63b02807922ac126894cbc7/0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
+wget https://gist.githubusercontent.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30/raw/2d05db503001af1a90d2d40a9270e0c5fb8c50a2/0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
 git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
 ```
 
@@ -42,7 +42,7 @@ See [gist here](https://gist.github.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b
 ## Add Code Climate Config to a Drupal 8 Module
 
 ```
-wget https://gist.githubusercontent.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382/raw/e43c218583628c3eed5406e759c707754c4a9e49/0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
+wget https://gist.githubusercontent.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382/raw/cc3437d7e93c5b9184561a5e09d34921bb6336b6/0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
 git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
 ```
 
