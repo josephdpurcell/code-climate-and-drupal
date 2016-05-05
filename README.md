@@ -18,6 +18,32 @@ As a result the speed and stability of development is improved through fewer bug
 
 <a name="footnote4">4</a>. The Linux kernel and Windows server teams found static analysis to have a 0.56 and 0.58 correlation with bug reports, see "[Linux Kernel Developer Responses to Static Analysis Bug Reports](https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html)" by Philip J. Guo and Dawson Engler from Stanford University for details.
 
+# Examples
+
+Note: these GPA's are likely out of date, so verify the commit Code Climate has matches with the latest commit.
+
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/workbench_moderation/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/workbench_moderation) [GitHub fork for drupal/workbench_moderation](https://github.com/josephdpurcell/workbench_moderation)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-multiversion/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-multiversion) [GitHub fork for drupal/multiversion](https://github.com/josephdpurcell/multiversion)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-deploy/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-deploy) [GitHub fork for drupal/drupal-deploy](https://github.com/josephdpurcell/drupal-deploy)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-replication/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-replication) [GitHub fork for drupal/drupal-replication](https://github.com/josephdpurcell/drupal-replication)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-relaxed/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-relaxed) [GitHub fork for drupal/drupal-relaxed](https://github.com/josephdpurcell/drupal-relaxed)
+
+# How To's
+
+## Add Code Climate Config to Drupal 8 Core
+
+```
+wget https://gist.githubusercontent.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30/raw/69793d7593f392961526f34336e22cac73df7bc2/0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
+git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
+```
+
+## Add Code Climate Config to a Drupal 8 Module
+
+```
+wget https://gist.githubusercontent.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382/raw/6333e4892cf4091463a5d072a4f15094b4919726/0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
+git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
+```
+
 # TODOs
 
 * explain why Code Climate is a better choice than other tools
