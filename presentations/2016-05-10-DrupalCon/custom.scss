@@ -1,0 +1,37 @@
+.background-color {
+    background: #636466;
+    background-color: #636466;
+}
+
+.reveal {
+    color: #d6d6d6;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #e97724;
+    }
+
+    section {
+        img {
+            border: none;
+            background: none;
+            box-shadow: none;
+            vertical-align: middle;
+        }
+    }
+
+    a {
+        color: inherit;
+    }
+}
+
+.fa {
+    vertical-align: middle;
+}
+
+.fa-drupal {
+    color: #0678BE;
+}
+
+.fa-twitter {
+    color: #55acee;
+}
