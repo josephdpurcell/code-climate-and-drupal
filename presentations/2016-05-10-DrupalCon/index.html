@@ -44,14 +44,257 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h2 style="text-transform:none">Static Analysis,<br>Code Climate, and Drupal</h2>
-					<p>
-						DrupalCon New Orleans 2016
-					</p><p>
-						<small>By Joseph D. Purcell</small>
-					</p>
+        <section>
+          <section>
+            <h2>Static Analysis,<br>Code Climate, and Drupal</h2>
+            <p>
+              DrupalCon New Orleans 2016
+            </p><p>
+              <small>By Joseph D. Purcell</small><br>
+              <small><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></small>
+            </p>
+          </section>
+
+          <section>
+            <p><img src="images/dbridge.png"></p>
+            <p><a href="https://twitter.com/dbridgechicago">@DBridgeChicago</a></p>
+            <aside class="notes">
+              <ul>
+                <li>web dev since 2003</li>
+                <li>dbridge</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h1>Let's talk.</h1>
+            <img src="images/have-a-seat.jpg" />
+            <p>Questions, comments, concerns, objections,<br>are all welcome!</p>
+            <aside class="notes">
+              <ul>
+                <li>I want feedback</li>
+                <li>honest convo about usefulness of static analysis</li>
+              </ul>
+            </aside>
+          </section>
 				</section>
+
+				<section>
+          <section>
+            <h2>What is static analysis?</h2>
+            <p class="fragment">Anything you know without executing code.</p>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Examples:</h2>
+            <ul>
+              <li><b>Security:</b> globals, var_dump, eval</li>
+              <li><b>Hard to test:</b> statics, complexity</li>
+              <li><b>Hard to refactor/extend:</b> coupling</li>
+              <li><b>Potential bugs:</b> unused vars/props</li>
+            </ul>
+            <p>
+              <i>i.e. code smells...</i>
+            </p>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <img src="images/baby-diaper.jpg" style="width:50%" />
+            <blockquote>If it stinks, change it.<br><small>- Grandma Beck, "Refactoring"</small></blockquote>
+            <aside class="notes">
+              <ul>
+                <li></li>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>What is Code Climate?</h2>
+            <p>An open source static analysis platform.</p>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>You can use it as a workflow tool.</h2>
+            <p>Find problems before you merge code.</p>
+          </section>
+
+          <section>
+            <img src="images/code-climate-pass.png" />
+            <small>Source: <a href="https://github.com/18F/micropurchase/pull/524">github.com/18F/micropurchase/pull/524</a></small>
+          </section>
+
+          <section>
+            <img src="images/code-climate-fail.png" />
+            <small>Source: <a href="https://github.com/18F/micropurchase/pull/466">github.com/18F/micropurchase/pull/466</a></small>
+          </section>
+
+          <section>
+            <img src="images/code-climate-issues.png" />
+            <small>Source: <a href="https://codeclimate.com/github/18F/micropurchase/pull/466">codeclimate.com/github/18F/micropurchase/pull/466</a></small>
+          </section>
+
+          <section>
+            <h2>You can use it as an audit tool.</h2>
+            <p>Evaluate code before using it.</p>
+          </section>
+
+          <section>
+            <h2>Globals: hard to test, security risk</h2>
+<pre>
+function wp_ajax_delete_tag() {
+    $tag_id = (int) $_POST['tag_ID'];
+    check_ajax_referer( "delete-tag_$tag_id" );
+
+    <b>$taxonomy = !empty($_POST['taxonomy']) ? $_POST['taxonomy'] : 'post_tag';</b>
+    ...
+</pre>
+
+            <small>Source: <a href="https://codeclimate.com/repos/5730fdf0d132d84858004be5/issues?category=security&engine=&page=2">codeclimate.com/repos/5730fdf0d132d84858004be5/issues?category=security...</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Globals: hard to test, security risk</h2>
+<pre>
+protected function doLoadMultiple(array $names, $immutable = TRUE) {
+  ...
+  if (isset($GLOBALS['config'][$name])) {
+    <b>$this->cache[$cache_key]->setSettingsOverride($GLOBALS['config'][$name]);</b>
+  ...
+</pre>
+
+            <small>Source: <a href="https://codeclimate.com/repos/5730f2e8d132d85e94000b46/issues?category=security&engine=">codeclimate.com/repos/5730f2e8d132d85e94000b46/issues?category=security...</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Unused variable: bug risk, obscure</h2>
+            <img src="images/code-climate-unused-var.png" />
+            <small>Source: <a href="https://codeclimate.com/repos/5730f2e8d132d85e94000b46/core/lib/Drupal/Core/Field/WidgetBase.php">codeclimate.com/repos...core/lib/Drupal/Core/Field/WidgetBase.php</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Unused variable: bug risk, obscure</h2>
+            <img src="images/code-climate-unused-var-multiversion.png" />
+            <small>Source: <a href="https://codeclimate.com/github/josephdpurcell/drupal-multiversion/src/Entity/Index/MultiversionIndexFactory.php">codeclimate.com...multiversion/src/Entity/Index/MultiversionIndexFactory.php</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Unused variable: bug risk, obscure</h2>
+<pre>
+function hook_tokens_alter(array &$replacements, array $context, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $options = $context['options'];
+  if (isset($options['langcode'])) {
+    <b>$url_options['language'] = \Drupal::languageManager()->getLanguage($options['langcode']);</b>
+    $langcode = $options['langcode'];
+  }
+  else {
+    $langcode = NULL;
+  }
+  if ($context['type'] == 'node' && !empty($context['data']['node'])) {
+    $node = $context['data']['node'];
+    if (isset($context['tokens']['title'])) {
+      $title = $node->field_title->view('default');
+      $replacements[$context['tokens']['title']] = drupal_render($title);
+    }
+  }
+}
+</pre>
+            <small>Source: <a href="https://codeclimate.com/repos/5730f2e8d132d85e94000b46/core/lib/Drupal/Core/Utility/token.api.php">codeclimate.com/repos...core/lib/Drupal/Core/Utility/token.api.php</a></small>
+          </section>
+
+          <section>
+            <h2 style="font-size:120%">Complexity: hard to maintain and extend</h2>
+            <img src="images/code-climate-class.png" style="width:80%" />
+            <small>Source: <a href="https://codeclimate.com/repos/5730f2e8d132d85e94000b46/core/lib/Drupal/Core/Entity/EntityType.php#complexity">codeclimate.com/repos...core/lib/Drupal/Core/Entity/EntityType.php#complexity</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <img src="images/code-climate-ratings.png" />
+            <small>Source: <a href="https://github.com/josephdpurcell/code-climate-and-drupal">github.com/josephdpurcell/code-climate-and-drupal</a></small>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h1>Ideas?</h2>
+            <ul>
+              <li>Add <a href="https://www.drupal.org/sandbox/coltrane/1921926">Drupal Security Sniffs</a>.</li>
+              <li>Core and contrib modules display their GPA on project pages.</li>
+              <li>Write a Code Climate engine that has all our static analysis checks.</li>
+              <li>Would phpmetrics.org be better for auditing?</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h1>Let's talk.</h1>
+            <img src="images/have-a-seat.jpg" />
+            <p>Questions, comments, concerns, objections,<br>are all welcome!</p>
+            <aside class="notes">
+              <ul>
+                <li>I want feedback</li>
+                <li>honest convo about usefulness of static analysis</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h1>References and Resources</h1>
+            <ul>
+              <li><a href="https://www.codeclimate.com/">Code Climate</a></li>
+              <li><a href="https://www.drupal.org/sandbox/coltrane/1921926">Drupal Security Sniffs</a></li>
+              <li><a href="http://www.phpmetrics.org/">phpmetrics.org</a></li>
+              <li>"<a href="http://blog.codeclimate.com/blog/2015/07/07/build-your-own-codeclimate-engine/">Build your own Code Climate Analysis Engine</a>"</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
 
 			</div>
 
