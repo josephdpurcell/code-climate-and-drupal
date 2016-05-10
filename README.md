@@ -37,6 +37,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 ## Other
 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/symfony/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/symfony) [GitHub fork for symfony/symfony:master](https://github.com/josephdpurcell/symfony)
+* [![Code Climate](https://codeclimate.com/repos/5730fdf0d132d84858004be5/badges/9503049144363360d9c2/gpa.svg)](https://codeclimate.com/repos/5730fdf0d132d84858004be5/feed) [GitHub fork for wordpress/wordpress:master](https://github.com/josephdpurcell/wordpress) ...is this number right???
 
 # How To's
 
@@ -68,3 +69,9 @@ See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c2
 # Improvements
 
 * Check Symfony using https://github.com/djoos/Symfony2-coding-standard
+* Use AST like [Phan](https://github.com/etsy/phan) or [pharborist](https://github.com/grom358/pharborist)
+* Involve the [Drupal Technical Working Group](https://groups.drupal.org/node/510675), see also [guidelines](https://www.drupal.org/project/coding_standards)
+* Have PHPCS include Drupal code sniffs (just like it does for PRS2)
+* Include security sniffs:
+    * [Drupal Security Sniffs](https://www.drupal.org/sandbox/coltrane/1921926), see also [issue](https://www.drupal.org/node/1844870)
+    * [FloeDesignTechnologies/phpcs-security-audit](https://github.com/FloeDesignTechnologies/phpcs-security-audit)
