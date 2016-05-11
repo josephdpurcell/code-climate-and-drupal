@@ -12,6 +12,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 
 ## Drupal
 
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-7.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-7.x) [GitHub fork for drupal/drupal:7.x](https://github.com/josephdpurcell/drupal-7.x)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal) [GitHub fork for drupal/drupal:8.1.x](https://github.com/josephdpurcell/drupal)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x) [GitHub fork for drupal/drupal:8.2.x](https://github.com/josephdpurcell/drupal-8.2.x)
 
@@ -48,13 +49,6 @@ git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
 
 See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382).
 
-# TODOs
-
-* explain why Code Climate is a better choice than other tools
-* explain how Code Climate will work and give an example
-* create slides for BOF
-* identify a better title
-
 # Improvements
 
 * Check Symfony using https://github.com/djoos/Symfony2-coding-standard
@@ -65,3 +59,6 @@ See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c2
     * [Drupal Security Sniffs](https://www.drupal.org/sandbox/coltrane/1921926), see also [issue](https://www.drupal.org/node/1844870)
     * [FloeDesignTechnologies/phpcs-security-audit](https://github.com/FloeDesignTechnologies/phpcs-security-audit)
 * Add checks for CSS and JS
+* Compare Scruitinizer and phpmetrics.org with Code Climate
+* Check [laravel](https://github.com/laravel/laravel) and [laravel framework](https://github.com/laravel/framework)
+* How does this compare with [https://www.drupal.org/node/1299710](https://www.drupal.org/node/1299710)?
