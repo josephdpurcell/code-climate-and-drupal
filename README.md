@@ -31,6 +31,15 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 
 # How To's
 
+## Add Code Climate Config to Drupal 7 Core
+
+```
+wget https://gist.githubusercontent.com/josephdpurcell/c4c5bb42bb8f4dd75b0cdaf41e2a023e/raw/9205838037a2ee6f62a69962a0252f6b8ec3f7c7/0001-Add-.codeclimate.yml-for-Drupal-7-core.patch
+git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-7-core.patch
+```
+
+See [gist here](https://gist.github.com/josephdpurcell/c4c5bb42bb8f4dd75b0cdaf41e2a023e).
+
 ## Add Code Climate Config to Drupal 8 Core
 
 ```
