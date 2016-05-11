@@ -23,6 +23,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-deploy/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-deploy) [GitHub fork for drupal/drupal-deploy:8.x-1.x](https://github.com/josephdpurcell/drupal-deploy)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-replication/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-replication) [GitHub fork for drupal/drupal-replication:8.x-1.x](https://github.com/josephdpurcell/drupal-replication)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-relaxed/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-relaxed) [GitHub fork for drupal/drupal-relaxed:8.x-1.x](https://github.com/josephdpurcell/drupal-relaxed)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-group/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-group) [GitHub fork for drupal/group:8.x-1.x](https://github.com/josephdpurcell/drupal-group)
 
 ## Other
 
