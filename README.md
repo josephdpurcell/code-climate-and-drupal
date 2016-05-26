@@ -72,3 +72,7 @@ See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c2
 * Compare Scruitinizer and phpmetrics.org with Code Climate
 * Check [laravel](https://github.com/laravel/laravel) and [laravel framework](https://github.com/laravel/framework)
 * How does this compare with [https://www.drupal.org/node/1299710](https://www.drupal.org/node/1299710)?
+* Give a quick pointer to how to get started with Code Climate
+* Explain the phpmd config and how to customize thresholds
+* Explain why .phpcs directory has to be added
+* Explain what git am does, i.e. just make sure people knows it makes a commit
