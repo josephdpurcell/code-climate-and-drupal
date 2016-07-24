@@ -4,6 +4,8 @@ Code Climate is a free open source static analysis platform that is a great fit 
 
 For more information on why Code Climate is a good fit for Drupal, read the [persuasive essay](persuasive-essay.md).
 
+Currently, I've identified in the [How To's](#how-tos) a few examples of how to use Code Climate with Drupal which focus solely on PHP Code Sniffer (PHPCS) and PHP Mess Detector (PHPMD). While PHPCS is less controversial since it is using the [Drupal Coder](https://www.drupal.org/project/coder) project. However, PHPMD is not configured out of the box to what the Drupal community would consider in alignment with best practices. As such, the examples below use a custom PHPMD configuration file according to my best guess as to what I think is a reasonable start [see config here](.phpmd.xml), with a hope it can evolve into aligning with more well adopted checks. It is worth noting these examples focus solely on PHP--revising the configuration for JS and CSS standards would be a win.
+
 # Examples
 
 The following examples use the PHPCS sniffs supported by their respective communities, and the same phpmd file. The result should be a somewhat objective comparison of how each code base meets its own code style, as well as the checks from PHPMD, such as complexity or unused variables.
