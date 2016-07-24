@@ -32,6 +32,8 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 
 # How To's
 
+Below are examples of how to add Code Climate to a Drupal project, core, or module. These are a work in progress. For now they focus on PHPCS code style and some PHPMD checks that seem appropriate for Drupal code.
+
 ## Drupal 7 Project
 
 To add a Code Climate config designed for a Drupal 7 project:
@@ -42,6 +44,8 @@ git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-7-project.patch
 ```
 
 See [gist here](https://gist.github.com/josephdpurcell/688383828f768be3aba6662d0a7736bf).
+
+@todo write notes about how if its an Acquia, composer-based, or multisite project it will be different
 
 ## Drupal 7 Core
 
@@ -61,6 +65,10 @@ See [gist here](https://gist.github.com/josephdpurcell/c4c5bb42bb8f4dd75b0cdaf41
 ## Drupal 7 Modules
 
 @todo write one for Drupal 7 modules
+
+## Drupal 8 Project
+
+@todo write one for a Drupal 8 project
 
 ## Drupal 8 Core
 
@@ -101,3 +109,4 @@ See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c2
 * Explain why .phpcs directory has to be added
 * Explain what git am does, i.e. just make sure people knows it makes a commit
 * Ensure .install files are added
+* Support theming code climate yml
