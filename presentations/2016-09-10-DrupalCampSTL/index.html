@@ -216,17 +216,6 @@ if (($err = SSLHashSHA1::update($hashCtx, $signedParams)) != 0)
           </section>
 
           <section>
-            <h2>Cost of Owning a Mess</h2>
-            <img style="max-width:70%;border:0;box-shadow:none;background:#fff" src="img/Code_Mess-Productivity_vs_Time.svg" alt="As time increases, productivity declines" />
-            <aside class="notes">
-              <ul>
-                <li>Can it save you time/money?</li>
-                <li>Linux kernel and Windows server 0.56 and 0.58 correlation to bug reports (<a href="https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html">source</a>)</li>
-              </ul>
-            </aside>
-          </section>
-
-          <section>
             <h2>Let's try it out...</h2>
             <aside class="notes">
               <ul>
@@ -704,6 +693,17 @@ exclude_paths:
             </aside>
           </section>
 
+          <section>
+            <h2>Cost of Owning a Mess</h2>
+            <img style="max-width:70%;border:0;box-shadow:none;background:#fff" src="img/Code_Mess-Productivity_vs_Time.svg" alt="As time increases, productivity declines" />
+            <aside class="notes">
+              <ul>
+                <li>Can it save you time/money?</li>
+                <li>Linux kernel and Windows server 0.56 and 0.58 correlation to bug reports (<a href="https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html">source</a>)</li>
+              </ul>
+            </aside>
+          </section>
+
         </section>
 
         <!-- SECTION 5: Now What? -->
@@ -712,7 +712,7 @@ exclude_paths:
           <section>
             <h2>What's next?</h2>
             <ul>
-              <li>Start using static anlaysis on Drupal Core and Contrib (see #<a href="https://www.drupal.org/node/1299710">1299710</a>)</li>
+              <li>Start using static anlaysis on Drupal Core and Contrib<br>(see #<a href="https://www.drupal.org/node/1299710">1299710</a>)</li>
               <li>Add GPAs to compare contrib modules</li>
               <li>Every PHP or Drupal CVE gets a sniff (see Ruby handbrake)</li>
               <li>Automated code quality spike tickets: CVEs or GPA threshold</li>
@@ -733,6 +733,7 @@ exclude_paths:
           </section>
 
         </section>
+
 
       </div>
     </div>
