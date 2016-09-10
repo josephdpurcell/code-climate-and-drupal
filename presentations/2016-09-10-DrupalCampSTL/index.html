@@ -108,7 +108,7 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
             </code></pre>
             <aside class="notes">
               <ul>
-                <li>September 2012 iOS and OS X<li>
+                <li>September 2012 iOS and OS X</li>
                 <li>not fixed until Feb 2014: 17 mo</li>
                 <li>man-in-the-middle on any SSL/TLS connection</li>
               </ul>
@@ -128,8 +128,8 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
           </section>
 
           <section>
-            <h2>We waste time with:</h2>
-            <ul>
+            <h2>If you're not using static analysis you're wasting time.</h2>
+            <ul class="fragment">
               <li>Trivial back and forth on code style</li>
               <li>Bug resolution for obvious problems (dead code, typos, etc)</li>
               <li>The "grind" on poor code (complex, highly coupled)</li>
@@ -153,12 +153,12 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
             <ol>
               <li>What is static analysis?</li>
               <li>What can the analysis find?</li>
-              <li>How do I do continual inspection?</li>
+              <li>How do I do continuous inspection?</li>
             </ol>
             <aside class="notes">
               <ul>
                 <li>how to stop wasting time</li>
-                <li>continual inspection</li>
+                <li>continuous inspection</li>
               </ul>
             </aside>
           </section>
@@ -516,7 +516,7 @@ class WorkspaceController extends ControllerBase {
             <aside class="notes">
               <ul>
                 <li>Cyclomatic complexity of 15 (if, while, for, case)</li>
-                <li>NPath complexity of 420 (idenpendent paths)</li>
+                <li>NPath complexity of 420 (independent paths)</li>
                 <li>Desired when wanting to consolidate complexity</li>
               </ul>
             </aside>
@@ -553,7 +553,7 @@ class MultiversionManager implements MultiversionManagerInterface, ContainerAwar
             </ul>
             <aside class="notes">
               <ul>
-                <li>High coupling means tests change, architecture changes</li>
+                <li>15; High coupling means tests change, architecture changes</li>
                 <li>Similar smells: inappropriate intimacy, indecent exposure</li>
               </ul>
             </aside>
@@ -561,16 +561,16 @@ class MultiversionManager implements MultiversionManagerInterface, ContainerAwar
 
         </section>
 
-        <!-- SECTION 4: How do I do continual inspection? -->
+        <!-- SECTION 4: How do I do continuous inspection? -->
         <section>
 
           <section>
-            <h2>How do I do<br>continual inspection?</h2>
+            <h2>How do I do<br>continuous inspection?</h2>
           </section>
 
           <section>
             <h2>Code Climate</h2>
-            <p>A static analysis platform.</p>
+            <p>A static analysis platform, free for open source (on GitHub).</p>
             <aside class="notes">
               <ul>
                 <li>wire up any of those tools</li>
@@ -786,6 +786,7 @@ exclude_paths:
             <h2>What's next?</h2>
             <ul>
               <li>Agree on static analysis config for D7 and D8, core, contrib, projects</li>
+              <li class="fragment">Code Climate support for Drupal.org</li>
               <li class="fragment">Start using static anlaysis on Drupal Core and Contrib<br>(see #<a href="https://www.drupal.org/node/1299710">1299710</a>)</li>
               <li class="fragment">Add GPAs to compare contrib modules</li>
               <li class="fragment">Every PHP or Drupal CVE gets a sniff (see Ruby handbrake)</li>
@@ -818,7 +819,15 @@ exclude_paths:
           <section>
             <h2>Thank you!</h2>
             <p>Come to the sprints tomorrow!</p>
-            <a href="https://github.com/josephdpurcell/code-climate-and-drupal">github.com/josephdpurcell/code-climate-and-drupal</a>
+            <p>Slides: <a href="https://github.com/josephdpurcell/code-climate-and-drupal">github.com/josephdpurcell/code-climate-and-drupal</a></p>
+            <p>Want help setting up Code Climate?</p>
+            <p><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></p>
+            <aside class="notes">
+              <ul>
+                <li>Setup code climate tomorrow</li>
+                <li>Find me online</li>
+              </ul>
+            </aside>
           </section>
 
           <section>
