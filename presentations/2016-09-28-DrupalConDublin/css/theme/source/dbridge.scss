@@ -1,0 +1,84 @@
+/**
+ * DBridge theme for reveal.js.
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+
+
+// Override theme settings (see ../template/settings.scss)
+
+// Background of the presentation
+$backgroundColor: #2E2E2E;
+
+// Primary/body text
+$mainFont: 'Open Sans', sans-serif;
+$mainFontSize: 30px;
+$mainColor: #E0E0E0;
+
+// Vertical spacing between blocks of text
+//$blockMargin: 20px;
+
+// Headings
+//$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Montserrat', Impact, sans-serif;
+$headingColor: #e97724;
+//$headingLineHeight: 1.2;
+$headingLetterSpacing: -0.03em;
+$headingTextTransform: none;
+$headingTextShadow: none;
+//$headingFontWeight: normal;
+//$heading1TextShadow: $headingTextShadow;
+//$heading1Size: 3.77em;
+//$heading2Size: 2.11em;
+//$heading3Size: 1.55em;
+//$heading4Size: 1.00em;
+
+// Links and actions
+$linkColor: #F2AE7D;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #F2AE7D;
+//$selectionColor: #fff;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+//@mixin bodyBackground() {
+//  background: $backgroundColor;
+//}
+
+body:after {
+  //position: fixed;
+  //bottom: 10px;
+  //left: 20px;
+  //width: 100px;
+  //height: 100px;
+  //content: "";
+  //background-image: url(../../media/images/db.png);
+  //background-size: 100%;
+}
+
+aside.db-logo-footer {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+
+  img {
+    height: 100%;
+  }
+}
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+

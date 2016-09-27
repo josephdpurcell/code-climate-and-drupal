@@ -1,0 +1,876 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Improving Code Quality with Static Analysis</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/dbridge.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+<style>
+.reveal h1 {
+  font-size: 2.5em;
+}
+</style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- SECTION 1: Intro -->
+        <section>
+
+          <section>
+            <h1>Improving Code Quality with Static Analysis</h1>
+            <p>DrupalCamp St. Louis</p>
+            <small>September 10, 2016</small>
+            <p>Joseph D. Purcell</p>
+            <small><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></small>
+          </section>
+
+          <section>
+            <h2>Who am I?</h2>
+            <aside class="notes">
+              <ul>
+                <li>in PHP since 2003</li>
+                <li>Sr. Dev at DBridge in Chicago</li>
+                <li>making a difference for companies in the midwest who find B2B e-commerce strategic</li>
+                <li>hiring</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Who are you?</h2>
+            <aside class="notes">
+              <ul>
+                <li>dev/pm/leader: how do I quantify "good" code?</li>
+                <li>someone is using static analysis and you don't understand</li>
+                <li>takeaway: what it is and how to change your process to improve quality</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <img src="img/customers-will-be-toad.jpg" style="max-width:50%" />
+            <aside class="notes">
+              <ul>
+                <li>do you spellcheck?</li>
+                <li>Less likely to trust a place with misspellings</li>
+                <li>We're forgiving though</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Typoglycemia</h2>
+            <p>Woh nedes a sepll cehcker?</p>
+            <p class="fragment">... computers aren't so forgiving</p>
+            <aside class="notes">
+              <ul>
+                <li>Spelling isn't required for comprehension</li>
+                <li>Except with computers</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-background="img/mariner1-explosion.jpg">
+            <aside class="notes">
+              <ul>
+                <li>1962: $18.5 mil ($150 mil)</li>
+                <li>first interplanetary vehicle; Venus</li>
+                <li>guidance system responded improperly to commands</li>
+                <li>self destruct 5 mins after</li>
+                <li>most expensive hyphen: missing overbar to smooth value</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>goto Fail</h2>
+            <pre><code>
+if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
+    goto fail;
+    goto fail;
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>September 2012 iOS and OS X</li>
+                <li>not fixed until Feb 2014: 17 mo</li>
+                <li>man-in-the-middle on any SSL/TLS connection</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <blockquote>The "goto fail" bug could have been caught by static analysis</blockquote>
+            <p>Source: <a href="http://www.martinfowler.com/articles/testing-culture.html">Martin Fowler</a></p>
+            <aside class="notes">
+              <ul>
+                <li>Some compilers, e.g. Golang, do this for you!</li>
+                <li>opinionated compilers is a good thing</li>
+                <li>PHP warns you of very little</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>If you're not using static analysis you're wasting time.</h2>
+            <ul class="fragment">
+              <li>Trivial back and forth on code style</li>
+              <li>Bug resolution for obvious problems (dead code, typos, etc)</li>
+              <li>The "grind" on poor code (complex, highly coupled)</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Put more time in:
+                  <ul>
+                    <li>training</li>
+                    <li>IDE config</li>
+                    <li>more rigorous code review</li>
+                  </ul>
+                </li>
+                <li>You don't have time for this</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Overview</h2>
+            <ol>
+              <li>What is static analysis?</li>
+              <li>What can the analysis find?</li>
+              <li>How do I do continuous inspection?</li>
+            </ol>
+            <aside class="notes">
+              <ul>
+                <li>how to stop wasting time</li>
+                <li>continuous inspection</li>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <!-- SECTION 2: What is static analysis? -->
+        <section>
+
+          <section>
+            <h2>What is static analysis?</h2>
+            <p>Anything you can learn from code without executing it.</p>
+            <aside class="notes">
+              <ul>
+                <li>Anything you can do with a spellchecker</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Imagine goto fail in PHP</h2>
+            <pre><code>
+if (($err = SSLHashSHA1::update($hashCtx, $signedParams)) != 0)
+  goto fail;
+  goto fail;
+            </code></pre>
+            <div style="text-align:left"><strong>Violations:</strong></div>
+            <ul>
+              <li>The method HashHandshake() utilizes a goto statement. (PHPMD)</li>
+              <li>Inline control structures are not allowed (PHPCS)</li>
+              <li>Line indented incorrectly; expected 4 spaces, found 6 (PHPCS)</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>We have tools we can use now to catch these</li>
+                <li>there are many more</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>How is this done?</h2>
+            <p>Read the file off disk and look for a pattern.</p>
+            <aside class="notes">
+              <ul>
+                <li>Configure editors</li>
+                <li>Run command line tool</li>
+                <li>Tie into CI (later)</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Static Analysis Tools</h2>
+            <ul>
+              <li>PHP Code Sniffer (PHPCS) <i>e.g. Drupal Coder</i></li>
+              <li>PHP Mess Detector (PHPMD)</li>
+              <li>PHP Copy and Paste Detector (PHPCPD)</li>
+              <li>PHP Lines of Code (PHPLOC)</li>
+              <li>Many more...</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Many other languages</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Let's try it out...</h2>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Global variable access</h3>
+<pre class="fragment">
+protected function doLoadMultiple(array $names, $immutable = TRUE) {
+  ...
+  if (isset($GLOBALS['config'][$name])) {
+    <b>$this->cache[$cache_key]->setSettingsOverride($GLOBALS['config'][$name]);</b>
+  ...
+</pre>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Unused variable or method parameter</h3>
+<pre class="fragment">
+  protected function formSingleElement(FieldItemListInterface $items, $delta...
+    <b>$entity = $items->getEntity();</b>
+
+    $element += array(
+      '#field_parents' => $form['#parents'],
+      // Only the first widget should be required.
+      '#required' => $delta == 0 && $this->fieldDefinition->isRequired(),
+      '#delta' => $delta,
+      '#weight' => $delta,
+    );
+
+    $element = $this->formElement($items, $delta, $element, $form, $form_state);
+
+    if ($element) { 
+      ...
+</pre>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <img src="img/baby-diaper.jpg" style="width:50%;border:none" />
+            <blockquote>If it stinks, change it.<br><small>- Grandma Beck, "Refactoring"</small></blockquote>
+            <aside class="notes">
+              <ul>
+                <li>Point: get rid of the smell</li>
+                <li>These would save time in code review</li>
+                <li>Make it easier to extend/maintain</li>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <!-- SECTION 3: What can the analysis find? -->
+        <section>
+
+          <section>
+            <h2>What can the analysis find?</h2>
+            <aside class="notes">
+              <ul>
+                <li>Now you know what it is</li>
+                <li>What can it find?</li>
+                <li>What do they mean?</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Characteristics of Checks</h2>
+            <dl>
+              <dt>Readability</dt>
+                <dd>How easy is it to read and understand?</dd>
+              <dt>Maintainability</dt>
+                <dd>How easy is it to bugfix and apply updates?</dd>
+              <dt>Extensibility</dt>
+                <dd>How easy is it to add a feature?</dd>
+              <dt>Security</dt>
+                <dd>How vulnerable is it to malicious users?</dd>
+              <dt>Testability</dt>
+                <dd>How easily can a test be written to verify behavior?</dd>
+              <dt>Correctness (i.e. bugs, technical debt)</dt>
+                <dd>How efficiently does it meet requirements?</dd>
+            </dl>
+            <aside class="notes">
+              <ul>
+                <li>Each check will tie back to these values</li>
+                <li>We are still trying to identify "good"</li>
+                <li>As far as checks, this is mine</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Global variable access</h3>
+<pre>
+protected function doLoadMultiple(array $names, $immutable = TRUE) {
+  ...
+  if (isset($GLOBALS['config'][$name])) {
+    <b>$this->cache[$cache_key]->setSettingsOverride($GLOBALS['config'][$name]);</b>
+  ...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Testability: You don't have control over global state, e.g. flaky test.</li>
+              <li>Security: No sanitization of inputs.</li>
+              <li>Extensibility: There is no abstraction possible.</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Unused variable or method parameter</h3>
+<pre>
+  protected function formSingleElement(FieldItemListInterface $items, $delta...
+    <b>$entity = $items->getEntity();</b>
+
+    $element += array(
+      '#field_parents' => $form['#parents'],
+      // Only the first widget should be required.
+      '#required' => $delta == 0 && $this->fieldDefinition->isRequired(),
+      '#delta' => $delta,
+      '#weight' => $delta,
+    );
+
+    $element = $this->formElement($items, $delta, $element, $form, $form_state);
+
+    if ($element) { 
+      ...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Readability: It's unclear what <code>$entity</code> is supposed to do.</li>
+              <li>Correctness: Is the lack of use of <code>$entity</code> a bug?</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Common case here is misspelling of var</li>
+                <li>Unused parameter = liskov subsitution principle</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Dead code</h3>
+<pre>
+  private function getProxyInstantiator()
+  {
+    if (!$this->proxyInstantiator) {
+      $this->proxyInstantiator = new RealServiceInstantiator();
+    }
+    ...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Readability: Why is this method still here?</li>
+              <li>Testability: You can't test code that can't be executed.</li>
+              <li>Correctness: Code that isn't executed is usually a bug.</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Sometimes this is used by a parent/child</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Number of public methods</h3>
+<pre>
+class EntityType implements EntityTypeInterface { 
+  public function get($property) {
+  public function set($property, $value) {
+  public function isStaticallyCacheable() {
+  public function isRenderCacheable() {
+  public function isPersistentlyCacheable() {
+  public function getKeys() {
+  public function getKey($key) {
+  public function hasKey($key) {
+  public function id() {
+  public function getProvider() {
+  public function getClass() {
+  public function getOriginalClass() {
+  public function setClass($class) {
+  public function isSubclassOf($class) {
+  public function getHandlerClasses() {
+  public function getHandlerClass($handler_type, $nested = FALSE) {
+  public function setHandlerClass($handler_type, $value) {
+  public function hasHandlerClass($handler_type, $nested = FALSE) {
+  public function getStorageClass() {
+  public function setStorageClass($class) {
+  ... 49 more methods!
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Extensibility: Likely difficult to vary behavior.</li>
+              <li>Correctness: Likely violates Single Responsibility Principle.</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>69 public methods!</li>
+                <li>Desired when wanting to consolidate complexity</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Use of statics</h3>
+<pre>
+class WorkspaceController extends ControllerBase {
+
+  public function add() {
+    <b>$types = WorkspaceType::loadMultiple();</b>
+    if ($types && count($types) == 1) {
+      $type = reset($types);
+      return $this->addForm($type);
+    }
+    ...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Testability: difficult to stub return of <code>::loadMultiple()</code></li>
+              <li>Extensibility: cannot replace WorkspaceType with subclass</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Desired when controlling extensibility</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Missing doc comment</h3>
+<pre>
+  public function update(WorkspacePointerInterface $source, WorkspacePointerInterface $target) { 
+    return $this->doReplication($source, $target);
+  } 
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Readability: <code>update</code> is generic, why is it just a wrapper to <code>doReplication</code>?</li>
+              <li>Extensibility: How do you know you've changed this class according to author's intent?</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Similar: missing param or return doc</li>
+                <li>Missing doc is a critical bug</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: NPath or Cyclomatic Complexity</h3>
+<pre>
+  public function disableEntityTypes() { 
+    foreach ($entity_types as $entity_type_id => $entity_type) { 
+      try { 
+        if ($storage->hasData()) { 
+      catch (\Exception $e) { 
+      if ($has_data[$entity_type_id]) { 
+        if ($entity_type_id == 'file') { 
+    foreach ($entity_manager->getDefinitions() as $entity_type) { 
+      if ($entity_type->isSubclassOf(FieldableEntityInterface::CLASS)) { 
+        foreach ($entity_manager->getFieldStorageDefinitions($entity_type_id)...
+          if ($storage_definition->getProvider() == 'multiversion' && !$storage...
+    foreach ($enabled_entity_types as $entity_type_id) { 
+    foreach ($entity_types as $entity_type_id => $entity_type) { 
+      if ($has_data[$entity_type_id]) { 
+    ...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Readability: We can't comprehend that much complexity.</li>
+              <li>Maintainability: Try to debug this!</li>
+              <li>Correctness: Likely violates Single Responsibility Principle.</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Cyclomatic complexity of 15 (if, while, for, case)</li>
+                <li>NPath complexity of 420 (independent paths)</li>
+                <li>Desired when wanting to consolidate complexity</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Efferent/Afferent Coupling</h3>
+<pre>
+...
+namespace Drupal\multiversion;
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\ContentEntityTypeInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\State\StateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Database\Connection;
+use Drupal\multiversion\Workspace\WorkspaceManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Serializer\Serializer;
+
+class MultiversionManager implements MultiversionManagerInterface, ContainerAwareInterface {
+...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Extensibility: High coupling = hard to change.</li>
+              <li>Testability: You have to double all those classes!</li>
+              <li>Correctness: Likely violates Single Responsibility Principle.</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>15; High coupling means tests change, architecture changes</li>
+                <li>Similar smells: inappropriate intimacy, indecent exposure</li>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <!-- SECTION 4: How do I do continuous inspection? -->
+        <section>
+
+          <section>
+            <h2>How do I do<br>continuous inspection?</h2>
+          </section>
+
+          <section>
+            <h2>Code Climate</h2>
+            <p>A static analysis platform, free for open source (on GitHub).</p>
+            <aside class="notes">
+              <ul>
+                <li>wire up any of those tools</li>
+                <li>PHPMD and PHPCS</li>
+                <li>Alternatives: Scruitinzer, manual</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>How to configure</h2>
+            <p>Examples on GitHub:<br>github.com/josephdpurcell/code-climate-and-drupal</p>
+          </section>
+
+          <section>
+            <h2>.codeclimate.yml</h2>
+<pre>
+---
+engines:
+  phpmd:
+    enabled: true
+    config:
+      file_extensions: "php,inc,module,install"
+      rulesets: ".phpmd.xml"
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,inc,module,install"
+      encoding: utf-8
+      standard: "Drupal"
+      ignore_warnings: true
+ratings:
+  paths:
+  - "web/modules/custom/**.php"
+  - "web/modules/custom/**.inc"
+  - "web/modules/custom/**.module"
+  - "web/modules/custom/**.install"
+exclude_paths:
+- conf
+- web/core
+- web/modules/contrib
+- web/profiles
+- web/sites
+- web/themes
+- web/*.php
+</pre>
+            <aside class="notes">
+              <ul>
+                <li>D8 example</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>.phpmd.xml</h2>
+<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3...
+  &lt;description&gt;
+    A PMD Ruleset for Drupal coding standards.
+  &lt;/description&gt;
+
+  &lt;!-- Code Size --&gt;
+  &lt;rule ref="rulesets/codesize.xml/CyclomaticComplexity"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/NPathComplexity"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/ExcessiveMethodLength"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/ExcessiveClassLength"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/ExcessiveParameterList"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/ExcessivePublicCount"/&gt;
+  &lt;rule ref="rulesets/codesize.xml/TooManyFields"/&gt;
+  ...
+</pre>
+          </section>
+
+          <section>
+            <h2>Ways to use static analysis</h2>
+            <ol>
+              <li>Development workflow (continuous inspection)</li>
+              <li>Code audit</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>1. Development Workflow</h2>
+            <ol>
+              <li>Commit and push code</li>
+              <li>Automated tests and static analysis run</li>
+              <li>If build fails, contributor revises</li>
+              <li>If build succeeds, code is reviewed and merged</li>
+            </ol>
+          </section>
+
+          <section>
+            <img src="img/code-climate-pass.png" />
+            <small>Source: <a href="https://github.com/18F/micropurchase/pull/524">github.com/18F/micropurchase/pull/524</a></small>
+          </section>
+
+          <section>
+            <img src="img/code-climate-fail.png" />
+            <small>Source: <a href="https://github.com/18F/micropurchase/pull/466">github.com/18F/micropurchase/pull/466</a></small>
+          </section>
+
+          <section>
+            <img src="img/code-climate-issues.png" />
+            <small>Source: <a href="https://codeclimate.com/github/18F/micropurchase/pull/466">codeclimate.com/github/18F/micropurchase/pull/466</a></small>
+            <aside class="notes">
+              <ul>
+                <li>GPA ratings</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>2. Code Audit</h2>
+            <ol>
+              <li>Planned refactoring</li>
+              <li>Sprint retrospectives</li>
+            </ol>
+          </section>
+
+          <section>
+            <img src="img/drupal-code-metrics-annotated.png" style="background:transparent;border:none;" />
+            <small><em>Drupal 8 code metrics generated by <a href="http://www.phpmetrics.org/">phpmetrics.org</a>, see <a href="http://josephdpurcell.github.io/principles-of-solitary-unit-testing/dist/2015-drupalcon-barcelona/assets/d8-phpmetrics-f3f3efae7d8b47947ff273f8480dd44798cead7b.html">results</a>.</em></small>
+            <aside class="notes">
+              <ul>
+                <li>Size = Volume</li>
+                <li>cyclo b/c indicator that you could be doing too much</li>
+                <li>afferent b/c a class that knows to much</li>
+                <li>efferent is usually ok</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>What not to do...</h2>
+          </section>
+
+          <section>
+            <h3>Static anlysis is only as good<br>as it's configured to be.</h3>
+            <aside class="notes">
+              <ul>
+                <li>Configure it before you run it.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Static anlysis is not a<br>replacement for you're brain.</h3>
+            <aside class="notes">
+              <ul>
+                <li>Some indicators are OK--understand what they mean.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Don't compare GPAs of projects<br>that use different configurations.</h3>
+            <aside class="notes">
+              <ul>
+                <li>GPA = errors per LOC</li>
+                <li>Which is why the static anlaysis checks need curation.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Don't avoid static analyisis<br>because there's too much to tackle.</h3>
+            <aside class="notes">
+              <ul>
+                <li>Clean code is hard work, static analysis makes it easier.</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Don't only run static analysis locally--they should be shared just like tests.</h3>
+            <aside class="notes">
+              <ul>
+                <li>Don't run them in a pre-commit hook</li>
+                <li>Configure your editor</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Cost of Owning a Mess</h2>
+            <img style="max-width:70%;border:0;box-shadow:none;background:#fff" src="img/Code_Mess-Productivity_vs_Time.svg" alt="As time increases, productivity declines" />
+            <aside class="notes">
+              <ul>
+                <li>code entropy: clean code is an active task</li>
+                <li>not just productivity is impacted</li>
+                <li>Linux kernel and Windows server 0.56 and 0.58 correlation to bug reports (<a href="https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html">source</a>)</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Savings of Static Analysis</h2>
+            <ul>
+              <li>You're not wasting time looking for code style</li>
+              <li>You're not worring about obvious bugs or typos</li>
+              <li>You can clean as you go</li>
+              <li>You know the parts that are hard to change</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <!-- SECTION 5: Now What? -->
+        <section>
+
+          <section>
+            <h2>What's next?</h2>
+            <ul>
+              <li>Agree on static analysis config for D7 and D8, core, contrib, projects</li>
+              <li class="fragment">Code Climate support for Drupal.org</li>
+              <li class="fragment">Start using static anlaysis on Drupal Core and Contrib<br>(see #<a href="https://www.drupal.org/node/1299710">1299710</a>)</li>
+              <li class="fragment">Add GPAs to compare contrib modules</li>
+              <li class="fragment">Every PHP or Drupal CVE gets a sniff (see Ruby handbrake)</li>
+              <li class="fragment">Automated code quality spike tickets: CVEs or GPA threshold</li>
+              <li class="fragment">Use these checks in autocorrect: PHP Code Beautifier and Fixer (PHPCBF)</li>
+              <li class="fragment">Write a Drupal project analysis engine for Code Climate</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>You are the Lorax.</h2>
+            <p>Speak for the code.</p>
+            <aside class="notes">
+              <ul>
+                <li>Zendoodles / Technical Pollution</li>
+                <li>Don't let Drupal have the next goto fail</li>
+                <li>Stop wasting time</li>
+                <li>Clean up your code</li>
+              </ul>
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Thank you!</h2>
+            <p>Come to the sprints tomorrow!</p>
+            <p>Slides: <a href="https://github.com/josephdpurcell/code-climate-and-drupal">github.com/josephdpurcell/code-climate-and-drupal</a></p>
+            <p>Want help setting up Code Climate?</p>
+            <p><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></p>
+            <aside class="notes">
+              <ul>
+                <li>Setup code climate tomorrow</li>
+                <li>Find me online</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>References and<br>Further Reading</h2>
+            <ul>
+              <li><a href="http://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=MARIN1">Mariner 1 report</a></l>
+              <li><a href="https://www.usenix.org/legacy/event/usenix09/tech/full_papers/guo/guo_html/index.html">Linux Kernel Developer Responses to Static Analysis Bug Reports</a></li>
+              <li><a href="http://www.martinfowler.com/articles/testing-culture.html">Goto Fail, Heartbleed, and Unit Testing Culture</a></li>
+              <li><a href="https://github.com/exakat/php-static-analysis-tools">List of PHP static analysis tools</a></li>
+              <li><a href="https://www.drupal.org/sandbox/coltrane/1921926">Drupal Secure Code Sniffs</a></li>
+              <li><a href="http://www.bloomberg.com/news/photo-essays/2012-08-07/when-software-catastrophe-strikes">When Software Catastrophe Strikes</a></li>
+              <li><a href="http://blog.codeclimate.com/blog/2015/07/07/build-your-own-codeclimate-engine/">Build your own Code Climate Analysis Engine</a></li>
+              <li><a href="https://josephdpurcell.github.io/Lorax/">Technical Pollution: Insights from the Lorax</a></li>
+              <li><a href="http://josephdpurcell.github.io/principles-of-solitary-unit-testing/dist/2015-drupalcon-barcelona/assets/d8-phpmetrics-f3f3efae7d8b47947ff273f8480dd44798cead7b.html">Drupal 8 code metrics generated by phpmetrics.org</a></li>
+            </ul>
+          </section>
+
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+    <aside class="db-logo-footer">
+      <a href="http://www.dbridgesolutions.com/">
+        <img src="media/images/db.png">
+      </a>
+    </aside>
+  </body>
+</html>
