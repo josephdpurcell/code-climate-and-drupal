@@ -24,23 +24,61 @@
 .reveal h1 {
   font-size: 2.5em;
 }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.flex-container > div {
+  flex-grow: 2;
+  flex: 2 50%;
+}
+
+.mentor-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.mentor-container > div {
+  flex: 4 25%;
+}
 </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
 
+
+<!--
+
+@todo
+
+use highlighted red for code samples
+
+-->
+
         <!-- SECTION 1: Intro -->
         <section>
 
           <section>
             <h1>Improving Code Quality with Static Analysis</h1>
-            <p>DrupalCon Dublin</p>
-            <small>September 28, 2016</small>
-            <p>Joseph D. Purcell</p>
-            <small><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></small>
+            <div class="flex-container">
+              <div>
+                <p>by Joseph D. Purcell</p>
+              </div>
+              <div>
+                <p>at DrupalCon Dublin</p>
+              </div>
+              <div>
+                <small><a href="https://twitter.com/josephdpurcell">@josephdpurcell</a></small>
+              </div>
+              <div>
+                <small>September 28, 2016</small>
+              </div>
+            </div>
             <blockquote>
-              Note: this replaces<br>"What type of testing is good for me?"
+              Note: this session replaces<br>"What type of testing is good for me?"
             </blockquote>
           </section>
 
@@ -51,7 +89,24 @@
                 <li>in PHP since 2003</li>
                 <li>Sr. Dev at DBridge in Chicago</li>
                 <li>making a difference for companies in the midwest who find B2B e-commerce strategic</li>
-                <li>hiring</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>My mentors...</h2>
+            <div class="mentor-container">
+              <div><img src="img/mentors/default-avatar.png" /><div>@zendoodles</div></div>
+              <div><img src="img/mentors/picture-1190096-1456091799.jpg" /><div>@craychee</div></div>
+              <div><img src="img/mentors/picture-1527020-1439581711.png" /><div>@lukewertz</div></div>
+              <div><img src="img/mentors/picture-179805-1456157639.jpg" /><div>@stevector</div></div>
+              <div><img src="img/mentors/picture-258568-1400198420.png" /><div>@yesct</div></div>
+              <div><img src="img/mentors/picture-26398-1400198420.jpg" /><div>@crell</div></div>
+              <div><img src="img/mentors/picture-81067-1452011152.png" /><div>@becw</div></div>
+              <div />
+            </div>
+            <aside class="notes">
+              <ul>
               </ul>
             </aside>
           </section>
@@ -103,12 +158,30 @@
           </section>
 
           <section>
+            <blockquote>
+              They do exactly as they are told,<br>
+              no more and no less.
+            </blockquote>
+            <p><small>Donald Knuth Knuth (1968), "The Art of Computer Programming"</small></p>
+          </section>
+
+          <section>
             <h2>goto Fail</h2>
             <pre><code>
 if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
     goto fail;
     goto fail;
             </code></pre>
+            <div class="fragment" style="text-align:left">
+              <p>is executed like...</p>
+              <pre><code>
+if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0) {
+    goto fail;
+}
+goto fail;
+              </code></pre>
+              <p>...the rest of the code is not executed!</p>
+            </div>
             <aside class="notes">
               <ul>
                 <li>September 2012 iOS and OS X</li>
@@ -131,7 +204,10 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
           </section>
 
           <section>
-            <h2>If you're not using static analysis you're wasting time.</h2>
+            <h2 style="font-size:150%">
+              If you're not using static analysis<br>
+              you're wasting time.
+            </h2>
             <ul class="fragment">
               <li>Trivial back and forth on code style</li>
               <li>Bug resolution for obvious problems (dead code, typos, etc)</li>
@@ -173,7 +249,7 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
 
           <section>
             <h2>What is static analysis?</h2>
-            <p>Anything you can learn from code without executing it.</p>
+            <p class="fragment">Anything you can learn from code without executing it.</p>
             <aside class="notes">
               <ul>
                 <li>Anything you can do with a spellchecker</li>
