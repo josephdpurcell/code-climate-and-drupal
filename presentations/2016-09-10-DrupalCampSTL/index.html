@@ -237,7 +237,7 @@ if (($err = SSLHashSHA1::update($hashCtx, $signedParams)) != 0)
 
           <section>
             <h3>Check: Global variable access</h3>
-<pre>
+<pre class="fragment">
 protected function doLoadMultiple(array $names, $immutable = TRUE) {
   ...
   if (isset($GLOBALS['config'][$name])) {
@@ -252,7 +252,7 @@ protected function doLoadMultiple(array $names, $immutable = TRUE) {
 
           <section>
             <h3>Check: Unused variable or method parameter</h3>
-<pre>
+<pre class="fragment">
   protected function formSingleElement(FieldItemListInterface $items, $delta...
     <b>$entity = $items->getEntity();</b>
 
