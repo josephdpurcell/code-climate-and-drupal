@@ -15,7 +15,7 @@ Currently, I've identified in the [How To's](docs/how-tos.md) a few examples of 
 
 To get started using Code Climate on your Drupal project or contrib module:
 
-1. Grab the right patch for the Code Climate config from [code-climate-configs/README.md].
+1. Grab the right patch for the Code Climate config from [code-climate-configs/README.md](/code-climate-configs).
 1. Apply the patch to your repository like: `git am --signoff < 0001-THE-PATCH.patch`
 1. Push the code to your GitHub repository. (Currently, Code Climate is free only for github.com)
 1. Go to [codeclimate.com](https://codeclimate.com/) and add your repository.
