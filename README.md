@@ -2,113 +2,44 @@
 
 Code Climate is a free open source static analysis platform that is a great fit for Drupal core and contrib development, as well as Drupal projects. It can be used as a workflow tool to surface problems with code contributions, audit existing code for vulnerabilities or problematic code, or evaluate new or legacy projects.
 
-For more information on why Code Climate is a good fit for Drupal, read the [persuasive essay](persuasive-essay.md).
-
 Currently, I've identified in the [How To's](#how-tos) a few examples of how to use Code Climate with Drupal which focus solely on PHP Code Sniffer (PHPCS) and PHP Mess Detector (PHPMD). While PHPCS is less controversial since it is using the [Drupal Coder](https://www.drupal.org/project/coder) project. However, PHPMD is not configured out of the box to what the Drupal community would consider in alignment with best practices. As such, the examples below use a custom PHPMD configuration file according to my best guess as to what I think is a reasonable start [see config here](.phpmd.xml), with a hope it can evolve into aligning with more well adopted checks. It is worth noting these examples focus solely on PHP--revising the configuration for JS and CSS standards would be a win.
 
-# Examples
+# Resources
 
-The following examples use the PHPCS sniffs supported by their respective communities, and the same phpmd file. The result should be a somewhat objective comparison of how each code base meets its own code style, as well as the checks from PHPMD, such as complexity or unused variables.
+* [Persuasive Essay](persuasive-essay.md)
+* [How Tos](docs/how-tos.md)
+* [Example Projects](docs/example-projects.md)
+* [Code Climate config examples](codeclimate-configs/README.md)
 
-Note: these GPA's are likely out of date, so verify the commit Code Climate has matches with the latest commit.
+# Getting Started
 
-## Drupal
+To get started using Code Climate on your Drupal project or contrib module:
 
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-7.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-7.x) [GitHub fork for drupal/drupal:7.x](https://github.com/josephdpurcell/drupal-7.x)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal) [GitHub fork for drupal/drupal:8.1.x](https://github.com/josephdpurcell/drupal)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x) [GitHub fork for drupal/drupal:8.2.x](https://github.com/josephdpurcell/drupal-8.2.x)
+1. Grab the right patch for the Code Climate config from [code-climate-configs/README.md].
+1. Apply the patch to your repository like: `git am --signoff < 0001-THE-PATCH.patch`
+1. Push the code to your GitHub repository. (Currently, Code Climate is free only for github.com)
+1. Go to [codeclimate.com](https://codeclimate.com/) and add your repository.
+1. Go to the repo on Code Climate, click "Integrations", click "GitHub Pull Requests" to enable the checks to show up on each pull request.
 
-## Drupal Modules
+# Roadmap
 
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/workbench_moderation/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/workbench_moderation) [GitHub fork for drupal/workbench_moderation:8.x-1.x](https://github.com/josephdpurcell/workbench_moderation)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-multiversion/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-multiversion) [GitHub fork for drupal/multiversion:8.x-1.x](https://github.com/josephdpurcell/drupal-multiversion)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-deploy/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-deploy) [GitHub fork for drupal/drupal-deploy:8.x-1.x](https://github.com/josephdpurcell/drupal-deploy)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-replication/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-replication) [GitHub fork for drupal/drupal-replication:8.x-1.x](https://github.com/josephdpurcell/drupal-replication)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-relaxed/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-relaxed) [GitHub fork for drupal/drupal-relaxed:8.x-1.x](https://github.com/josephdpurcell/drupal-relaxed)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-group/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-group) [GitHub fork for drupal/group:8.x-1.x](https://github.com/josephdpurcell/drupal-group)
+Below is a rough sketch of what adoption of Code Climate might look like:
 
-## Other
+* Validate people can use these Code Climate configs to get started.
+* Validate the PHPMD config is reasonable with other Drupalers.
+* Identify Drupal projects and modules that can adopt Code Climate into their workflow to give feedback on the use of PHPMD and PHPCS.
+* Expand the checks to include theming-related checks, e.g. JS and CSS.
+* Once the Code Climate checks are affirmed by at least a portion of the community, make a recommendation to the [Drupal Technical Working Group](https://groups.drupal.org/node/510675) to provide these Code Climate configs for core, contrib, and the public to use.
+* Involve the , see also [guidelines](https://www.drupal.org/project/coding_standards)
 
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/symfony/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/symfony) [GitHub fork for symfony/symfony:master](https://github.com/josephdpurcell/symfony)
-* [![Code Climate](https://codeclimate.com/repos/5730fdf0d132d84858004be5/badges/9503049144363360d9c2/gpa.svg)](https://codeclimate.com/repos/5730fdf0d132d84858004be5/feed) [GitHub fork for wordpress/wordpress:master](https://github.com/josephdpurcell/wordpress) ...is this number right???
+* Violations of these checks are made available per-patch in the issue queue.
+* GPAs of core and contrib are published on drupal.org.
 
-# How To's
+**Assumption:** Code Climate provides support for the 'drupal.org' domain.
 
-Below are examples of how to add Code Climate to a Drupal project, core, or module. These are a work in progress. For now they focus on PHPCS code style and some PHPMD checks that seem appropriate for Drupal code.
+# Wish List
 
-## Drupal 7 Project
+* Add security sniffs to these configs we're standardizing on. (Maybe [Drupal Security Sniffs](https://www.drupal.org/sandbox/coltrane/1921926) or [issue](https://www.drupal.org/node/1844870) or [FloeDesignTechnologies/phpcs-security-audit](https://github.com/FloeDesignTechnologies/phpcs-security-audit))
+* See how current issues on the TWG or infrastructure issue queues are related and perhaps make a suggestion there once this is mature, e.g. [drupal.org/node/1299710](https://www.drupal.org/node/1299710).
+* Add documentation on what the PHPMD configs mean.
 
-To add a Code Climate config designed for a Drupal 7 project:
-
-```
-wget https://gist.githubusercontent.com/josephdpurcell/688383828f768be3aba6662d0a7736bf/raw/567617903f574ebfeb5957499a4d58e66d40a977/0001-Add-.codeclimate.yml-for-Drupal-7-project.patch
-git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-7-project.patch
-```
-
-See [gist here](https://gist.github.com/josephdpurcell/688383828f768be3aba6662d0a7736bf).
-
-@todo write notes about how if its an Acquia, composer-based, or multisite project it will be different
-
-## Drupal 7 Core
-
-To add a Code Climate config designed for Drupal 7 core:
-
-```
-wget https://gist.githubusercontent.com/josephdpurcell/c4c5bb42bb8f4dd75b0cdaf41e2a023e/raw/b54f27bfc11538093150a89a65120b006256337e/0001-Add-.codeclimate.yml-for-Drupal-7-core.patch
-git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-7-core.patch
-```
-
-See [gist here](https://gist.github.com/josephdpurcell/c4c5bb42bb8f4dd75b0cdaf41e2a023e).
-
-@todo confirm the ratings paths are correct
-
-@todo add .install files
-
-## Drupal 7 Modules
-
-@todo write one for Drupal 7 modules
-
-## Drupal 8 Project
-
-@todo write one for a Drupal 8 project
-
-## Drupal 8 Core
-
-To add a Code Climate config designed for Drupal 8 core:
-
-```
-wget https://gist.githubusercontent.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30/raw/f80049648971775fe4fe7b36a85b9c8060a47e88/0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
-git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-Core.patch
-```
-
-See [gist here](https://gist.github.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30).
-
-## Drupal 8 Modules
-
-To add a Code Climate config designed for Drupal 8 modules:
-
-```
-wget https://gist.githubusercontent.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382/raw/6a0904f0bf7cded8fb168f459064514ed7fa2526/0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
-git am --signoff < 0001-Add-.codeclimate.yml-for-Drupal-8-modules.patch
-```
-
-See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382).
-
-# Improvements
-
-* Check Symfony using https://github.com/djoos/Symfony2-coding-standard
-* Use AST like [Phan](https://github.com/etsy/phan) or [pharborist](https://github.com/grom358/pharborist)
-* Involve the [Drupal Technical Working Group](https://groups.drupal.org/node/510675), see also [guidelines](https://www.drupal.org/project/coding_standards)
-* Include security sniffs:
-    * [Drupal Security Sniffs](https://www.drupal.org/sandbox/coltrane/1921926), see also [issue](https://www.drupal.org/node/1844870)
-    * [FloeDesignTechnologies/phpcs-security-audit](https://github.com/FloeDesignTechnologies/phpcs-security-audit)
-* Add checks for CSS and JS
-* Compare Scruitinizer and phpmetrics.org with Code Climate
-* Check [laravel](https://github.com/laravel/laravel) and [laravel framework](https://github.com/laravel/framework)
-* How does this compare with [https://www.drupal.org/node/1299710](https://www.drupal.org/node/1299710)?
-* Give a quick pointer to how to get started with Code Climate
-* Explain the phpmd config and how to customize thresholds
-* Explain why .phpcs directory has to be added
-* Explain what git am does, i.e. just make sure people knows it makes a commit
-* Ensure .install files are added
-* Support theming code climate yml
