@@ -11,8 +11,6 @@ wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh
 git am --signoff < 0001-Add-Drupal-7-project-Code-Climate-config.patch
 ```
 
-See [gist here](https://gist.github.com/josephdpurcell/688383828f768be3aba6662d0a7736bf).
-
 @todo write notes about how if its an Acquia, composer-based, or multisite project it will be different
 
 ## Drupal 7 Core
@@ -45,8 +43,6 @@ wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh
 git am --signoff < 0001-Add-Drupal-8-core-Code-Climate-config.patch
 ```
 
-See [gist here](https://gist.github.com/josephdpurcell/a57bc443b58c7c1ca547e5a7b067ff30).
-
 ## Drupal 8 Modules
 
 To add a Code Climate config designed for Drupal 8 modules:
@@ -55,6 +51,4 @@ To add a Code Climate config designed for Drupal 8 modules:
 wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh-pages/code-climate-configs/0001-Add-Drupal-8-module-Code-Climate-config.patch
 git am --signoff < 0001-Add-Drupal-8-module-Code-Climate-config.patch
 ```
-
-See [gist here](https://gist.github.com/josephdpurcell/ca2572a1f2764c1fe930885c29d06382).
 
