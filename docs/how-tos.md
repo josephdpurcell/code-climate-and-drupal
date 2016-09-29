@@ -8,7 +8,8 @@ To add a Code Climate config designed for a Drupal 7 project:
 
 ```
 wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh-pages/code-climate-configs/0001-Add-Drupal-7-project-Code-Climate-config.patch
-git am --signoff < 0001-Add-Drupal-7-project-Code-Climate-config.patch
+git apply --index < 0001-Add-Drupal-7-project-Code-Climate-config.patch
+git commit -m 'Add Drupal 7 project Code Climate config'
 ```
 
 @todo write notes about how if its an Acquia, composer-based, or multisite project it will be different
@@ -19,7 +20,8 @@ To add a Code Climate config designed for Drupal 7 core:
 
 ```
 wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh-pages/code-climate-configs/0001-Add-Drupal-7-core-Code-Climate-config.patch
-git am --signoff < 0001-Add-Drupal-7-core-Code-Climate-config.patch
+git apply --index < 0001-Add-Drupal-7-core-Code-Climate-config.patch
+git commit -m 'Add Drupal 7 core Code Climate config'
 ```
 
 @todo confirm the ratings paths are correct
@@ -40,7 +42,8 @@ To add a Code Climate config designed for Drupal 8 core:
 
 ```
 wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh-pages/code-climate-configs/0001-Add-Drupal-8-core-Code-Climate-config.patch
-git am --signoff < 0001-Add-Drupal-8-core-Code-Climate-config.patch
+git apply --index < 0001-Add-Drupal-8-core-Code-Climate-config.patch
+git commit -m 'Add Drupal 8 core Code Climate config'
 ```
 
 ## Drupal 8 Modules
@@ -49,6 +52,7 @@ To add a Code Climate config designed for Drupal 8 modules:
 
 ```
 wget https://raw.githubusercontent.com/josephdpurcell/code-climate-and-drupal/gh-pages/code-climate-configs/0001-Add-Drupal-8-module-Code-Climate-config.patch
-git am --signoff < 0001-Add-Drupal-8-module-Code-Climate-config.patch
+git apply --index < 0001-Add-Drupal-8-module-Code-Climate-config.patch
+git commit -m 'Add Drupal 8 module Code Climate config'
 ```
 
