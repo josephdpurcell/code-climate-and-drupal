@@ -1,15 +1,3 @@
-From c4c9414959b7dfb20e9d197f1105236353111340 Mon Sep 17 00:00:00 2001
-From: "Joseph D. Purcell" <josephdpurcell@gmail.com>
-Date: Wed, 28 Sep 2016 12:21:34 -0500
-Subject: [PATCH] Add Drupal 7 project Code Climate config
-
----
- .codeclimate.yml | 32 +++++++++++++++++++++++
- .phpmd.xml       | 78 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 110 insertions(+)
- create mode 100644 code-climate-configs/drupal7-project/.codeclimate.yml
- create mode 100644 code-climate-configs/drupal7-project/.phpmd.xml
-
 diff --git a/.codeclimate.yml b/.codeclimate.yml
 new file mode 100644
 index 0000000..f85e3ca
@@ -132,6 +120,3 @@ index 0000000..c1a66cf
 +  -->
 +
 +</ruleset>
--- 
-2.7.4
-
