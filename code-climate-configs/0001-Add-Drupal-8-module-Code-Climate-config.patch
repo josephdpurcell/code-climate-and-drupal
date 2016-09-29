@@ -1,56 +1,30 @@
-From 937ba10020cf752b5f9eb8a144a565b81cd26110 Mon Sep 17 00:00:00 2001
-From: "Joseph D. Purcell" <josephdpurcell@gmail.com>
-Date: Wed, 28 Sep 2016 11:17:00 -0500
-Subject: [PATCH] Add Drupal 8 module Code Climate config
-
----
- .codeclimate.yml | 35 +++++++++++++++++++++++++
- .phpmd.xml       | 78 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 113 insertions(+)
- create mode 100644 codeclimate-configs/drupal8-module/.codeclimate.yml
- create mode 100644 codeclimate-configs/drupal8-module/.phpmd.xml
-
 diff --git a/.codeclimate.yml b/.codeclimate.yml
 new file mode 100644
-index 0000000..e3498a7
+index 0000000..fe129b4
 --- /dev/null
 +++ b/.codeclimate.yml
-@@ -0,0 +1,35 @@
+@@ -0,0 +1,21 @@
 +---
 +engines:
 +  phpmd:
 +    enabled: true
 +    config:
-+      file_extensions: "php,inc,module"
++      file_extensions: "php,inc,module,install"
 +      rulesets: ".phpmd.xml"
 +  phpcodesniffer:
 +    enabled: true
 +    config:
-+      file_extensions: "php,inc,module"
++      file_extensions: "php,inc,module,install"
 +      encoding: utf-8
 +      standard: "Drupal"
 +      ignore_warnings: true
 +ratings:
 +  paths:
-+  - "core/lib/Drupal/Core/**.php"
-+  - "core/lib/Drupal/Core/**.inc"
-+  - "core/lib/Drupal/Core/**.module"
++  - "**.php"
++  - "**.inc"
++  - "**.module"
++  - "**.install"
 +exclude_paths:
-+- "**/Test/**/*"
-+- core/assets
-+- core/config
-+- core/includes
-+- core/lib/Drupal/Component
-+- core/misc
-+- core/modules
-+- core/profiles
-+- core/scripts
-+- core/tests
-+- core/themes
-+- modules
-+- profiles
-+- sites
-+- themes
 diff --git a/.phpmd.xml b/.phpmd.xml
 new file mode 100644
 index 0000000..c1a66cf
@@ -135,6 +109,3 @@ index 0000000..c1a66cf
 +  -->
 +
 +</ruleset>
--- 
-2.7.4
-
