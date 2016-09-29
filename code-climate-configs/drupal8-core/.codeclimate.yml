@@ -3,12 +3,12 @@ engines:
   phpmd:
     enabled: true
     config:
-      file_extensions: "php,inc,module"
+      file_extensions: "php,inc,module,install"
       rulesets: ".phpmd.xml"
   phpcodesniffer:
     enabled: true
     config:
-      file_extensions: "php,inc,module"
+      file_extensions: "php,inc,module,install"
       encoding: utf-8
       standard: "Drupal"
       ignore_warnings: true
@@ -17,6 +17,7 @@ ratings:
   - "core/lib/Drupal/Core/**.php"
   - "core/lib/Drupal/Core/**.inc"
   - "core/lib/Drupal/Core/**.module"
+  - "core/lib/Drupal/Core/**.install"
 exclude_paths:
 - "**/Test/**/*"
 - core/assets
