@@ -10,6 +10,7 @@ Currently, I've identified in the [How To's](docs/how-tos.md) a few examples of 
 * [How Tos](docs/how-tos.md)
 * [Example Projects](docs/example-projects.md)
 * [Code Climate config examples](code-climate-configs/README.md)
+* [Contributing](CONTRIBUTING.md)
 
 # Getting Started
 
