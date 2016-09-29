@@ -4,7 +4,11 @@ The following examples use the PHPCS sniffs supported by their respective commun
 
 Note: these GPA's are likely out of date, so verify the commit Code Climate has matches with the latest commit.
 
-## Drupal
+## Drupal Projects
+
+* <a href="https://codeclimate.com/github/lter/deims"><img src="https://codeclimate.com/github/lter/deims/badges/gpa.svg" /></a> [github.com/lter/diems](https://github.com/lter/deims)
+
+## Drupal Core
 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-7.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-7.x) [GitHub fork for drupal/drupal:7.x](https://github.com/josephdpurcell/drupal-7.x)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal) [GitHub fork for drupal/drupal:8.1.x](https://github.com/josephdpurcell/drupal)
@@ -23,4 +27,5 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/symfony/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/symfony) [GitHub fork for symfony/symfony:master](https://github.com/josephdpurcell/symfony)
 * [![Code Climate](https://codeclimate.com/repos/5730fdf0d132d84858004be5/badges/9503049144363360d9c2/gpa.svg)](https://codeclimate.com/repos/5730fdf0d132d84858004be5/feed) [GitHub fork for wordpress/wordpress:master](https://github.com/josephdpurcell/wordpress) ...is this number right???
+* [![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [github.com/18F/micropurchase](https://github.com/18F/micropurchase)
 
