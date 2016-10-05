@@ -16,10 +16,11 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 
 ## Drupal Modules
 
+* [![Code Climate](https://codeclimate.com/github/relaxedws/drupal-replication/badges/gpa.svg)](https://codeclimate.com/github/relaxedws/drupal-replication) [github.com/relaxedws/drupal-replication](https://github.com/relaxedws/drupal-replication)
+*  [![Code Climate](https://codeclimate.com/github/timmillwood/drupal-workspace/badges/gpa.svg)](https://codeclimate.com/github/timmillwood/drupal-workspace) [github.com/timmillwood/drupal-workspace](https://github.com/timmillwood/drupal-workspace)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/workbench_moderation/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/workbench_moderation) [GitHub fork for drupal/workbench_moderation:8.x-1.x](https://github.com/josephdpurcell/workbench_moderation)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-multiversion/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-multiversion) [GitHub fork for drupal/multiversion:8.x-1.x](https://github.com/josephdpurcell/drupal-multiversion)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-deploy/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-deploy) [GitHub fork for drupal/drupal-deploy:8.x-1.x](https://github.com/josephdpurcell/drupal-deploy)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-replication/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-replication) [GitHub fork for drupal/drupal-replication:8.x-1.x](https://github.com/josephdpurcell/drupal-replication)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-relaxed/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-relaxed) [GitHub fork for drupal/drupal-relaxed:8.x-1.x](https://github.com/josephdpurcell/drupal-relaxed)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-group/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-group) [GitHub fork for drupal/group:8.x-1.x](https://github.com/josephdpurcell/drupal-group)
 
