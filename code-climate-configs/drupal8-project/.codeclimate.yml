@@ -1,0 +1,27 @@
+---
+engines:
+  phpmd:
+    enabled: true
+    config:
+      file_extensions: "php,inc,module,install"
+      rulesets: ".phpmd.xml"
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php,inc,module,install"
+      encoding: utf-8
+      standard: "Drupal"
+      ignore_warnings: true
+ratings:
+  paths:
+  - "modules/custom/**.php"
+  - "modules/custom/**.inc"
+  - "modules/custom/**.module"
+  - "modules/custom/**.install"
+exclude_paths:
+  - core
+  - modules/contrib
+  - profiles
+  - sites
+  - themes
+  - vendor
