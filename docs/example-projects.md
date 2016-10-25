@@ -23,7 +23,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-deploy/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-deploy) [GitHub fork for drupal/drupal-deploy:8.x-1.x](https://github.com/josephdpurcell/drupal-deploy)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-relaxed/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-relaxed) [GitHub fork for drupal/drupal-relaxed:8.x-1.x](https://github.com/josephdpurcell/drupal-relaxed)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-group/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-group) [GitHub fork for drupal/group:8.x-1.x](https://github.com/josephdpurcell/drupal-group)
-* [![Code Climate](https://codeclimate.com/github/josephdpurcell/auth0-drupal/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/auth0-drupal) [fork of github.com/auth0/auth0-drupal:drupal8](https://github.com/josephdpurcell/auth0-drupal)
+* [![Code Climate](https://codeclimate.com/github/auth0/auth0-drupal/badges/gpa.svg)](https://codeclimate.com/github/auth0/auth0-drupal) [github.com/auth0/auth0-drupal](https://github.com/auth0/auth0-drupal)
 * [![Code Climate](https://codeclimate.com/github/EclipseGc/Plugins/badges/gpa.svg)](https://codeclimate.com/github/EclipseGc/Plugins) [github.com/eclipsegc/plugins](https://github.com/EclipseGc/Plugins)
 
 ## Other
