@@ -1,0 +1,1647 @@
+<html>
+<head>
+    <title>PhpMetrics report v1.10.0 - by Jean-François Lépine</title>
+    <meta charset="utf-8">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFA+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/wAAAAAAAAAAAAAAAAAAAAAAAAAAUD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/wC6eP8sdU7/ALp4/1A+LP9QPiz/AAAAAAAAAAAAAAAAUD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/wC6eP9QPiz/SUgy/wC6eP9LRTD/ALp4/1A+LP8AAAAAAAAAAFA+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/wC6eP89Wz3/ALp4/wCz9P8As/T/UD4s/wC6eP9QPiz/AAAAAFA+LP9QPiz/UD4s/1A+LP9QPiz/TkAt/1A+LP8Aunj/OGJC/wCz9P8As/T/ALP0/xSbZf9QPiz/UD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/ALp4/1A+LP8Aunj/ALp4/wui2P9QPiz/Cabd/wevcf8Aunj/UD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/TUMv/wC6eP8Aunj/ALp4/wC6eP8Aunj/ALp4/wynbP9QPiz/K3dP/zZmRP9QPiz/UD4s/1A+LP9QPiz/ALp4/wC6eP8Aunj/TEQw/xqSX/8As/T/SEoz/wC6eP8BuHf/ALP0/wC6eP8Aunj/C6ht/1A+LP9QPiz/OWFC/wC6eP8Aunj/ALp4/01BLv8qdYv/UD4s/wCz9P9QPiz/ALp4/1A+LP8Aunj/ALp4/wC6eP9QPiz/UD4s/1A+LP8As/T/ALP0/1A+LP8As/T/ALP0/wC6eP8Aunj/UD4s/wC6eP8za0f/UD4s/xeVYv8Kqm7/UD4s/wAAAABQPiz/ALP0/wCz9P8Aunj/ALP0/zdhaf9QPiz/UD4s/wC6eP9QPiz/ALp4/wC6eP8Aunj/UD4s/wAAAAAAAAAAUD4s5FA+LP9QPiz/UD4s/wCz9P8As/T/UD4s/wC6eP8Snmf/UD4s/1A+LP9QPiz/UD4s/1A+LP8AAAAAAAAAAAAAAABQPiz/UD4s/1A+LP8As/T/ALP0/1A+LP8Aunj/UD4s/1A+LP9QPiz/UD4s/1A+LP8AAAAAAAAAAAAAAAAAAAAAAAAAADwvIZJQPiz/UD4s/1A+LP9QPiz/UD4s/1A+LP9QPiz/UD4s/1A+LNMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEY2J1ZQPiz/UD4s/1A+LP9QPiz/RjYnpQAAAAAAAAAAAAAAAAAAAAAAAAAA+B8AAOAHAADAAwAAgAEAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAgAEAAMADAADgBwAA/B8AAA==" rel="icon" type="image/x-icon" />    <style type="text/css">
+                        /* ---- layout ---- */
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    text-align: center;
+    margin-bottom: 2.5em;
+}
+.container {
+    width: 1170px;
+    text-align: left;
+    margin: 0 auto;
+}
+.row {
+    position: relative;
+    clear: left;
+}
+.col-3 {
+    float:left;
+    width:28%;
+    margin-right:2%;
+}
+.col-3:last-child {
+    margin-right: 0;
+}
+.col-3:last-child:after {
+    content:" ";
+    clear:left;
+}
+
+.col-6 {
+    float:left;
+    width:48%;
+    margin-right:2%;
+}
+.col-3:last-child {
+    margin-right: 0;
+}
+.col-3:last-child:after {
+    content:" ";
+    clear:left;
+}
+
+.accessibility-box {
+    float:right;
+    width: 200px;
+}
+
+.menu, .menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    display: inline-block;
+    padding: 10px 15px;
+}
+.menu li.active {
+    background-color: #428bca;
+    border-radius: 4px;
+}
+.menu li.active a {
+    color: #fff;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left:0;
+    text-align: center;
+    font-size: 0.9em;
+    background: #FFF;
+    height: 2.5em;
+    width: 100%;
+}
+.footer .container {
+    text-align: center;
+}
+
+
+/* ---- tabs ---- */
+.tab-pane {
+    display:none;
+}
+.tab-pane.active {
+    display:block;
+}
+
+
+/* ----- fonts ----- */
+a:hover, a:focus {
+    color: #2a6496;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}
+a {
+    color: #428bca;
+    text-decoration: none;
+    cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+h4 {
+    font-weight: bold;
+}
+.more {
+    color: #666;
+    font-size: 0.9em;
+}
+
+
+/* ---- general styles ----- */
+.validate-critical, .critical {
+    background-color:#B01E00 !important;
+    color:#FFF;
+}
+.validate-warning, .warning {
+    background-color:#f4b300 !important;
+    color:#333;
+}
+.validate-good, .good {
+    background-color:#78ba00 !important;
+    color:#FFF;
+}
+.validate-unknown, .unknown {
+}
+
+/* ---- tables ---- */
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    font-size:0.8em;
+}
+.table-bordered {
+    border: 1px solid #ddd;
+}
+.table thead {
+    font-weight:normal;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #f9f9f9;
+}
+.mytable td {
+    width:4%;
+    text-align:center;
+}
+.mytable .sep {
+    border-left:1px solid #CCC;
+}
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+
+/* ---- form ---- */
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/* ---- Charts ---- */
+#chart-tableview .critical,
+#chart-tableview .warning,
+#chart-tableview .good,
+#chart-tableview .unknown {
+    display:block;
+    text-align: center;
+}
+
+#svg-custom,
+#svg-maintainability,
+#svg-abstractness {
+    width:300px;
+    height:300px;
+}
+.svg-main {
+    margin: 0 auto;
+    width:960px;;
+    height:960px;;
+}
+
+
+/* ---- maintainability ---- */
+#svg-maintainability svg circle:hover {
+    fill:steelblue !important;
+}
+
+/* ---- relations ---- */
+.node {
+    font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    fill: #bbb;
+}
+.node:hover {
+    fill: #000;
+}
+.link {
+    stroke: steelblue;
+    stroke-opacity: .4;
+    fill: none;
+    pointer-events: none;
+}
+.node:hover,
+.node--source,
+.node--target {
+    font-weight: 700;
+}
+.node--source {
+    fill: #AE113D;
+}
+.node--target {
+    fill: #4617B4;
+}
+.link--source,
+.link--target {
+    stroke-opacity: 1;
+    stroke-width: 2px;
+}
+.link--source {
+    stroke: #AE113D;
+}
+.link--target {
+    stroke: #4617B4;
+}
+.relation-source {
+    background-color: #AE113D;
+}
+.relation-target {
+    background-color: #4617B4;
+}
+
+
+/* ---- tooltip ---- */
+.tooltip {
+    position: absolute;
+    background: #333;
+    border-radius: 5px;
+    padding: 5px 15px;
+    box-shadow: 1px 1px 3px;
+    text-align: left;
+    color:#FFF;
+    z-index: 4;
+}
+
+/* ---- zoom ---- */
+.zoomed {
+    position: fixed;
+    z-index: 2;
+    top: 20px;
+    left: 0;
+    width: 100% !important;
+    height: 95% !important;
+    background: #FFF;
+}
+.btn-close {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    background: #333;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 0;
+    height: 20px;
+    lien-height: 20px;
+}
+.btn-close a {
+    color: #FFF;
+}
+    </style>
+                <link rel="stylesheet" type="text/css" href="http://nvd3.org/assets/css/nv.d3.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/alangrafu/radar-chart-d3/master/src/radar-chart.min.css">
+    </head>
+
+<body>
+
+<div class="container">
+
+
+
+    <h1 id="title">PhpMetrics report</h1>
+
+    <div class="row">
+        <div class="well accessibility-box">
+            <label>
+                <input type="checkbox" onclick="toggleAccessibility()"> I'm colorblind
+            </label>
+        </div>
+
+        <div class="menu-box">
+            <ul id="menu" class="menu" >
+                <li id="link-overview" class="active"><a >Overview</a></li>
+                <li id="link-score"><a >Evaluation</a></li>
+                <li id="link-relations"><a  >Relations map</a></li>
+                <li id="link-repartition"><a  >Repartition</a></li>
+                <li id="link-explore"><a >Explore</a></li>
+                
+                <li id="link-help"><a  >Help</a></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+
+    <div class="tab-content row">
+
+
+        <!-- General details -->
+        <div class="row tab active" id="overview">
+            <div class="col-3">
+                <h3>Evaluation</h3>
+                <small><a id="btn-save-maintainability" download="phpmetric-maintainability.svg">Download (as SVG)</a> | <a onclick="return zoom('svg-maintainability', updateMaintainabilityChart);">zoom</a></small>
+                <div id="svg-maintainability"><svg /></div>
+
+                <div class="well ">
+
+                    <h4>Information</h4>
+                    <p>
+                        Each file is symbolized by a circle.
+                        Size of the circle represents the Cyclomatic complexity.
+                        Color of the circle represents the Maintainability Index.
+                    </p>
+                    <p>Large red circles will be probably hard to maintain.</p>
+                </div>
+
+            </div>
+            <div class=" col-3">
+
+                <h3 id="title-custom">Custom chart</h3>
+                <small><a id="btn-save-custom" download="phpmetric-custom.svg">Download (as SVG)</a> | <a onclick="return zoom('svg-custom', updateCustomChart);">zoom</a></small>
+                <div id="svg-custom"><svg /></div>
+
+                <div class="well">
+                    <h4>Configuration</h4>
+                    <p>
+                        Select metrics you want to display in chart.
+                    </p>
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td>X Axis</td>
+                            <td>Y Axis</td>
+                            <td>Diameter</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="xAxis" class="form-control" onchange="xAxis = this.value; updateCustomChart();">
+                                                                            <option value="afferentCoupling">Afferent Coupling </option>
+                                                                            <option value="bugs">Bugs </option>
+                                                                            <option value="commentWeight">Comment Weight </option>
+                                                                            <option value="cyclomaticComplexity">Cyclomatic Complexity </option>
+                                                                            <option value="dc">Dc </option>
+                                                                            <option value="difficulty">Difficulty </option>
+                                                                            <option value="efferentCoupling">Efferent Coupling </option>
+                                                                            <option value="effort">Effort </option>
+                                                                            <option value="filename">Filename </option>
+                                                                            <option value="instability">Instability </option>
+                                                                            <option value="intelligentContent">Intelligent Content </option>
+                                                                            <option value="lcom">Lcom </option>
+                                                                            <option value="length">Length </option>
+                                                                            <option value="loc">Loc </option>
+                                                                            <option value="logicalLoc">Logical Loc </option>
+                                                                            <option value="maintainabilityIndex">Maintainability Index </option>
+                                                                            <option value="maintainabilityIndexWithoutComment">Maintainability Index Without Comment </option>
+                                                                            <option value="myerDistance">Myer Distance </option>
+                                                                            <option value="myerInterval">Myer Interval </option>
+                                                                            <option value="name">Name </option>
+                                                                            <option value="noc">Noc </option>
+                                                                            <option value="noc-anon">Noc-anon </option>
+                                                                            <option value="noca">Noca </option>
+                                                                            <option value="nocc">Nocc </option>
+                                                                            <option value="noi">Noi </option>
+                                                                            <option value="nom">Nom </option>
+                                                                            <option value="operators">Operators </option>
+                                                                            <option value="rdc">Rdc </option>
+                                                                            <option value="rsc">Rsc </option>
+                                                                            <option value="rsysc">Rsysc </option>
+                                                                            <option value="sc">Sc </option>
+                                                                            <option value="sysc">Sysc </option>
+                                                                            <option value="time">Time </option>
+                                                                            <option value="vocabulary">Vocabulary </option>
+                                                                            <option value="volume">Volume </option>
+                                                                    </select>
+                            </td>
+                            <td>
+                                <select id="yAxis" class="form-control" onchange="yAxis = this.value; updateCustomChart();">
+                                                                            <option value="afferentCoupling">Afferent Coupling </option>
+                                                                            <option value="bugs">Bugs </option>
+                                                                            <option value="commentWeight">Comment Weight </option>
+                                                                            <option value="cyclomaticComplexity">Cyclomatic Complexity </option>
+                                                                            <option value="dc">Dc </option>
+                                                                            <option value="difficulty">Difficulty </option>
+                                                                            <option value="efferentCoupling">Efferent Coupling </option>
+                                                                            <option value="effort">Effort </option>
+                                                                            <option value="filename">Filename </option>
+                                                                            <option value="instability">Instability </option>
+                                                                            <option value="intelligentContent">Intelligent Content </option>
+                                                                            <option value="lcom">Lcom </option>
+                                                                            <option value="length">Length </option>
+                                                                            <option value="loc">Loc </option>
+                                                                            <option value="logicalLoc">Logical Loc </option>
+                                                                            <option value="maintainabilityIndex">Maintainability Index </option>
+                                                                            <option value="maintainabilityIndexWithoutComment">Maintainability Index Without Comment </option>
+                                                                            <option value="myerDistance">Myer Distance </option>
+                                                                            <option value="myerInterval">Myer Interval </option>
+                                                                            <option value="name">Name </option>
+                                                                            <option value="noc">Noc </option>
+                                                                            <option value="noc-anon">Noc-anon </option>
+                                                                            <option value="noca">Noca </option>
+                                                                            <option value="nocc">Nocc </option>
+                                                                            <option value="noi">Noi </option>
+                                                                            <option value="nom">Nom </option>
+                                                                            <option value="operators">Operators </option>
+                                                                            <option value="rdc">Rdc </option>
+                                                                            <option value="rsc">Rsc </option>
+                                                                            <option value="rsysc">Rsysc </option>
+                                                                            <option value="sc">Sc </option>
+                                                                            <option value="sysc">Sysc </option>
+                                                                            <option value="time">Time </option>
+                                                                            <option value="vocabulary">Vocabulary </option>
+                                                                            <option value="volume">Volume </option>
+                                                                    </select>
+                            </td>
+                            <td>
+                                <select id="rAxis" class="form-control" onchange="rAxis = this.value; updateCustomChart();">
+                                                                            <option value="afferentCoupling">Afferent Coupling </option>
+                                                                            <option value="bugs">Bugs </option>
+                                                                            <option value="commentWeight">Comment Weight </option>
+                                                                            <option value="cyclomaticComplexity">Cyclomatic Complexity </option>
+                                                                            <option value="dc">Dc </option>
+                                                                            <option value="difficulty">Difficulty </option>
+                                                                            <option value="efferentCoupling">Efferent Coupling </option>
+                                                                            <option value="effort">Effort </option>
+                                                                            <option value="filename">Filename </option>
+                                                                            <option value="instability">Instability </option>
+                                                                            <option value="intelligentContent">Intelligent Content </option>
+                                                                            <option value="lcom">Lcom </option>
+                                                                            <option value="length">Length </option>
+                                                                            <option value="loc">Loc </option>
+                                                                            <option value="logicalLoc">Logical Loc </option>
+                                                                            <option value="maintainabilityIndex">Maintainability Index </option>
+                                                                            <option value="maintainabilityIndexWithoutComment">Maintainability Index Without Comment </option>
+                                                                            <option value="myerDistance">Myer Distance </option>
+                                                                            <option value="myerInterval">Myer Interval </option>
+                                                                            <option value="name">Name </option>
+                                                                            <option value="noc">Noc </option>
+                                                                            <option value="noc-anon">Noc-anon </option>
+                                                                            <option value="noca">Noca </option>
+                                                                            <option value="nocc">Nocc </option>
+                                                                            <option value="noi">Noi </option>
+                                                                            <option value="nom">Nom </option>
+                                                                            <option value="operators">Operators </option>
+                                                                            <option value="rdc">Rdc </option>
+                                                                            <option value="rsc">Rsc </option>
+                                                                            <option value="rsysc">Rsysc </option>
+                                                                            <option value="sc">Sc </option>
+                                                                            <option value="sysc">Sysc </option>
+                                                                            <option value="time">Time </option>
+                                                                            <option value="vocabulary">Vocabulary </option>
+                                                                            <option value="volume">Volume </option>
+                                                                    </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-3">
+                <h3>Abstractness / Instability</h3>
+                <small><a id="btn-save-abstractness" download="phpmetric-abstractness.svg">Download (as SVG)</a> | <a onclick="return zoom('svg-abstractness', updateAbstractnessChart);">zoom</a></small>
+                <div id="svg-abstractness"><svg /></div>
+            </div>
+        </div>
+        <!-- end: General details -->
+
+        <!-- Score -->
+        <div class="tab" id="score">
+            <div class="col-sm-12">
+                <h3>Score</h3>
+
+                <div class="col-6">
+                    <div id="chart-score"></div>
+                </div>
+
+                <div class="col-6">
+                    <p>
+                        This score is not absolute. This chart is a comparison of your project relative to a representative average of recent PHP projects.
+                    </p>
+                    <p>
+                        Each score is calculated from <acronym title="Cyclomatic complexity, Halstead metrics, Maintainability Index, Comment weight, Difficulty, Logical lines of code...">various criterias</acronym> from 52 files in your projects.
+                        Your score is a note between 0 (poor) and 100 (excellent).
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                    <tr>
+                                <td>Maintainability</td>
+                                <td>75.88 / 100</td>
+                            </tr>
+                                                    <tr>
+                                <td>Accessibility for new developers</td>
+                                <td>68.29 / 100</td>
+                            </tr>
+                                                    <tr>
+                                <td>Simplicity of algorithms</td>
+                                <td>19 / 100</td>
+                            </tr>
+                                                    <tr>
+                                <td>Volume</td>
+                                <td>65.15 / 100</td>
+                            </tr>
+                                                    <tr>
+                                <td>Reducing bug&#039;s probability</td>
+                                <td>63.93 / 100</td>
+                            </tr>
+                                                </tbody>
+                    </table>
+                    <p>
+                        <strong>This score does not replace the judgement of a human.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- end: Score -->
+
+        <!-- Relations -->
+        <div class="tab" id="relations">
+            <h3>Relations</h3>
+            <div class="col-sm-12">
+                <div class="well">
+                    <p>
+                        Class uses another when it calls, constructs, types hint, extends or implements it.
+                    </p>
+                    <ul>
+                        <li><span class="badge relation-source">Used by</span> : this class is used by hovered element.</li>
+                        <li><span class="badge relation-target">Uses</span> : this class uses hovered element.</li>
+                    </ul>
+
+                </div>
+                <small><a id="btn-save-relations" download="phpmetric-relations.svg">Download (as SVG)</a></small>
+                <div class="svg-main" id="svg-relations"><svg /></div>
+
+            </div>
+        </div>
+        <!-- end: Relations -->
+
+
+        <!-- Tabular datas -->
+        <div class="tab" id="explore">
+            <div class="col-sm-12">
+                <h3>Explore</h3>
+                <p>
+                    <select id="select-display-tabular">
+                        <option value="all" selected="selected">Display metrics</option>
+                        <option value="essential">Essential</option>
+                        <option value="all">All</option>
+                    </select>
+                </p>
+                <div id="chart-tableview"></div>
+            </div>
+        </div>
+        <!-- end: Tabular datas -->
+
+
+        <!-- Volume -->
+        <div class="tab" id="repartition">
+            <h3>Repartition</h3>
+            <div class="col-3">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Files</td>
+                            <td>52</td>
+                        </tr>
+                        <tr>
+                            <td>Lines of code</td>
+                            <td>
+                                4057
+                                                                    <span class="more">(78 by class,
+                                        25 by method)</span>
+                                                            </td>
+                        </tr>
+                        <tr>
+                            <td>Logical lines of code</td>
+                            <td>
+                                958
+                                                                    <span class="more">(18 by class,
+                                        6 by method)</span>
+                                                            </td>
+                        </tr>
+                        <tr>
+                            <td>Classes</td>
+                            <td>52
+                                                                    <div>
+                                        <span class="more">
+                                            13 interfaces (25 %)
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="more">
+                                            38 concrete classes (73 %)
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="more">
+                                            14 abstract classes (27 %)
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="more">
+                                            0 anonymous classes (0 %)
+                                        </span>
+                                    </div>
+                                                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Methods</td>
+                            <td>
+                                162
+                                                                    <span class="more">(3.1 by class )</span>
+                                                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-3">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Relative system complexity</td>
+                        <td>3.46</td>
+                    </tr>
+                    <tr>
+                        <td>Relative data complexity</td>
+                        <td>0.97</td>
+                    </tr>
+                    <tr>
+                        <td>Relative structure complexity</td>
+                        <td>2.49</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-3">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Lack of cohesion of methods</td>
+                        <td>1.4</td>
+                    </tr>
+                    <tr>
+                        <td>Efferent Coupling</td>
+                        <td>2.06</td>
+                    </tr>
+                    <tr>
+                        <td>Afferent Coupling</td>
+                        <td>0.06</td>
+                    </tr>
+                    <tr>
+                        <td>Abstractness</td>
+                        <td>0.27</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end: Volume -->
+
+        <!-- Help -->
+        <div class="tab" id="help">
+            <div class="col-sm-12">
+                <h3>Help</h3>
+                <ul>
+                    <li>You're using PhpMetrics v1.10.0</li>
+                    <li>Online help is available on the <a href="http://www.phpmetrics.org/documentation/index.html">PhpMetrics website</a>.</li>
+                    <li>Sources of PhpMetrics are available on <a href="https://github.com/PhpMetrics/PhpMetrics">Github</a>.</li>
+                    <li>PhpMetrics is created by <a href="http://lepine.pro">Jean-François Lépine</a>.</li>
+                </ul>
+            </div>
+        </div>
+        <!-- end: Help -->
+
+        <!-- Extensions blocks -->
+        
+        <!-- end: Extensions -->
+
+    </div>
+
+
+    <div class="row footer">
+        <div class="container">
+            Powered by <a href="http://www.phpmetrics.org">PhpMetrics</a> v1.10.0 - Copyright Jean-François Lépine
+            <br/> Generated on 25th of October 2016 at 09:06:18 AM
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    function validate() {
+        return 'unknown';
+    }
+
+
+    function validate(key, value) {
+        var rule = ruleSet[key];
+
+        if(typeof(rule) === 'undefined' || rule === undefined) {
+            return 'unknown';
+        }
+
+        // according order
+        if(rule[0] < rule[2]) {
+            // critical < warn < good
+            switch(true) {
+                case value < rule[1]:
+                    return 'critical';
+                case value >= rule[1] && value < rule[2]:
+                    return 'warning';
+                default:
+                    return 'good';
+            }
+        } else {
+            // critical > warn > good
+            switch(true) {
+                case value > rule[1]:
+                    return 'critical';
+                case value < rule[2]:
+                    return 'good';
+                default:
+                    return 'warning';
+            }
+        }
+    }
+
+    function validateIn(results, key, type) {
+        type = type || 'average';
+        var value = results[type] ? results[type][key] : results[key];
+        return validate(key, value);
+    }
+
+
+    function textify(string) {
+        string = string.charAt(0).toUpperCase() + string.slice(1);
+        return string.replace(/([a-z0-9])([A-Z])/, "$1 $2");
+    }
+
+    function toggleAccessibility() {
+        accessibilityEnabled = !!!accessibilityEnabled;
+        document.getElementById('svg-maintainability').firstElementChild.innerHTML = '';
+        updateMaintainabilityChart();
+
+    }
+
+
+    function displayTab(e, id) {
+
+        var i, tabs = document.getElementsByClassName('tab');
+        for(i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = 'none';
+        }
+        document.getElementById(id).style.display = 'block';
+
+        var child, menu = document.getElementById('menu');
+        var nodes = menu.childNodes;
+        for(var i = 0; i < nodes.length; i++) {
+            nodes[i].className = '';
+        }
+
+        e.className = 'active';
+    }
+
+    function zoom(id, callback) {
+        var e = document.getElementById(id);
+
+        // preserve olds values
+        e.setAttribute('data-original-width', e.offsetWidth);
+        e.setAttribute('data-original-height', e.offsetHeight);
+
+        // zoom
+        e.className = 'zoomed';
+
+        // add close button
+        var close = document.createElement('div');
+        close.setAttribute('id', 'btn-close');
+        close.innerHTML = '<a>Close</a>';
+        document.body.appendChild(close);
+        close.className = 'btn-close'
+        close.onclick = function(id, callback) {
+            return function() {
+                zoomOut(id, callback);
+            }
+        }(id, callback);
+
+        // apply callback
+        callback();
+    }
+
+    function zoomOut(id, callback) {
+        var e = document.getElementById(id);
+
+        // zoom
+        e.className = '';
+
+        // remove close button
+        var close = document.getElementById('btn-close');
+        close.parentNode.removeChild(close);
+
+        // apply callback
+        var w = e.getAttribute('data-original-width');
+        callback(w);
+    }
+
+</script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://nvd3.org/assets/js/nv.d3.js" charset="utf-8"></script>
+    <script src="https://cdn.rawgit.com/alangrafu/radar-chart-d3/master/src/radar-chart.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    function updateScoreChart() {
+        if(updateScoreChart.initiazed) return;
+        updateScoreChart.initiazed = true;
+        var score = [
+            {
+                className: 'score',
+                axes: [
+                                            {axis: "Maintainability", value: 76 },
+                                            {axis: "Accessibility for new developers", value: 68 },
+                                            {axis: "Simplicity of algorithms", value: 19 },
+                                            {axis: "Volume", value: 65 },
+                                            {axis: "Reducing bug's probability", value: 64 },
+                                    ]
+            }
+        ];
+
+        var chart = RadarChart.chart();
+        chart.config({
+            maxValue: 100,
+            w: 500,
+            h: 500
+        });
+        var svg = d3.select('#chart-score').append('svg');
+
+        // darw one
+        svg.append('g').classed('focus', 1).datum(score).call(chart);
+        svg.attr('width', 500).attr('height', 500);
+    }
+</script>
+<script type="text/javascript">
+
+    var tabularCurrentView = 'all';
+
+    function updateTableView() {
+
+        document.getElementById('chart-tableview').innerHTML = '';
+
+        /**
+         * Get column header
+         *
+         * @param label
+         * @param key
+         * @param type [average|sum|min|max]
+         * @returns object
+         */
+        function getCol(label, key, type, help, doValidate) {
+            type = type || false;
+            if(doValidate == undefined) {
+                doValidate = true;
+            }
+            return {
+                format: function(d) {
+                    if(type) {
+                        return d[type] ? d[type][key] : d[key];
+                    }
+                    return d[key];
+                },
+                label: '<abbr title="' + help + '">' + label + '</abbr>',
+                type: type,
+                classes:
+                        ( doValidate
+                            ? function(d) { return validateIn(d,key, type); }
+                            : ''
+                        )
+            };
+        }
+
+        /**
+         * Get all columns
+         *
+         * @returns {*[]}
+         */
+        function getAllColumns() {
+            return [
+                getCol('loc'            , 'loc'                     , 'sum'     , 'Number of lines of code'                 , false),
+                getCol('lloc'           , 'logicalLoc'              , 'sum'     , 'Number of logical lines of code'         ,false),
+                getCol('CommW'          , 'commentWeight'           , 'average' , 'Comment Weight'),
+                getCol('Length'         , 'length'                  , 'sum'     , 'Halstead length'),
+                getCol('Volume'         , 'volume'                  , 'average' , 'Halstead Volume'),
+                getCol('Vocabulary'     , 'vocabulary'              , 'average' , 'Halstead Vocabulary'),
+                getCol('Eff.'           , 'effort'                  , 'average' , 'Halstead effort'),
+                getCol('MI'             , 'maintainabilityIndex'     , 'average' , 'Maintainability Index (mi < 65: low ; 65 < mi < 85: correct; 85 < mi: good)'),
+                getCol('MIwC'           , 'maintainabilityIndexWithoutComment' , 'average', 'Maintainability index without comments'),
+                getCol('Diff'           , 'difficulty'              , 'average' , 'Halstead difficulty (average)'),
+                getCol('Bugs'           , 'bugs'                    , 'average' , 'Estimated number of bugs (average by file)'),
+                getCol('IC'             , 'intelligentContent'      , 'average' , 'Intelligent content'),
+                getCol('CC'             , 'cyclomaticComplexity'    , 'average' , "Cyclomatic complexity"),
+                getCol('Dist.'          , 'myerDistance'            , 'average' , "Myer's distance"),
+                getCol('Oper.'          , 'operators'               , 'sum'     , 'Number of operators'                 , false),
+                getCol('lcom'           , 'lcom'                    , 'average' , 'Lack of cohesion of methods (LCOM4)'),
+                getCol('rsysc'          , 'rsysc'                   , 'average' , 'Relative System complexity'),
+                getCol('rdc'            , 'rdc'                     , 'average' , 'Relative Data complexity'),
+                getCol('rsc'            , 'rsc'                     , 'average' , 'Relative Structural complexity'),
+                getCol('Abstr.'         , 'abstractness'            , false     , 'Abstractness'),
+                getCol('Inst.'          , 'instability'             , false     , 'Instability'),
+                getCol('EC'             , 'efferentCoupling'        , 'average' , 'Efferent coupling'),
+                getCol('AC'             , 'afferentCoupling'        , 'average' , 'Afferent coupling'),
+                getCol('noc'            , 'noc'                     , 'sum'     , 'Number of classes'                   , false),
+                getCol('noca'           , 'noca'                    , 'sum'     , 'Number of abstract classes and interfaces'          , false),
+                getCol('nocc'           , 'nocc'                    , 'sum'     , 'Number of concrete classes'          , false),
+                getCol('noi'            , 'noi'                     , 'sum'     , 'Number of interfaces'                , false)
+            ];
+        }
+
+        /**
+         * Get essentials columns
+         *
+         * @returns {*[]}
+         */
+        function getEssentialColumns() {
+            return [
+                getCol('Lines of code'            , 'loc'                     , 'sum'     , 'Number of lines of code'                 , false),
+                getCol('Logical lines of code'           , 'logicalLoc'              , 'sum'     , 'Number of logical lines of code'         ,false),
+                getCol('Comment weight'          , 'commentWeight'           , 'average' , 'Comment Weight'),
+                getCol('Maintainability index'             , 'maintainabilityIndex'     , 'average' , 'Maintainability Index (mi < 65: low ; 65 < mi < 85: correct; 85 < mi: good)'),
+                getCol('Bugs'           , 'bugs'                    , 'average' , 'Estimated number of bugs (average by file)'),
+                getCol('Lack of cohesion of methods'           , 'lcom'                    , 'average' , 'Lack of cohesion of methods (LCOM4)'),
+            ];
+        }
+
+        /**
+         * Get only active columns
+         *
+         * @returns {*[]}
+         */
+        function getActiveColumns() {
+            switch(tabularCurrentView) {
+                case 'essential':
+                    return getEssentialColumns();
+                case 'all':
+                default:
+                    return getAllColumns();
+            }
+        }
+
+        nv.addGraph(function() {
+            var columns = getActiveColumns();
+            columns.unshift({
+                key: 'name',
+                label: 'Name',
+                showCount: true,
+                type: 'text',
+                classes: function(d) {
+                    return  'name '
+                            + (d.childs ? 'clickable ' : '')
+                            + 'depth-' + d._depth;
+                }
+            });
+            var chart = nv.models.indentedTree()
+                    .tableClass('table table-striped') //for bootstrap styling
+                    .columns(columns);
+
+            d3.select('#chart-tableview')
+                    .datum(tabularize(JSON.parse(JSON.stringify(groupedData))))
+                    .call(chart);
+
+            // fix bug with nvd3js and html in labels
+            d3.select('#chart-tableview').selectAll('th').each(function() {
+                this.innerHTML = this.innerText;
+            });
+
+
+
+            return chart;
+        });
+
+        // select type of display
+        var d = document.getElementById('select-display-tabular');
+        d.onchange = function(){
+            tabularCurrentView = this.options[this.selectedIndex].value;
+            updateTableView();
+        }
+
+    }
+
+    function tabularize(root) {
+        var result = root;
+
+        var i, len = root.length;
+
+        for(i = 0; i < len; i++) {
+            result[i]._values = root[i].childs;
+            delete result[i].childs;
+            result[i]._depth = result[i].depth;
+        }
+
+        // we want to display results in a tree
+        var parents = [
+            { name: "temporary", _values: []}
+        ];
+        var final, e, level, separator;
+        separator = "/";
+        for(i = 0; i < len; i++) {
+            if (result[i].name.indexOf("\\") !== -1) {
+                separator = "\\";
+                break;
+            }
+        }
+        for(i = 0; i < len; i++) {
+            e = result[i];
+            level = (e.name.split(separator).length - 1);
+            if(!e.name.match(/\.php$/)) {
+                parents[level + 1] = e;
+                parents[level]._values.push(e);
+            } else {
+                parents[level]._values.push(e);
+            }
+        }
+        final = parents[1];
+        return [final];
+    }
+
+
+
+</script>
+<script type="text/javascript">
+
+    function updateMaintainabilityChart() {
+        chartMaintainability();
+    };
+
+    function chartMaintainability() {
+        var maxHeight = document.getElementById('svg-maintainability').offsetHeight,
+            maxWidth = document.getElementById('svg-maintainability').offsetWidth,
+            format = d3.format(",d"),
+            color = d3.scale.category20c();
+
+        var bubble = d3.layout.pack()
+            .sort(null)
+            .size([maxWidth, maxHeight])
+            .padding(1.5);
+
+        var r = d3.scale.linear().range([1, maxWidth / 4]).domain([1, 100]);
+        var x = d3.scale.linear().range([1, maxWidth]);
+        var y = d3.scale.linear().range([1, maxHeight]);
+
+
+
+        d3.select("#svg-maintainability").html("<svg></svg>");
+        var svg = d3.select("#svg-maintainability").select("svg")
+            .attr("width", maxWidth)
+            .attr("height", maxHeight)
+            .attr("class", "bubble");
+
+
+        // accessibility for colorblind
+        var defs= svg.append('defs');
+        defs.append('pattern')
+                    .attr('id', 'hash-warning')
+                    .attr('patternUnits', 'userSpaceOnUse')
+                    .attr('width', 4)
+                    .attr('height', 4)
+                    .append('path')
+                        .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
+                        .attr('stroke', '#000000')
+                        .attr('stroke-width', 1);
+        defs.append('pattern')
+                    .attr('id', 'hash-critical')
+                    .attr('patternUnits', 'userSpaceOnUse')
+                    .attr('width', 4)
+                    .attr('height', 4)
+                    .append('path')
+                        .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
+                        .attr('stroke', '#000000')
+                        .attr('stroke-width', 3);
+        defs.append('pattern')
+                .attr('id', 'hash-good')
+                .attr('patternUnits', 'userSpaceOnUse')
+                .attr('width', 5)
+                .attr('height', 5)
+                .append('circle')
+                    .attr('cx', 2)
+                    .attr('cy', 2)
+                    .attr('r', 2)
+                    .attr('style', "stroke:none;fill:#eee");
+
+        // initialization
+        d3
+            .select('#svg-maintainability')
+            .datum(data)
+            .call(bubble)
+                ;
+
+        var node = svg.selectAll(".node")
+            .data(
+                bubble.nodes(mapDatas(data))
+                .filter(function(d) { return !d.children; })
+            )
+            .enter().append("g")
+            .attr("class", "node");
+
+            node
+                .append('circle')
+                // uncomment following line if you want fixed size for your bubble (cyclo=1 => size=1)
+                //.attr("r", function(d) { return r(d.value);})
+                .attr("r", function(d) { return d.r; })
+                .attr("x", function(d) { return x(d.x)})
+                .attr("y", function(d) { return y(d.y)})
+
+                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+                // events
+                .on('mouseover', function(d) {
+                    var text = '<strong>' + d.name + '</strong>'
+                            + "<br />Cyclomatic Complexity : " + format(d.cyclomaticComplexity)
+                            + "<br />Maintainability Index: " + format(d.maintainabilityIndex);
+                    d3.select('.tooltip').html(text);
+                    d3.select(".tooltip").style("opacity", 1);
+                })
+                .on('mousemove', function() {
+                    d3.select(".tooltip")
+                            .style("left", (d3.event.pageX + 5) + "px")
+                            .style("top",  (d3.event.pageY + 5) + "px");
+                })
+                .on('mouseout', function() {
+                    d3.select(".tooltip").style("opacity", 0);
+                })
+                // for colorblinds
+                .style("fill", function(d) {
+                    if(accessibilityEnabled) {
+                        return 'url(#hash-'+ validate('maintainabilityIndex', d.maintainabilityIndex) +')'
+                    }
+                    switch(validate('maintainabilityIndex', d.maintainabilityIndex)) {
+                        case 'good':
+                            return '#78BA00';
+                        case 'warning':
+                            return '#F4B300';
+                        case 'critical':
+                            return '#FF2E12';
+                        default:
+                            return '#CCCCCC';
+                    }
+                })
+                .style('stroke-width', function(d) {
+                    return accessibilityEnabled ? 1 : 0;
+                })
+                .style('stroke', '#000')
+        ;
+
+        // tooltip
+        d3.select("body")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+        // Save as
+        function mapDatas(root) {
+            var datas = [];
+            var i, color;
+            for(i in root) {
+                var e = root[i];
+                datas.push({
+                    "value": parseFloat(e.cyclomaticComplexity) + 1
+                    , "name": e.filename
+                    , "cyclomaticComplexity": parseFloat(e.cyclomaticComplexity)
+                    , "maintainabilityIndex": parseInt(e.maintainabilityIndex)
+                });
+            }
+            return {"children":datas};
+        }
+
+        d3.select(self.frameElement).style("height", maxWidth + "px");
+
+
+        // Save as
+        document.getElementById('btn-save-maintainability').onmouseover = function() {
+            var e = this;
+            if(e.className != 'initialized') {
+                var svgc  = document.getElementById('svg-maintainability').childNodes[0]
+                        , xml  = new XMLSerializer().serializeToString(svgc)
+                        , xmldata = btoa(xml);
+                e.href = 'data:application/octet-stream;base64,' + xmldata;
+                e.className = 'initialized';
+            }
+        };
+
+
+    }
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
+
+
+
+    function updateCustomChart() {
+        chartCustom(xAxis, yAxis, rAxis);
+        document.getElementById('title-custom').innerHTML = textify(xAxis) + ' / ' + textify(yAxis);
+    };
+
+
+    function chartCustom(xData, yData, rData) {
+
+
+        var chart;
+        document.getElementById('svg-custom').innerHTML = '<svg />';
+        nv.addGraph(function() {
+            chart = nv.models.scatterChart()
+                    .showDistX(true)
+                    .showDistY(true)
+                    .showLegend(false)
+                    .useVoronoi(false)
+                    .color(d3.scale.category10().range())
+                    .transitionDuration(300)
+            ;
+
+            chart.xAxis.tickFormat(d3.format('.02f')).axisLabel(textify(xData));
+            chart.yAxis.tickFormat(d3.format('.02f')).axisLabel(textify(yData));
+            chart.tooltipContent(function(key, x, y, e, graph) {
+                return '<h2>' + e.point.title + '</h2>';
+            });
+            chart.scatter.useVoronoi(false);
+
+
+            d3.select("#svg-custom").select("svg")
+                    .attr("width",380)
+                    .attr("height",300)
+                    .datum(mapDatas(data))
+                    .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+
+            // Save as
+            var svg  = document.getElementById('svg-custom').childNodes[0],
+                    xml  = new XMLSerializer().serializeToString(svg),
+                    xmldata = btoa(xml),
+                    img  = new Image();
+            document.getElementById('btn-save-custom').href =  'data:application/octet-stream;base64,' + xmldata;
+
+
+            return chart;
+        });
+
+
+        function mapDatas(root) {
+            var results = [
+                { key: textify(xData) + " / " + textify(yData) + " chart", "values": [] }
+            ];
+            var i;
+            for(i in root) {
+                var e = root[i];
+                results[0].values.push({
+                    "title": e.filename
+                    , "x": Math.max(0,parseFloat(e[xData]))
+                    , "y": Math.max(0,parseFloat(e[yData]))
+                    , size: Math.max(0,parseFloat(e[rData]))
+                    , shape: 'round'
+                });
+            }
+            return results;
+        }
+
+    }
+
+
+</script>
+<script type="text/javascript">
+
+    function updateAbstractnessChart() {
+            chartAbstractness();
+    };
+
+    function chartAbstractness() {
+        if(chartAbstractness.initiazed) return;
+        chartAbstractness.initiazed = true;
+
+        var xData = 'abstractness';
+        var yData = 'instability';
+        var rData = 'loc';
+
+        var chart;
+        nv.addGraph(function() {
+            chart = nv.models.scatterChart()
+                    .showDistX(true)
+                    .showDistY(true)
+                    .useVoronoi(false)
+                    .showLegend(false)
+                    .color(d3.scale.category10().range())
+                    .transitionDuration(300)
+                    .forceY([0, 1])
+                    .forceX([0, 1])
+            ;
+
+            chart.xAxis.tickFormat(d3.format('.02f'))
+                    .axisLabel('Abstractness');
+            chart.yAxis.tickFormat(d3.format('.02f'))
+                    .axisLabel('Instability')
+            chart.tooltipContent(function(key, x, y, e, graph) {
+                return '<h2>' + e.point.name + '</h2>';
+            });
+            chart.scatter.useVoronoi(false);
+
+            d3.select("#svg-abstractness").select("svg")
+                    .attr("width",380)
+                    .attr("height",300)
+                    .attr("class",'svg')
+                    .datum(mapDatas(groupedData))
+                    .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+
+            // line (legend)
+            chart = nv.models.lineChart()
+                    .options({
+                        margin: {left: 75, bottom: 50},
+                        x: function(d,i) { return i},
+                        showXAxis: false,
+                        showYAxis: false,
+                        showLegend: false,
+                        transitionDuration: 300
+                    })
+                    .forceY([0, 1])
+                    .forceX([0, 1])
+            ;
+
+            d3.select("#svg-abstractness").select("svg")
+                    .datum([{key:" ", values:[ {x:0, y:1}, {x:1, y:0}  ]  , color: '#EEE'  }])
+                    .attr("width",380)
+                    .attr("height",300)
+                    .call(chart);
+
+
+
+            // btn save as
+            var svg = document.getElementById('svg-abstractness').childNodes[0],
+                    xml  = new XMLSerializer().serializeToString(svg),
+                    xmldata = btoa(xml);
+            document.getElementById('btn-save-abstractness').href = 'data:application/octet-stream;base64,' + xmldata;
+
+            return chart;
+        });
+
+        function mapDatas(root) {
+            var results = [
+                { key: textify(xData) + " / " + textify(yData) + " chart", "values": [] }
+            ];
+            var i;
+            for(i in root) {
+                var e = root[i];
+                results[0].values.push({
+                    "name": e.name
+                    , "x": Math.max(0,parseFloat(e[xData]))
+                    , "y": Math.max(0,parseFloat(e[yData]))
+                    , size: Math.max(0,parseFloat([rData]))
+                    , shape: 'round'
+                });
+            }
+            return results;
+        }
+    }
+</script>
+<script type="text/javascript">
+    /**
+     * Thank's to http://bl.ocks.org/mbostock/raw/7607999/
+     */
+    var relations = [{"name":"\\Drupal\\replication\\BulkDocsFactory","size":3000,"relations":["Drupal\\multiversion\\Workspace\\WorkspaceManagerInterface","Drupal\\multiversion\\Entity\\Index\\UuidIndexInterface","Drupal\\multiversion\\Entity\\Index\\RevisionIndexInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\Core\\Lock\\LockBackendInterface","Drupal\\Core\\Logger\\LoggerChannelFactoryInterface","Drupal\\Core\\State\\StateInterface","Drupal\\replication\\BulkDocs\\BulkDocs","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\ChangesFactory","size":3000,"relations":["Drupal\\multiversion\\Entity\\Index\\SequenceIndexInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Symfony\\Component\\Serializer\\SerializerInterface","Drupal\\replication\\Plugin\\ReplicationFilterManagerInterface","Drupal\\replication\\Changes\\Changes","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilterManagerInterface","size":3000,"relations":["\\Drupal\\replication\\Plugin\\PluginManagerInterface,"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilterInterface","size":3000,"relations":["\\Drupal\\replication\\Plugin\\PluginInspectionInterface,","Drupal\\Core\\Entity\\EntityInterface"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilterManager","size":3000,"relations":["Drupal\\Core\\Plugin\\DefaultPluginManager","Drupal\\Core\\Plugin\\DefaultPluginManager","\\Traversable","Drupal\\Core\\Cache\\CacheBackendInterface","Drupal\\Core\\Extension\\ModuleHandlerInterface"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilter\\EntityTypeFilter","size":3000,"relations":["Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","Drupal\\Core\\Entity\\EntityInterface"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilter\\UuidFilter","size":3000,"relations":["Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","Drupal\\Core\\Entity\\EntityInterface"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","size":3000,"relations":["Drupal\\Core\\Plugin\\PluginBase"]},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilter\\PublishedFilter","size":3000,"relations":["Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","Drupal\\Core\\Entity\\EntityTypeManagerInterface","\\Drupal\\replication\\Plugin\\ReplicationFilter\\PublishedFilter","Symfony\\Component\\DependencyInjection\\ContainerInterface","\\Drupal\\replication\\Plugin\\ReplicationFilter\\static","Drupal\\Core\\Entity\\EntityInterface"]},{"name":"\\Drupal\\replication\\Plugin\\Field\\FieldType\\ReplicationHistoryItem","size":3000,"relations":["Drupal\\Core\\Field\\FieldItemBase","Drupal\\Core\\TypedData\\DataDefinition","Drupal\\Core\\Field\\FieldStorageDefinitionInterface"]},{"name":"\\Drupal\\replication\\Plugin\\Field\\FieldType\\ReplicationHistoryItemList","size":3000,"relations":["Drupal\\Core\\Field\\FieldItemList"]},{"name":"\\Drupal\\replication\\Changes\\Changes","size":3000,"relations":["Drupal\\multiversion\\Entity\\Index\\SequenceIndexInterface","Drupal\\multiversion\\Entity\\WorkspaceInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Symfony\\Component\\Serializer\\SerializerInterface","Drupal\\replication\\Plugin\\ReplicationFilterManagerInterface"]},{"name":"\\Drupal\\replication\\Changes\\ChangesInterface","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\AllDocsFactoryInterface","size":3000,"relations":["Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\BulkDocsFactoryInterface","size":3000,"relations":["Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\Encoder\\StreamEncoder","size":3000,"relations":["Drupal\\Component\\Utility\\Random","\\InvalidArgumentException"]},{"name":"\\Drupal\\replication\\AllDocs\\AllDocs","size":3000,"relations":["Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\multiversion\\MultiversionManagerInterface","Drupal\\multiversion\\Entity\\WorkspaceInterface","Drupal\\multiversion\\Entity\\Index\\EntityIndexInterface","Symfony\\Component\\Serializer\\SerializerInterface"]},{"name":"\\Drupal\\replication\\AllDocs\\AllDocsInterface","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\RevisionDiffFactory","size":3000,"relations":["Drupal\\multiversion\\Entity\\Index\\RevisionIndexInterface","Drupal\\replication\\RevisionDiff\\RevisionDiff","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\AllDocsFactory","size":3000,"relations":["Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\multiversion\\MultiversionManagerInterface","Drupal\\multiversion\\Entity\\Index\\EntityIndexInterface","Symfony\\Component\\Serializer\\SerializerInterface","Drupal\\replication\\AllDocs\\AllDocs","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\BulkDocs\\BulkDocs","size":3000,"relations":["Drupal\\multiversion\\Workspace\\WorkspaceManagerInterface","Drupal\\multiversion\\Entity\\WorkspaceInterface","Drupal\\multiversion\\Entity\\Index\\UuidIndexInterface","Drupal\\multiversion\\Entity\\Index\\RevisionIndexInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\Core\\Lock\\LockBackendInterface","Drupal\\Core\\Logger\\LoggerChannelInterface","Drupal\\Core\\State\\StateInterface"]},{"name":"\\Drupal\\replication\\BulkDocs\\BulkDocsInterface","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\ChangesFactoryInterface","size":3000,"relations":["Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\RevisionDiffFactoryInterface","size":3000,"relations":["Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\ProcessFileAttachment","size":3000,"relations":["Drupal\\Core\\Session\\AccountProxyInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\multiversion\\Entity\\Index\\MultiversionIndexFactory","\\Drupal\\replication\\Drupal","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\Entity\\ReplicationLog","size":3000,"relations":["Drupal\\Core\\Entity\\ContentEntityBase","\\Drupal\\replication\\Entity\\Drupal","\\Drupal\\replication\\Entity\\ReplicationLog","Drupal\\Core\\Field\\BaseFieldDefinition","Drupal\\Core\\Field\\FieldStorageDefinitionInterface","Drupal\\Core\\Entity\\EntityTypeInterface"]},{"name":"\\Drupal\\replication\\Entity\\ReplicationSettings","size":3000,"relations":["Drupal\\Core\\Config\\Entity\\ConfigEntityBase"]},{"name":"\\Drupal\\replication\\Entity\\ReplicationSettingsInterface","size":3000,"relations":["Drupal\\Core\\Config\\Entity\\ConfigEntityInterface"]},{"name":"\\Drupal\\replication\\Entity\\ReplicationLogInterface","size":3000,"relations":["Drupal\\Core\\Entity\\ContentEntityInterface"]},{"name":"\\Drupal\\replication\\Annotation\\ReplicationFilter","size":3000,"relations":["Drupal\\Component\\Annotation\\Plugin"]},{"name":"\\Drupal\\replication\\RevisionDiff\\RevisionDiff","size":3000,"relations":["Drupal\\multiversion\\Entity\\Index\\RevisionIndexInterface","Drupal\\multiversion\\Entity\\WorkspaceInterface"]},{"name":"\\Drupal\\replication\\RevisionDiff\\RevisionDiffInterface","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\UsersMapping","size":3000,"relations":["Drupal\\Core\\Config\\ConfigFactoryInterface","Drupal\\Core\\Entity\\EntityTypeManagerInterface"]},{"name":"\\Drupal\\replication\\ReplicationTask\\ReplicationTaskInterface","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\ReplicationTask\\ReplicationTask","size":3000,"relations":[]},{"name":"\\Drupal\\replication\\Form\\SettingsForm","size":3000,"relations":["Drupal\\Core\\Form\\ConfigFormBase","Drupal\\Core\\Form\\ConfigFormBase","Drupal\\Core\\Form\\FormStateInterface","\\Drupal\\replication\\Form\\Drupal"]},{"name":"\\Drupal\\replication\\Normalizer\\ContentEntityNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Drupal\\Core\\Entity\\EntityManagerInterface","Drupal\\multiversion\\Entity\\Index\\MultiversionIndexFactory","Drupal\\Core\\Language\\LanguageManagerInterface","Drupal\\replication\\ProcessFileAttachment","Drupal\\replication\\UsersMapping","Drupal\\Core\\Entity\\EntityReferenceSelection\\SelectionPluginManagerInterface","Symfony\\Component\\Serializer\\Exception\\UnexpectedValueException","Drupal\\Core\\Language\\LanguageInterface","Drupal\\language\\Entity\\ConfigurableLanguage","Drupal\\Core\\Cache\\Cache","\\Drupal\\replication\\Normalizer\\Drupal"]},{"name":"\\Drupal\\replication\\Normalizer\\CommentItemNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"\\Drupal\\replication\\Normalizer\\EntityReferenceItemNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","\\Drupal\\replication\\Normalizer\\Drupal"]},{"name":"\\Drupal\\replication\\Normalizer\\ChangesNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"\\Drupal\\replication\\Normalizer\\FileItemNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Drupal\\file\\Entity\\File"]},{"name":"\\Drupal\\replication\\Normalizer\\RevsDiffNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Drupal\\replication\\RevisionDiffFactoryInterface","\\stdClass","Symfony\\Component\\Serializer\\Exception\\LogicException"]},{"name":"\\Drupal\\replication\\Normalizer\\ReplicationLogNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\multiversion\\Entity\\Index\\UuidIndexInterface","Drupal\\replication\\Entity\\ReplicationLog"]},{"name":"\\Drupal\\replication\\Normalizer\\LocalSequenceItemListNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"\\Drupal\\replication\\Normalizer\\WorkspaceNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\EntityNormalizer","Drupal\\serialization\\Normalizer\\EntityNormalizer","Drupal\\multiversion\\Entity\\WorkspaceType","\\Exception"]},{"name":"\\Drupal\\replication\\Normalizer\\RevisionInfoItemListNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\ListNormalizer","Drupal\\serialization\\Normalizer\\ListNormalizer"]},{"name":"\\Drupal\\replication\\Normalizer\\LinkItemNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Drupal\\Core\\Entity\\EntityTypeManagerInterface","Drupal\\multiversion\\Entity\\Index\\MultiversionIndexFactory"]},{"name":"\\Drupal\\replication\\Normalizer\\AttachmentNormalizer","size":3000,"relations":["\\Drupal\\replication\\Normalizer\\ContentEntityNormalizer","\\Drupal\\replication\\Normalizer\\ContentEntityNormalizer"]},{"name":"\\Drupal\\replication\\Normalizer\\DeletedFlagItemListNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"\\Drupal\\replication\\Normalizer\\BulkDocsNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase","Symfony\\Component\\Serializer\\Exception\\LogicException","\\Drupal\\replication\\Normalizer\\Drupal"]},{"name":"\\Drupal\\replication\\Normalizer\\TextItemNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"\\Drupal\\replication\\Normalizer\\AllDocsNormalizer","size":3000,"relations":["Drupal\\serialization\\Normalizer\\NormalizerBase"]},{"name":"Drupal\\multiversion\\Workspace\\WorkspaceManagerInterface","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\Index\\UuidIndexInterface","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\Index\\RevisionIndexInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\EntityTypeManagerInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Lock\\LockBackendInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Logger\\LoggerChannelFactoryInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\State\\StateInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\BulkDocs\\BulkDocs","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\WorkspaceInterface","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\Index\\SequenceIndexInterface","relations":[],"size":3000},{"name":"Symfony\\Component\\Serializer\\SerializerInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\Plugin\\ReplicationFilterManagerInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\Changes\\Changes","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Plugin\\PluginManagerInterface,","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Plugin\\PluginInspectionInterface,","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\EntityInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Plugin\\DefaultPluginManager","relations":[],"size":3000},{"name":"\\Traversable","relations":[],"size":3000},{"name":"Drupal\\Core\\Cache\\CacheBackendInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Extension\\ModuleHandlerInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\Plugin\\ReplicationFilter\\ReplicationFilterBase","relations":[],"size":3000},{"name":"Drupal\\Core\\Plugin\\PluginBase","relations":[],"size":3000},{"name":"Symfony\\Component\\DependencyInjection\\ContainerInterface","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Plugin\\ReplicationFilter\\static","relations":[],"size":3000},{"name":"Drupal\\Core\\Field\\FieldItemBase","relations":[],"size":3000},{"name":"Drupal\\Core\\TypedData\\DataDefinition","relations":[],"size":3000},{"name":"Drupal\\Core\\Field\\FieldStorageDefinitionInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Field\\FieldItemList","relations":[],"size":3000},{"name":"Drupal\\Component\\Utility\\Random","relations":[],"size":3000},{"name":"\\InvalidArgumentException","relations":[],"size":3000},{"name":"Drupal\\multiversion\\MultiversionManagerInterface","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\Index\\EntityIndexInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\RevisionDiff\\RevisionDiff","relations":[],"size":3000},{"name":"Drupal\\replication\\AllDocs\\AllDocs","relations":[],"size":3000},{"name":"Drupal\\Core\\Logger\\LoggerChannelInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Session\\AccountProxyInterface","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\Index\\MultiversionIndexFactory","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Drupal","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\ContentEntityBase","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Entity\\Drupal","relations":[],"size":3000},{"name":"Drupal\\Core\\Field\\BaseFieldDefinition","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\EntityTypeInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Config\\Entity\\ConfigEntityBase","relations":[],"size":3000},{"name":"Drupal\\Core\\Config\\Entity\\ConfigEntityInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\ContentEntityInterface","relations":[],"size":3000},{"name":"Drupal\\Component\\Annotation\\Plugin","relations":[],"size":3000},{"name":"Drupal\\Core\\Config\\ConfigFactoryInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Form\\ConfigFormBase","relations":[],"size":3000},{"name":"Drupal\\Core\\Form\\FormStateInterface","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Form\\Drupal","relations":[],"size":3000},{"name":"Drupal\\serialization\\Normalizer\\NormalizerBase","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\EntityManagerInterface","relations":[],"size":3000},{"name":"Drupal\\Core\\Language\\LanguageManagerInterface","relations":[],"size":3000},{"name":"Drupal\\replication\\ProcessFileAttachment","relations":[],"size":3000},{"name":"Drupal\\replication\\UsersMapping","relations":[],"size":3000},{"name":"Drupal\\Core\\Entity\\EntityReferenceSelection\\SelectionPluginManagerInterface","relations":[],"size":3000},{"name":"Symfony\\Component\\Serializer\\Exception\\UnexpectedValueException","relations":[],"size":3000},{"name":"Drupal\\Core\\Language\\LanguageInterface","relations":[],"size":3000},{"name":"Drupal\\language\\Entity\\ConfigurableLanguage","relations":[],"size":3000},{"name":"Drupal\\Core\\Cache\\Cache","relations":[],"size":3000},{"name":"\\Drupal\\replication\\Normalizer\\Drupal","relations":[],"size":3000},{"name":"Drupal\\file\\Entity\\File","relations":[],"size":3000},{"name":"Drupal\\replication\\RevisionDiffFactoryInterface","relations":[],"size":3000},{"name":"\\stdClass","relations":[],"size":3000},{"name":"Symfony\\Component\\Serializer\\Exception\\LogicException","relations":[],"size":3000},{"name":"Drupal\\replication\\Entity\\ReplicationLog","relations":[],"size":3000},{"name":"Drupal\\serialization\\Normalizer\\EntityNormalizer","relations":[],"size":3000},{"name":"Drupal\\multiversion\\Entity\\WorkspaceType","relations":[],"size":3000},{"name":"\\Exception","relations":[],"size":3000},{"name":"Drupal\\serialization\\Normalizer\\ListNormalizer","relations":[],"size":3000}];
+
+    function updateRelationsChart() {
+
+        if(updateRelationsChart.initiazed) return;
+        updateRelationsChart.initiazed = true;
+
+        var diameter = 960,
+                radius = diameter / 2,
+                innerRadius = radius - 120;
+
+        var cluster = d3.layout.cluster()
+                .size([360, innerRadius])
+                .sort(null)
+                .value(function(d) { return d.size; });
+
+        var bundle = d3.layout.bundle();
+
+        var line = d3.svg.line.radial()
+                .interpolate("bundle")
+                .tension(.85)
+                .radius(function(d) { return d.y; })
+                .angle(function(d) { return d.x / 180 * Math.PI; });
+
+        var svg = d3.select("#svg-relations").select("svg")
+                .attr("width", diameter)
+                .attr("height", diameter)
+                .append("g")
+                .attr("transform", "translate(" + radius + "," + radius + ")");
+
+        var link = svg.append("g").selectAll(".link"),
+                node = svg.append("g").selectAll(".node");
+
+
+
+        var nodes = cluster.nodes(packageHierarchy(relations)),
+                links = packageImports(nodes);
+        link = link
+                .data(bundle(links))
+                .enter().append("path")
+                .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
+                .attr("class", "link")
+                .attr("d", line);
+
+        node = node
+                .data(nodes.filter(function(n) { return !n.children; }))
+                .enter().append("text")
+                .attr("class", "node")
+                .attr("dy", ".31em")
+                .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+                .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+                .text(function(d) { return d.key; })
+                .on("mouseover", mouseovered)
+                .on("mouseout", mouseouted);
+
+
+//        d3.data(relations);
+
+        function mouseovered(d) {
+            node
+                    .each(function(n) { n.target = n.source = false; });
+
+            link
+                    .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
+                    .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
+                    .filter(function(l) { return l.target === d || l.source === d; })
+                    .each(function() { this.parentNode.appendChild(this); });
+
+            node
+                    .classed("node--target", function(n) { return n.target; })
+                    .classed("node--source", function(n) { return n.source; });
+        }
+
+        function mouseouted(d) {
+            link
+                    .classed("link--target", false)
+                    .classed("link--source", false);
+
+            node
+                    .classed("node--target", false)
+                    .classed("node--source", false);
+        }
+
+        d3.select(self.frameElement).style("height", diameter + "px");
+
+        // Lazily construct the package hierarchy from class names.
+        function packageHierarchy(classes) {
+            var map = {};
+
+            function find(name, data) {
+                name = (data ? name + ' ' : name);
+                var node = map[name], i;
+                if (!node) {
+                    node = map[name] = data || {name: name, children: []};
+                    if (name.length) {
+                        node.parent = find(name.substring(0, i = name.lastIndexOf("\\")));
+                        if(!node.parent.children) {
+                            node.parent.children = []; // fix anomalies
+                        }
+                        node.parent.children.push(node);
+                        node.key = name.substring(i + 1);
+                    }
+                }
+                return node;
+            }
+
+            classes.forEach(function(d) {
+                find(d.name, d);
+            });
+
+            return map[""];
+        }
+
+        // Return a list of imports for the given array of nodes.
+        function packageImports(nodes) {
+            var map = {},
+                    imports = [];
+
+            // Compute a map from name to node.
+            nodes.forEach(function(d) {
+                map[d.name] = d;
+            });
+
+            // For each import, construct a link from the source to target node.
+            nodes.forEach(function(d) {
+                if (d.relations) d.relations.forEach(function(i) {
+                    imports.push({source: map[d.name], target: map[i]});
+                });
+            });
+
+            return imports;
+        }
+
+
+    }
+
+
+    // Save as
+    document.getElementById('btn-save-relations').onmouseover = function() {
+        var e = this;
+        if(e.className != 'initialized') {
+            var svgc  = document.getElementById('svg-relations').childNodes[0]
+                    , xml  = new XMLSerializer().serializeToString(svgc)
+                    , xmldata = btoa(xml);
+            e.href = 'data:application/octet-stream;base64,' + xmldata;
+            e.className = 'initialized';
+        }
+    };
+
+
+</script>
+
+
+<script type="text/javascript">
+
+    document.onreadystatechange = function() {
+        if(document.readyState == 'complete') {
+            // init tabs
+            document.getElementById('link-overview').onclick = function() { displayTab(this, 'overview'); updateAbstractnessChart(); updateCustomChart(); updateMaintainabilityChart(); };
+            document.getElementById('link-score').onclick = function() { displayTab(this, 'score'); updateScoreChart(); };
+            document.getElementById('link-relations').onclick = function() { displayTab(this, 'relations'); updateRelationsChart(); };
+            document.getElementById('link-explore').onclick = function() { displayTab(this, 'explore'); updateTableView(); };
+            document.getElementById('link-repartition').onclick = function() { displayTab(this, 'repartition'); };
+            document.getElementById('link-help').onclick = function() { displayTab(this, 'help')};
+            document.getElementById('menu').firstElementChild.onclick();
+
+            // selects
+            document.getElementById('xAxis').value = xAxis;
+            document.getElementById('yAxis').value = yAxis;
+            document.getElementById('rAxis').value = rAxis;
+
+            
+        }
+    }
+
+
+    // default selected elements
+    var xAxis = 'lcom';
+    var yAxis = 'cyclomaticComplexity';
+    var rAxis = 'loc';
+
+
+
+        var data = [{"filename":"src\/BulkDocsFactory.php","name":"src\/BulkDocsFactory.php","loc":98,"logicalLoc":27,"volume":1085.98,"length":187,"vocabulary":56,"effort":12269.21,"difficulty":"11.3","time":682,"bugs":0.36,"intelligentContent":96.12,"maintainabilityIndexWithoutComment":"47.25","maintainabilityIndex":"88.7","commentWeight":41.45,"instability":1,"afferentCoupling":0,"efferentCoupling":9,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":54.54,"rsysc":27.27,"dc":1.54,"rdc":0.77,"sc":53,"rsc":26.5},{"filename":"src\/ChangesFactory.php","name":"src\/ChangesFactory.php","loc":68,"logicalLoc":18,"volume":713.94,"length":130,"vocabulary":45,"effort":7139.41,"difficulty":"10","time":397,"bugs":0.24,"intelligentContent":71.39,"maintainabilityIndexWithoutComment":"52.37","maintainabilityIndex":"92.16","commentWeight":39.79,"instability":1,"afferentCoupling":0,"efferentCoupling":6,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":21.47,"rsysc":10.74,"dc":1.47,"rdc":0.74,"sc":20,"rsc":10},{"filename":"src\/Plugin\/ReplicationFilterManagerInterface.php","name":"src\/Plugin\/ReplicationFilterManagerInterface.php","loc":18,"logicalLoc":3,"volume":57.06,"length":18,"vocabulary":9,"effort":53.49,"difficulty":"0.94","time":3,"bugs":0.02,"intelligentContent":60.86,"maintainabilityIndexWithoutComment":"77.16","maintainabilityIndex":"120.1","commentWeight":42.94,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/Plugin\/ReplicationFilterInterface.php","name":"src\/Plugin\/ReplicationFilterInterface.php","loc":42,"logicalLoc":7,"volume":117.21,"length":30,"vocabulary":15,"effort":96.28,"difficulty":"0.82","time":5,"bugs":0.04,"intelligentContent":142.69,"maintainabilityIndexWithoutComment":"66.94","maintainabilityIndex":"113.45","commentWeight":46.51,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":0.5,"dc":0.5,"rdc":0.17,"sc":1,"rsc":0.33},{"filename":"src\/Plugin\/ReplicationFilterManager.php","name":"src\/Plugin\/ReplicationFilterManager.php","loc":31,"logicalLoc":7,"volume":200.67,"length":45,"vocabulary":22,"effort":570.34,"difficulty":"2.84","time":32,"bugs":0.07,"intelligentContent":70.61,"maintainabilityIndexWithoutComment":"65.31","maintainabilityIndex":"108.46","commentWeight":43.15,"instability":1,"afferentCoupling":0,"efferentCoupling":4,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":1,"sysc":16.6,"rsysc":16.6,"dc":0.6,"rdc":0.6,"sc":16,"rsc":16},{"filename":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","name":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","loc":62,"logicalLoc":13,"volume":562.54,"length":105,"vocabulary":41,"effort":6401.35,"difficulty":"11.38","time":356,"bugs":0.19,"intelligentContent":49.44,"maintainabilityIndexWithoutComment":"55.37","maintainabilityIndex":"94.59","commentWeight":39.22,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":8,"myerInterval":"8:10","myerDistance":2,"operators":2,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","name":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","loc":42,"logicalLoc":6,"volume":194.51,"length":43,"vocabulary":23,"effort":892.47,"difficulty":"4.59","time":50,"bugs":0.06,"intelligentContent":42.39,"maintainabilityIndexWithoutComment":"66.86","maintainabilityIndex":"111.32","commentWeight":44.46,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":3,"rsysc":1.5,"dc":2,"rdc":1,"sc":1,"rsc":0.5},{"filename":"src\/Plugin\/ReplicationFilter\/ReplicationFilterBase.php","name":"src\/Plugin\/ReplicationFilter\/ReplicationFilterBase.php","loc":71,"logicalLoc":11,"volume":302.86,"length":63,"vocabulary":28,"effort":1569.38,"difficulty":"5.18","time":87,"bugs":0.1,"intelligentContent":58.45,"maintainabilityIndexWithoutComment":"59.64","maintainabilityIndex":"103.55","commentWeight":43.91,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":2,"sysc":6,"rsysc":1.2,"dc":6,"rdc":1.2,"sc":0,"rsc":0},{"filename":"src\/Plugin\/ReplicationFilter\/PublishedFilter.php","name":"src\/Plugin\/ReplicationFilter\/PublishedFilter.php","loc":84,"logicalLoc":18,"volume":803.61,"length":139,"vocabulary":55,"effort":7946.8,"difficulty":"9.89","time":441,"bugs":0.27,"intelligentContent":81.26,"maintainabilityIndexWithoutComment":"52.01","maintainabilityIndex":"96.47","commentWeight":44.46,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":3,"sysc":14.5,"rsysc":3.63,"dc":5.5,"rdc":1.38,"sc":9,"rsc":2.25},{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","loc":155,"logicalLoc":18,"volume":1333.61,"length":260,"vocabulary":35,"effort":31414.01,"difficulty":"23.56","time":1745,"bugs":0.44,"intelligentContent":56.62,"maintainabilityIndexWithoutComment":"50.6","maintainabilityIndex":"75.79","commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67},{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":28.33,"difficulty":"0.69","time":2,"bugs":0.01,"intelligentContent":59.94,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"81.99","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/Changes\/Changes.php","name":"src\/Changes\/Changes.php","loc":197,"logicalLoc":54,"volume":2628.39,"length":401,"vocabulary":94,"effort":66608.94,"difficulty":"25.34","time":3700,"bugs":0.88,"intelligentContent":103.72,"maintainabilityIndexWithoutComment":"35.44","maintainabilityIndex":"75.52","commentWeight":40.08,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":7,"cyclomaticComplexity":21,"myerInterval":"21:25","myerDistance":4,"operators":4,"lcom":1,"sysc":36.83,"rsysc":5.26,"dc":11.83,"rdc":1.69,"sc":25,"rsc":3.57},{"filename":"src\/Changes\/ChangesInterface.php","name":"src\/Changes\/ChangesInterface.php","loc":74,"logicalLoc":7,"volume":100.08,"length":24,"vocabulary":18,"effort":100.08,"difficulty":"1","time":6,"bugs":0.03,"intelligentContent":100.08,"maintainabilityIndexWithoutComment":"67.42","maintainabilityIndex":"116.04","commentWeight":48.62,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":6,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":4,"rsysc":0.67,"dc":4,"rdc":0.67,"sc":0,"rsc":0},{"filename":"src\/AllDocsFactoryInterface.php","name":"src\/AllDocsFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/BulkDocsFactoryInterface.php","name":"src\/BulkDocsFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/Encoder\/StreamEncoder.php","name":"src\/Encoder\/StreamEncoder.php","loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":"14.55","time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":"49.05","maintainabilityIndex":"85.99","commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":"13:13","myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6},{"filename":"src\/AllDocs\/AllDocs.php","name":"src\/AllDocs\/AllDocs.php","loc":191,"logicalLoc":49,"volume":2196.08,"length":332,"vocabulary":98,"effort":29570.52,"difficulty":"13.47","time":1643,"bugs":0.73,"intelligentContent":163.09,"maintainabilityIndexWithoutComment":"37.98","maintainabilityIndex":"78.29","commentWeight":40.31,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":9,"cyclomaticComplexity":13,"myerInterval":"13:14","myerDistance":1,"operators":1,"lcom":7,"sysc":33.83,"rsysc":3.76,"dc":8.83,"rdc":0.98,"sc":25,"rsc":2.78},{"filename":"src\/AllDocs\/AllDocsInterface.php","name":"src\/AllDocs\/AllDocsInterface.php","loc":57,"logicalLoc":11,"volume":178.62,"length":38,"vocabulary":26,"effort":96.45,"difficulty":"0.54","time":5,"bugs":0.06,"intelligentContent":330.77,"maintainabilityIndexWithoutComment":"61.38","maintainabilityIndex":"106.86","commentWeight":45.48,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":8,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":7,"rsysc":0.88,"dc":7,"rdc":0.88,"sc":0,"rsc":0},{"filename":"src\/RevisionDiffFactory.php","name":"src\/RevisionDiffFactory.php","loc":41,"logicalLoc":9,"volume":369.21,"length":76,"vocabulary":29,"effort":3655.14,"difficulty":"9.9","time":203,"bugs":0.12,"intelligentContent":37.29,"maintainabilityIndexWithoutComment":"60.94","maintainabilityIndex":"98.11","commentWeight":37.17,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":6.17,"rsysc":3.09,"dc":1.17,"rdc":0.59,"sc":5,"rsc":2.5},{"filename":"src\/AllDocsFactory.php","name":"src\/AllDocsFactory.php","loc":56,"logicalLoc":15,"volume":663.26,"length":123,"vocabulary":42,"effort":6873.73,"difficulty":"10.36","time":382,"bugs":0.22,"intelligentContent":64,"maintainabilityIndexWithoutComment":"54.32","maintainabilityIndex":"92","commentWeight":37.68,"instability":1,"afferentCoupling":0,"efferentCoupling":6,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":21.47,"rsysc":10.74,"dc":1.47,"rdc":0.74,"sc":20,"rsc":10},{"filename":"src\/BulkDocs\/BulkDocs.php","name":"src\/BulkDocs\/BulkDocs.php","loc":235,"logicalLoc":69,"volume":3415.9,"length":499,"vocabulary":115,"effort":89376.84,"difficulty":"26.16","time":4965,"bugs":1.14,"intelligentContent":130.55,"maintainabilityIndexWithoutComment":"32.99","maintainabilityIndex":"72.28","commentWeight":39.29,"instability":1,"afferentCoupling":0,"efferentCoupling":8,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":6,"cyclomaticComplexity":16,"myerInterval":"16:17","myerDistance":1,"operators":1,"lcom":1,"sysc":71.89,"rsysc":11.98,"dc":7.89,"rdc":1.32,"sc":64,"rsc":10.67},{"filename":"src\/BulkDocs\/BulkDocsInterface.php","name":"src\/BulkDocs\/BulkDocsInterface.php","loc":39,"logicalLoc":6,"volume":60.94,"length":17,"vocabulary":12,"effort":30.47,"difficulty":"0.5","time":2,"bugs":0.02,"intelligentContent":121.89,"maintainabilityIndexWithoutComment":"70.39","maintainabilityIndex":"115.75","commentWeight":45.36,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":5,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":2,"rsysc":0.4,"dc":2,"rdc":0.4,"sc":0,"rsc":0},{"filename":"src\/ChangesFactoryInterface.php","name":"src\/ChangesFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/RevisionDiffFactoryInterface.php","name":"src\/RevisionDiffFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/ProcessFileAttachment.php","name":"src\/ProcessFileAttachment.php","loc":89,"logicalLoc":28,"volume":1299.54,"length":215,"vocabulary":66,"effort":15316.06,"difficulty":"11.79","time":851,"bugs":0.43,"intelligentContent":110.26,"maintainabilityIndexWithoutComment":"45.96","maintainabilityIndex":"78.77","commentWeight":32.81,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":5,"myerInterval":"5:6","myerDistance":1,"operators":1,"lcom":1,"sysc":15.75,"rsysc":7.88,"dc":2.75,"rdc":1.38,"sc":13,"rsc":6.5},{"filename":"src\/Entity\/ReplicationLog.php","name":"src\/Entity\/ReplicationLog.php","loc":139,"logicalLoc":26,"volume":1498.3,"length":258,"vocabulary":56,"effort":26553.16,"difficulty":"17.72","time":1475,"bugs":0.5,"intelligentContent":84.54,"maintainabilityIndexWithoutComment":"46.63","maintainabilityIndex":"85.21","commentWeight":38.58,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":8,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":8,"sysc":23.5,"rsysc":2.94,"dc":10.5,"rdc":1.31,"sc":13,"rsc":1.63},{"filename":"src\/Entity\/ReplicationSettings.php","name":"src\/Entity\/ReplicationSettings.php","loc":67,"logicalLoc":9,"volume":164.23,"length":38,"vocabulary":20,"effort":362.28,"difficulty":"2.21","time":20,"bugs":0.05,"intelligentContent":74.45,"maintainabilityIndexWithoutComment":"63.54","maintainabilityIndex":"110.61","commentWeight":47.07,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Entity\/ReplicationSettingsInterface.php","name":"src\/Entity\/ReplicationSettingsInterface.php","loc":26,"logicalLoc":4,"volume":53.15,"length":16,"vocabulary":10,"effort":35.43,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":79.73,"maintainabilityIndexWithoutComment":"74.65","maintainabilityIndex":"119.11","commentWeight":44.46,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/Entity\/ReplicationLogInterface.php","name":"src\/Entity\/ReplicationLogInterface.php","loc":63,"logicalLoc":8,"volume":104,"length":26,"vocabulary":16,"effort":62.4,"difficulty":"0.6","time":3,"bugs":0.03,"intelligentContent":173.33,"maintainabilityIndexWithoutComment":"66.04","maintainabilityIndex":"113.72","commentWeight":47.68,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":6,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":3,"rsysc":0.5,"dc":3,"rdc":0.5,"sc":0,"rsc":0},{"filename":"src\/Annotation\/ReplicationFilter.php","name":"src\/Annotation\/ReplicationFilter.php","loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":"72.35","maintainabilityIndex":"120.32","commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/RevisionDiff\/RevisionDiff.php","name":"src\/RevisionDiff\/RevisionDiff.php","loc":73,"logicalLoc":17,"volume":726.1,"length":133,"vocabulary":44,"effort":7188.43,"difficulty":"9.9","time":399,"bugs":0.24,"intelligentContent":73.34,"maintainabilityIndexWithoutComment":"52.45","maintainabilityIndex":"92.37","commentWeight":39.92,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":5,"myerInterval":"5:5","myerDistance":0,"operators":0,"lcom":1,"sysc":8.67,"rsysc":2.17,"dc":4.67,"rdc":1.17,"sc":4,"rsc":1},{"filename":"src\/RevisionDiff\/RevisionDiffInterface.php","name":"src\/RevisionDiff\/RevisionDiffInterface.php","loc":32,"logicalLoc":7,"volume":123.19,"length":29,"vocabulary":19,"effort":75.28,"difficulty":"0.61","time":4,"bugs":0.04,"intelligentContent":201.58,"maintainabilityIndexWithoutComment":"66.79","maintainabilityIndex":"109.52","commentWeight":42.73,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1,"rsysc":0.33,"dc":1,"rdc":0.33,"sc":0,"rsc":0},{"filename":"src\/UsersMapping.php","name":"src\/UsersMapping.php","loc":62,"logicalLoc":16,"volume":683.71,"length":126,"vocabulary":43,"effort":6629.91,"difficulty":"9.7","time":368,"bugs":0.23,"intelligentContent":70.51,"maintainabilityIndexWithoutComment":"53.21","maintainabilityIndex":"91.02","commentWeight":37.81,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":5,"myerInterval":"5:6","myerDistance":1,"operators":1,"lcom":1,"sysc":8.67,"rsysc":2.89,"dc":4.67,"rdc":1.56,"sc":4,"rsc":1.33},{"filename":"src\/ReplicationTask\/ReplicationTaskInterface.php","name":"src\/ReplicationTask\/ReplicationTaskInterface.php","loc":91,"logicalLoc":8,"volume":123.19,"length":29,"vocabulary":19,"effort":137.68,"difficulty":"1.12","time":8,"bugs":0.04,"intelligentContent":110.22,"maintainabilityIndexWithoutComment":"65.53","maintainabilityIndex":"114.41","commentWeight":48.88,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":7,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":5,"rsysc":0.71,"dc":5,"rdc":0.71,"sc":0,"rsc":0},{"filename":"src\/ReplicationTask\/ReplicationTask.php","name":"src\/ReplicationTask\/ReplicationTask.php","loc":82,"logicalLoc":15,"volume":519.57,"length":103,"vocabulary":33,"effort":5260.67,"difficulty":"10.13","time":292,"bugs":0.17,"intelligentContent":51.32,"maintainabilityIndexWithoutComment":"54.93","maintainabilityIndex":"96.94","commentWeight":42.01,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":7,"cyclomaticComplexity":3,"myerInterval":"3:3","myerDistance":0,"operators":0,"lcom":1,"sysc":12,"rsysc":1.71,"dc":12,"rdc":1.71,"sc":0,"rsc":0},{"filename":"src\/Form\/SettingsForm.php","name":"src\/Form\/SettingsForm.php","loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":"28.5","time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":"45.67","maintainabilityIndex":"75.88","commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":"12:14","myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4},{"filename":"src\/Normalizer\/ContentEntityNormalizer.php","name":"src\/Normalizer\/ContentEntityNormalizer.php","loc":552,"logicalLoc":171,"volume":14043.24,"length":1827,"vocabulary":206,"effort":701856.54,"difficulty":"49.98","time":38992,"bugs":4.68,"intelligentContent":280.99,"maintainabilityIndexWithoutComment":"7.45","maintainabilityIndex":"40.51","commentWeight":33.06,"instability":0.92,"afferentCoupling":1,"efferentCoupling":11,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":110,"myerInterval":"110:129","myerDistance":19,"operators":19,"lcom":1,"sysc":61.56,"rsysc":15.39,"dc":8.56,"rdc":2.14,"sc":53,"rsc":13.25},{"filename":"src\/Normalizer\/CommentItemNormalizer.php","name":"src\/Normalizer\/CommentItemNormalizer.php","loc":53,"logicalLoc":12,"volume":482.81,"length":92,"vocabulary":38,"effort":4655.66,"difficulty":"9.64","time":259,"bugs":0.16,"intelligentContent":50.07,"maintainabilityIndexWithoutComment":"57.13","maintainabilityIndex":"96.38","commentWeight":39.25,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":4,"myerInterval":"4:5","myerDistance":1,"operators":1,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/EntityReferenceItemNormalizer.php","name":"src\/Normalizer\/EntityReferenceItemNormalizer.php","loc":80,"logicalLoc":22,"volume":1031,"length":176,"vocabulary":58,"effort":13849.83,"difficulty":"13.43","time":769,"bugs":0.34,"intelligentContent":76.75,"maintainabilityIndexWithoutComment":"48.14","maintainabilityIndex":"83.11","commentWeight":34.97,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":11,"myerInterval":"11:13","myerDistance":2,"operators":2,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/ChangesNormalizer.php","name":"src\/Normalizer\/ChangesNormalizer.php","loc":51,"logicalLoc":12,"volume":557.41,"length":107,"vocabulary":37,"effort":8652,"difficulty":"15.52","time":481,"bugs":0.19,"intelligentContent":35.91,"maintainabilityIndexWithoutComment":"56.02","maintainabilityIndex":"90.16","commentWeight":34.14,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":9,"myerInterval":"9:10","myerDistance":1,"operators":1,"lcom":1,"sysc":1,"rsysc":1,"dc":1,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/FileItemNormalizer.php","name":"src\/Normalizer\/FileItemNormalizer.php","loc":79,"logicalLoc":21,"volume":1052,"length":176,"vocabulary":63,"effort":15329.16,"difficulty":"14.57","time":852,"bugs":0.35,"intelligentContent":72.2,"maintainabilityIndexWithoutComment":"49.19","maintainabilityIndex":"83.63","commentWeight":34.44,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":6,"myerInterval":"6:6","myerDistance":0,"operators":0,"lcom":2,"sysc":2.5,"rsysc":1.25,"dc":1.5,"rdc":0.75,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/RevsDiffNormalizer.php","name":"src\/Normalizer\/RevsDiffNormalizer.php","loc":49,"logicalLoc":13,"volume":545.94,"length":100,"vocabulary":44,"effort":5641.41,"difficulty":"10.33","time":313,"bugs":0.18,"intelligentContent":52.83,"maintainabilityIndexWithoutComment":"56","maintainabilityIndex":"92.83","commentWeight":36.83,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":4,"myerInterval":"4:4","myerDistance":0,"operators":0,"lcom":2,"sysc":4.5,"rsysc":1.5,"dc":1.5,"rdc":0.5,"sc":3,"rsc":1},{"filename":"src\/Normalizer\/ReplicationLogNormalizer.php","name":"src\/Normalizer\/ReplicationLogNormalizer.php","loc":97,"logicalLoc":27,"volume":1532.29,"length":246,"vocabulary":75,"effort":22008.12,"difficulty":"14.36","time":1223,"bugs":0.51,"intelligentContent":106.68,"maintainabilityIndexWithoutComment":"45.26","maintainabilityIndex":"80.09","commentWeight":34.83,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":9,"myerInterval":"9:11","myerDistance":2,"operators":2,"lcom":3,"sysc":12.67,"rsysc":3.17,"dc":7.67,"rdc":1.92,"sc":5,"rsc":1.25},{"filename":"src\/Normalizer\/LocalSequenceItemListNormalizer.php","name":"src\/Normalizer\/LocalSequenceItemListNormalizer.php","loc":33,"logicalLoc":7,"volume":255.41,"length":55,"vocabulary":25,"effort":948.67,"difficulty":"3.71","time":53,"bugs":0.09,"intelligentContent":68.76,"maintainabilityIndexWithoutComment":"64.58","maintainabilityIndex":"104.79","commentWeight":40.21,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/WorkspaceNormalizer.php","name":"src\/Normalizer\/WorkspaceNormalizer.php","loc":65,"logicalLoc":22,"volume":988.54,"length":177,"vocabulary":48,"effort":11186.09,"difficulty":"11.32","time":621,"bugs":0.33,"intelligentContent":87.36,"maintainabilityIndexWithoutComment":"48.8","maintainabilityIndex":"82.67","commentWeight":33.87,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":7,"myerInterval":"7:7","myerDistance":0,"operators":0,"lcom":2,"sysc":5.83,"rsysc":2.92,"dc":0.83,"rdc":0.42,"sc":5,"rsc":2.5},{"filename":"src\/Normalizer\/RevisionInfoItemListNormalizer.php","name":"src\/Normalizer\/RevisionInfoItemListNormalizer.php","loc":28,"logicalLoc":6,"volume":209.59,"length":47,"vocabulary":22,"effort":1556.98,"difficulty":"7.43","time":86,"bugs":0.07,"intelligentContent":28.21,"maintainabilityIndexWithoutComment":"66.5","maintainabilityIndex":"104.98","commentWeight":38.48,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":2,"rsysc":2,"dc":1,"rdc":1,"sc":1,"rsc":1},{"filename":"src\/Normalizer\/LinkItemNormalizer.php","name":"src\/Normalizer\/LinkItemNormalizer.php","loc":133,"logicalLoc":34,"volume":2190.62,"length":335,"vocabulary":93,"effort":41195,"difficulty":"18.81","time":2289,"bugs":0.73,"intelligentContent":116.49,"maintainabilityIndexWithoutComment":"41.05","maintainabilityIndex":"80.86","commentWeight":39.81,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":16,"myerInterval":"16:20","myerDistance":4,"operators":4,"lcom":1,"sysc":11.67,"rsysc":2.92,"dc":7.67,"rdc":1.92,"sc":4,"rsc":1},{"filename":"src\/Normalizer\/AttachmentNormalizer.php","name":"src\/Normalizer\/AttachmentNormalizer.php","loc":75,"logicalLoc":22,"volume":1241.89,"length":212,"vocabulary":58,"effort":19373.51,"difficulty":"15.6","time":1076,"bugs":0.41,"intelligentContent":79.61,"maintainabilityIndexWithoutComment":"47.17","maintainabilityIndex":"81.58","commentWeight":34.41,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":14,"myerInterval":"14:14","myerDistance":0,"operators":0,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/DeletedFlagItemListNormalizer.php","name":"src\/Normalizer\/DeletedFlagItemListNormalizer.php","loc":28,"logicalLoc":6,"volume":236.84,"length":51,"vocabulary":25,"effort":834.57,"difficulty":"3.52","time":46,"bugs":0.08,"intelligentContent":67.21,"maintainabilityIndexWithoutComment":"66.26","maintainabilityIndex":"104.74","commentWeight":38.48,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/BulkDocsNormalizer.php","name":"src\/Normalizer\/BulkDocsNormalizer.php","loc":73,"logicalLoc":18,"volume":1083.43,"length":191,"vocabulary":51,"effort":22120.1,"difficulty":"20.42","time":1229,"bugs":0.36,"intelligentContent":53.07,"maintainabilityIndexWithoutComment":"49.35","maintainabilityIndex":"78.73","commentWeight":29.38,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":15,"myerInterval":"15:20","myerDistance":5,"operators":5,"lcom":2,"sysc":5.33,"rsysc":2.67,"dc":1.33,"rdc":0.67,"sc":4,"rsc":2},{"filename":"src\/Normalizer\/TextItemNormalizer.php","name":"src\/Normalizer\/TextItemNormalizer.php","loc":35,"logicalLoc":6,"volume":252.01,"length":53,"vocabulary":27,"effort":1367.15,"difficulty":"5.43","time":76,"bugs":0.08,"intelligentContent":46.45,"maintainabilityIndexWithoutComment":"65.94","maintainabilityIndex":"108.39","commentWeight":42.45,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":4,"rsysc":4,"dc":4,"rdc":4,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/AllDocsNormalizer.php","name":"src\/Normalizer\/AllDocsNormalizer.php","loc":34,"logicalLoc":8,"volume":290.05,"length":61,"vocabulary":27,"effort":1878.06,"difficulty":"6.48","time":104,"bugs":0.1,"intelligentContent":44.8,"maintainabilityIndexWithoutComment":"62.79","maintainabilityIndex":"88.13","commentWeight":25.34,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":1,"rsysc":1,"dc":1,"rdc":1,"sc":0,"rsc":0}]
+    var groupedData = [{"name":"src","childs":[{"filename":"src\/BulkDocsFactory.php","name":"src\/BulkDocsFactory.php","loc":98,"logicalLoc":27,"volume":1085.98,"length":187,"vocabulary":56,"effort":12269.21,"difficulty":"11.3","time":682,"bugs":0.36,"intelligentContent":96.12,"maintainabilityIndexWithoutComment":"47.25","maintainabilityIndex":"88.7","commentWeight":41.45,"instability":1,"afferentCoupling":0,"efferentCoupling":9,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":54.54,"rsysc":27.27,"dc":1.54,"rdc":0.77,"sc":53,"rsc":26.5},{"filename":"src\/ChangesFactory.php","name":"src\/ChangesFactory.php","loc":68,"logicalLoc":18,"volume":713.94,"length":130,"vocabulary":45,"effort":7139.41,"difficulty":"10","time":397,"bugs":0.24,"intelligentContent":71.39,"maintainabilityIndexWithoutComment":"52.37","maintainabilityIndex":"92.16","commentWeight":39.79,"instability":1,"afferentCoupling":0,"efferentCoupling":6,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":21.47,"rsysc":10.74,"dc":1.47,"rdc":0.74,"sc":20,"rsc":10},{"filename":"src\/AllDocsFactoryInterface.php","name":"src\/AllDocsFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/BulkDocsFactoryInterface.php","name":"src\/BulkDocsFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/RevisionDiffFactory.php","name":"src\/RevisionDiffFactory.php","loc":41,"logicalLoc":9,"volume":369.21,"length":76,"vocabulary":29,"effort":3655.14,"difficulty":"9.9","time":203,"bugs":0.12,"intelligentContent":37.29,"maintainabilityIndexWithoutComment":"60.94","maintainabilityIndex":"98.11","commentWeight":37.17,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":6.17,"rsysc":3.09,"dc":1.17,"rdc":0.59,"sc":5,"rsc":2.5},{"filename":"src\/AllDocsFactory.php","name":"src\/AllDocsFactory.php","loc":56,"logicalLoc":15,"volume":663.26,"length":123,"vocabulary":42,"effort":6873.73,"difficulty":"10.36","time":382,"bugs":0.22,"intelligentContent":64,"maintainabilityIndexWithoutComment":"54.32","maintainabilityIndex":"92","commentWeight":37.68,"instability":1,"afferentCoupling":0,"efferentCoupling":6,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":21.47,"rsysc":10.74,"dc":1.47,"rdc":0.74,"sc":20,"rsc":10},{"filename":"src\/ChangesFactoryInterface.php","name":"src\/ChangesFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/RevisionDiffFactoryInterface.php","name":"src\/RevisionDiffFactoryInterface.php","loc":18,"logicalLoc":3,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.63","time":1,"bugs":0.01,"intelligentContent":65.93,"maintainabilityIndexWithoutComment":"78.15","maintainabilityIndex":"119.28","commentWeight":41.13,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":1.5,"dc":0.5,"rdc":0.5,"sc":1,"rsc":1},{"filename":"src\/ProcessFileAttachment.php","name":"src\/ProcessFileAttachment.php","loc":89,"logicalLoc":28,"volume":1299.54,"length":215,"vocabulary":66,"effort":15316.06,"difficulty":"11.79","time":851,"bugs":0.43,"intelligentContent":110.26,"maintainabilityIndexWithoutComment":"45.96","maintainabilityIndex":"78.77","commentWeight":32.81,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":5,"myerInterval":"5:6","myerDistance":1,"operators":1,"lcom":1,"sysc":15.75,"rsysc":7.88,"dc":2.75,"rdc":1.38,"sc":13,"rsc":6.5},{"filename":"src\/UsersMapping.php","name":"src\/UsersMapping.php","loc":62,"logicalLoc":16,"volume":683.71,"length":126,"vocabulary":43,"effort":6629.91,"difficulty":"9.7","time":368,"bugs":0.23,"intelligentContent":70.51,"maintainabilityIndexWithoutComment":"53.21","maintainabilityIndex":"91.02","commentWeight":37.81,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":5,"myerInterval":"5:6","myerDistance":1,"operators":1,"lcom":1,"sysc":8.67,"rsysc":2.89,"dc":4.67,"rdc":1.56,"sc":4,"rsc":1.33}],"depth":1,"abstractness":0.27,"instability":0.97,"average":{"filename":0,"name":0,"loc":78.02,"logicalLoc":18.42,"volume":938.37,"length":151.52,"vocabulary":41.42,"effort":24041.95,"difficulty":9.61,"time":1335.62,"bugs":0.31,"intelligentContent":88.41,"maintainabilityIndexWithoutComment":57.64,"maintainabilityIndex":96.42,"commentWeight":38.78,"instability":0.63,"afferentCoupling":0.06,"efferentCoupling":2.06,"noc":1,"noca":0.27,"nocc":0.73,"noc-anon":0,"noi":0.25,"nom":3.12,"cyclomaticComplexity":6.67,"myerInterval":6.67,"myerDistance":0.88,"operators":0.88,"lcom":1.4,"sysc":10.65,"rsysc":3.46,"dc":3.32,"rdc":0.97,"sc":7.33,"rsc":2.49},"min":{"filename":"src\/AllDocs\/AllDocs.php","name":"src\/AllDocs\/AllDocs.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":25.76,"difficulty":"0.5","time":1,"bugs":0.01,"intelligentContent":28.21,"maintainabilityIndexWithoutComment":"7.45","maintainabilityIndex":"40.51","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"110:129","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/UsersMapping.php","name":"src\/UsersMapping.php","loc":552,"logicalLoc":171,"volume":14043.24,"length":1827,"vocabulary":206,"effort":701856.54,"difficulty":"49.98","time":38992,"bugs":4.68,"intelligentContent":330.77,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"120.32","commentWeight":48.88,"instability":1,"afferentCoupling":1,"efferentCoupling":11,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":9,"cyclomaticComplexity":110,"myerInterval":"9:11","myerDistance":19,"operators":19,"lcom":8,"sysc":71.89,"rsysc":27.27,"dc":12,"rdc":4,"sc":64,"rsc":26.5},"sum":{"filename":0,"name":0,"loc":4057,"logicalLoc":958,"volume":48795.45,"length":7879,"vocabulary":2154,"effort":1250181.5,"difficulty":499.7,"time":69452,"bugs":16.22,"intelligentContent":4597.29,"maintainabilityIndexWithoutComment":2997.39,"maintainabilityIndex":5014,"commentWeight":2016.61,"instability":32.58,"afferentCoupling":3,"efferentCoupling":107,"noc":52,"noca":14,"nocc":38,"noc-anon":0,"noi":13,"nom":162,"cyclomaticComplexity":347,"myerInterval":347,"myerDistance":46,"operators":46,"lcom":73,"sysc":553.79,"rsysc":179.66,"dc":172.79,"rdc":50.44,"sc":381,"rsc":129.23}},{"name":"src\/Plugin","childs":[{"filename":"src\/Plugin\/ReplicationFilterManagerInterface.php","name":"src\/Plugin\/ReplicationFilterManagerInterface.php","loc":18,"logicalLoc":3,"volume":57.06,"length":18,"vocabulary":9,"effort":53.49,"difficulty":"0.94","time":3,"bugs":0.02,"intelligentContent":60.86,"maintainabilityIndexWithoutComment":"77.16","maintainabilityIndex":"120.1","commentWeight":42.94,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/Plugin\/ReplicationFilterInterface.php","name":"src\/Plugin\/ReplicationFilterInterface.php","loc":42,"logicalLoc":7,"volume":117.21,"length":30,"vocabulary":15,"effort":96.28,"difficulty":"0.82","time":5,"bugs":0.04,"intelligentContent":142.69,"maintainabilityIndexWithoutComment":"66.94","maintainabilityIndex":"113.45","commentWeight":46.51,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1.5,"rsysc":0.5,"dc":0.5,"rdc":0.17,"sc":1,"rsc":0.33},{"filename":"src\/Plugin\/ReplicationFilterManager.php","name":"src\/Plugin\/ReplicationFilterManager.php","loc":31,"logicalLoc":7,"volume":200.67,"length":45,"vocabulary":22,"effort":570.34,"difficulty":"2.84","time":32,"bugs":0.07,"intelligentContent":70.61,"maintainabilityIndexWithoutComment":"65.31","maintainabilityIndex":"108.46","commentWeight":43.15,"instability":1,"afferentCoupling":0,"efferentCoupling":4,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":1,"sysc":16.6,"rsysc":16.6,"dc":0.6,"rdc":0.6,"sc":16,"rsc":16}],"depth":2,"abstractness":0.33,"instability":0.93,"average":{"filename":0,"name":0,"loc":56.89,"logicalLoc":9.44,"volume":401.48,"length":79.56,"vocabulary":26.33,"effort":5441.38,"difficulty":6.65,"time":302.33,"bugs":0.13,"intelligentContent":69.14,"maintainabilityIndexWithoutComment":63.99,"maintainabilityIndex":100.64,"commentWeight":36.65,"instability":0.65,"afferentCoupling":0.11,"efferentCoupling":1.56,"noc":1,"noca":0.33,"nocc":0.67,"noc-anon":0,"noi":0.22,"nom":2.22,"cyclomaticComplexity":2,"myerInterval":2,"myerDistance":0.22,"operators":0.22,"lcom":1.44,"sysc":5.92,"rsysc":3.11,"dc":2.25,"rdc":0.75,"sc":3.67,"rsc":2.36},"min":{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":28.33,"difficulty":"0.69","time":2,"bugs":0.01,"intelligentContent":42.39,"maintainabilityIndexWithoutComment":"50.6","maintainabilityIndex":"75.79","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/Plugin\/ReplicationFilterManagerInterface.php","name":"src\/Plugin\/ReplicationFilterManagerInterface.php","loc":155,"logicalLoc":18,"volume":1333.61,"length":260,"vocabulary":55,"effort":31414.01,"difficulty":"23.56","time":1745,"bugs":0.44,"intelligentContent":142.69,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"120.1","commentWeight":46.51,"instability":1,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":5,"cyclomaticComplexity":8,"myerInterval":"8:10","myerDistance":2,"operators":2,"lcom":3,"sysc":16.6,"rsysc":16.6,"dc":6,"rdc":1.5,"sc":16,"rsc":16},"sum":{"filename":0,"name":0,"loc":512,"logicalLoc":85,"volume":3613.28,"length":716,"vocabulary":237,"effort":48972.45,"difficulty":59.89,"time":2721,"bugs":1.2,"intelligentContent":622.26,"maintainabilityIndexWithoutComment":575.88,"maintainabilityIndex":905.72,"commentWeight":329.84,"instability":5.83,"afferentCoupling":1,"efferentCoupling":14,"noc":9,"noca":3,"nocc":6,"noc-anon":0,"noi":2,"nom":20,"cyclomaticComplexity":18,"myerInterval":18,"myerDistance":2,"operators":2,"lcom":13,"sysc":53.27,"rsysc":27.99,"dc":20.27,"rdc":6.74,"sc":33,"rsc":21.25}},{"name":"src\/Plugin\/ReplicationFilter","childs":[{"filename":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","name":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","loc":62,"logicalLoc":13,"volume":562.54,"length":105,"vocabulary":41,"effort":6401.35,"difficulty":"11.38","time":356,"bugs":0.19,"intelligentContent":49.44,"maintainabilityIndexWithoutComment":"55.37","maintainabilityIndex":"94.59","commentWeight":39.22,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":8,"myerInterval":"8:10","myerDistance":2,"operators":2,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","name":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","loc":42,"logicalLoc":6,"volume":194.51,"length":43,"vocabulary":23,"effort":892.47,"difficulty":"4.59","time":50,"bugs":0.06,"intelligentContent":42.39,"maintainabilityIndexWithoutComment":"66.86","maintainabilityIndex":"111.32","commentWeight":44.46,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":3,"rsysc":1.5,"dc":2,"rdc":1,"sc":1,"rsc":0.5},{"filename":"src\/Plugin\/ReplicationFilter\/ReplicationFilterBase.php","name":"src\/Plugin\/ReplicationFilter\/ReplicationFilterBase.php","loc":71,"logicalLoc":11,"volume":302.86,"length":63,"vocabulary":28,"effort":1569.38,"difficulty":"5.18","time":87,"bugs":0.1,"intelligentContent":58.45,"maintainabilityIndexWithoutComment":"59.64","maintainabilityIndex":"103.55","commentWeight":43.91,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":2,"sysc":6,"rsysc":1.2,"dc":6,"rdc":1.2,"sc":0,"rsc":0},{"filename":"src\/Plugin\/ReplicationFilter\/PublishedFilter.php","name":"src\/Plugin\/ReplicationFilter\/PublishedFilter.php","loc":84,"logicalLoc":18,"volume":803.61,"length":139,"vocabulary":55,"effort":7946.8,"difficulty":"9.89","time":441,"bugs":0.27,"intelligentContent":81.26,"maintainabilityIndexWithoutComment":"52.01","maintainabilityIndex":"96.47","commentWeight":44.46,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":3,"sysc":14.5,"rsysc":3.63,"dc":5.5,"rdc":1.38,"sc":9,"rsc":2.25}],"depth":3,"abstractness":0.25,"instability":0.88,"average":{"filename":0,"name":0,"loc":64.75,"logicalLoc":12,"volume":465.88,"length":87.5,"vocabulary":36.75,"effort":4202.5,"difficulty":7.76,"time":233.5,"bugs":0.16,"intelligentContent":57.89,"maintainabilityIndexWithoutComment":58.47,"maintainabilityIndex":101.48,"commentWeight":43.01,"instability":0.71,"afferentCoupling":0.25,"efferentCoupling":1.75,"noc":1,"noca":0.25,"nocc":0.75,"noc-anon":0,"noi":0,"nom":3.25,"cyclomaticComplexity":3.25,"myerInterval":3.25,"myerDistance":0.5,"operators":0.5,"lcom":2.25,"sysc":6.88,"rsysc":2.08,"dc":4.13,"rdc":1.27,"sc":2.75,"rsc":0.81},"min":{"filename":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","name":"src\/Plugin\/ReplicationFilter\/EntityTypeFilter.php","loc":42,"logicalLoc":6,"volume":194.51,"length":43,"vocabulary":23,"effort":892.47,"difficulty":"4.59","time":50,"bugs":0.06,"intelligentContent":42.39,"maintainabilityIndexWithoutComment":"52.01","maintainabilityIndex":"94.59","commentWeight":39.22,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":3,"rsysc":1.2,"dc":2,"rdc":1,"sc":0,"rsc":0},"max":{"filename":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","name":"src\/Plugin\/ReplicationFilter\/UuidFilter.php","loc":84,"logicalLoc":18,"volume":803.61,"length":139,"vocabulary":55,"effort":7946.8,"difficulty":"11.38","time":441,"bugs":0.27,"intelligentContent":81.26,"maintainabilityIndexWithoutComment":"66.86","maintainabilityIndex":"111.32","commentWeight":44.46,"instability":1,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":8,"myerInterval":"8:10","myerDistance":2,"operators":2,"lcom":3,"sysc":14.5,"rsysc":3.63,"dc":6,"rdc":1.5,"sc":9,"rsc":2.25},"sum":{"filename":0,"name":0,"loc":259,"logicalLoc":48,"volume":1863.52,"length":350,"vocabulary":147,"effort":16810,"difficulty":31.04,"time":934,"bugs":0.62,"intelligentContent":231.54,"maintainabilityIndexWithoutComment":233.88,"maintainabilityIndex":405.93,"commentWeight":172.05,"instability":2.83,"afferentCoupling":1,"efferentCoupling":7,"noc":4,"noca":1,"nocc":3,"noc-anon":0,"noi":0,"nom":13,"cyclomaticComplexity":13,"myerInterval":13,"myerDistance":2,"operators":2,"lcom":9,"sysc":27.5,"rsysc":8.33,"dc":16.5,"rdc":5.08,"sc":11,"rsc":3.25}},{"name":"src\/Plugin\/Field","childs":[],"depth":3,"abstractness":0,"instability":1,"average":{"filename":0,"name":0,"loc":81,"logicalLoc":10,"volume":687.41,"length":136.5,"vocabulary":22,"effort":15721.17,"difficulty":12.13,"time":873.5,"bugs":0.23,"intelligentContent":58.28,"maintainabilityIndexWithoutComment":66.3,"maintainabilityIndex":78.89,"commentWeight":12.6,"instability":0.5,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1.5,"cyclomaticComplexity":1,"myerInterval":1,"myerDistance":0,"operators":0,"lcom":1.5,"sysc":3.84,"rsysc":1.28,"dc":1.34,"rdc":0.45,"sc":2.5,"rsc":0.84},"min":{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":28.33,"difficulty":"0.69","time":2,"bugs":0.01,"intelligentContent":56.62,"maintainabilityIndexWithoutComment":"50.6","maintainabilityIndex":"75.79","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","loc":155,"logicalLoc":18,"volume":1333.61,"length":260,"vocabulary":35,"effort":31414.01,"difficulty":"23.56","time":1745,"bugs":0.44,"intelligentContent":59.94,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"81.99","commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67},"sum":{"filename":0,"name":0,"loc":162,"logicalLoc":20,"volume":1374.82,"length":273,"vocabulary":44,"effort":31442.34,"difficulty":24.25,"time":1747,"bugs":0.45,"intelligentContent":116.56,"maintainabilityIndexWithoutComment":132.59,"maintainabilityIndex":157.78,"commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":2,"noca":0,"nocc":2,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":2,"myerInterval":2,"myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67}},{"name":"src\/Plugin\/Field\/FieldType","childs":[{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","loc":155,"logicalLoc":18,"volume":1333.61,"length":260,"vocabulary":35,"effort":31414.01,"difficulty":"23.56","time":1745,"bugs":0.44,"intelligentContent":56.62,"maintainabilityIndexWithoutComment":"50.6","maintainabilityIndex":"75.79","commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67},{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":28.33,"difficulty":"0.69","time":2,"bugs":0.01,"intelligentContent":59.94,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"81.99","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0}],"depth":4,"abstractness":0,"instability":1,"average":{"filename":0,"name":0,"loc":81,"logicalLoc":10,"volume":687.41,"length":136.5,"vocabulary":22,"effort":15721.17,"difficulty":12.13,"time":873.5,"bugs":0.23,"intelligentContent":58.28,"maintainabilityIndexWithoutComment":66.3,"maintainabilityIndex":78.89,"commentWeight":12.6,"instability":0.5,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1.5,"cyclomaticComplexity":1,"myerInterval":1,"myerDistance":0,"operators":0,"lcom":1.5,"sysc":3.84,"rsysc":1.28,"dc":1.34,"rdc":0.45,"sc":2.5,"rsc":0.84},"min":{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItem.php","loc":7,"logicalLoc":2,"volume":41.21,"length":13,"vocabulary":9,"effort":28.33,"difficulty":"0.69","time":2,"bugs":0.01,"intelligentContent":56.62,"maintainabilityIndexWithoutComment":"50.6","maintainabilityIndex":"75.79","commentWeight":0,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","name":"src\/Plugin\/Field\/FieldType\/ReplicationHistoryItemList.php","loc":155,"logicalLoc":18,"volume":1333.61,"length":260,"vocabulary":35,"effort":31414.01,"difficulty":"23.56","time":1745,"bugs":0.44,"intelligentContent":59.94,"maintainabilityIndexWithoutComment":"81.99","maintainabilityIndex":"81.99","commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67},"sum":{"filename":0,"name":0,"loc":162,"logicalLoc":20,"volume":1374.82,"length":273,"vocabulary":44,"effort":31442.34,"difficulty":24.25,"time":1747,"bugs":0.45,"intelligentContent":116.56,"maintainabilityIndexWithoutComment":132.59,"maintainabilityIndex":157.78,"commentWeight":25.19,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":2,"noca":0,"nocc":2,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":2,"myerInterval":2,"myerDistance":0,"operators":0,"lcom":3,"sysc":7.67,"rsysc":2.56,"dc":2.67,"rdc":0.89,"sc":5,"rsc":1.67}},{"name":"src\/Changes","childs":[{"filename":"src\/Changes\/Changes.php","name":"src\/Changes\/Changes.php","loc":197,"logicalLoc":54,"volume":2628.39,"length":401,"vocabulary":94,"effort":66608.94,"difficulty":"25.34","time":3700,"bugs":0.88,"intelligentContent":103.72,"maintainabilityIndexWithoutComment":"35.44","maintainabilityIndex":"75.52","commentWeight":40.08,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":7,"cyclomaticComplexity":21,"myerInterval":"21:25","myerDistance":4,"operators":4,"lcom":1,"sysc":36.83,"rsysc":5.26,"dc":11.83,"rdc":1.69,"sc":25,"rsc":3.57},{"filename":"src\/Changes\/ChangesInterface.php","name":"src\/Changes\/ChangesInterface.php","loc":74,"logicalLoc":7,"volume":100.08,"length":24,"vocabulary":18,"effort":100.08,"difficulty":"1","time":6,"bugs":0.03,"intelligentContent":100.08,"maintainabilityIndexWithoutComment":"67.42","maintainabilityIndex":"116.04","commentWeight":48.62,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":6,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":4,"rsysc":0.67,"dc":4,"rdc":0.67,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":1,"average":{"filename":0,"name":0,"loc":135.5,"logicalLoc":30.5,"volume":1364.24,"length":212.5,"vocabulary":56,"effort":33354.51,"difficulty":13.17,"time":1853,"bugs":0.46,"intelligentContent":101.9,"maintainabilityIndexWithoutComment":51.43,"maintainabilityIndex":95.78,"commentWeight":44.35,"instability":0.5,"afferentCoupling":0,"efferentCoupling":2.5,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":6.5,"cyclomaticComplexity":11,"myerInterval":11,"myerDistance":2,"operators":2,"lcom":0.5,"sysc":20.42,"rsysc":2.97,"dc":7.92,"rdc":1.18,"sc":12.5,"rsc":1.79},"min":{"filename":"src\/Changes\/Changes.php","name":"src\/Changes\/Changes.php","loc":74,"logicalLoc":7,"volume":100.08,"length":24,"vocabulary":18,"effort":100.08,"difficulty":"1","time":6,"bugs":0.03,"intelligentContent":100.08,"maintainabilityIndexWithoutComment":"35.44","maintainabilityIndex":"75.52","commentWeight":40.08,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":6,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":4,"rsysc":0.67,"dc":4,"rdc":0.67,"sc":0,"rsc":0},"max":{"filename":"src\/Changes\/ChangesInterface.php","name":"src\/Changes\/ChangesInterface.php","loc":197,"logicalLoc":54,"volume":2628.39,"length":401,"vocabulary":94,"effort":66608.94,"difficulty":"25.34","time":3700,"bugs":0.88,"intelligentContent":103.72,"maintainabilityIndexWithoutComment":"67.42","maintainabilityIndex":"116.04","commentWeight":48.62,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":7,"cyclomaticComplexity":21,"myerInterval":"21:25","myerDistance":4,"operators":4,"lcom":1,"sysc":36.83,"rsysc":5.26,"dc":11.83,"rdc":1.69,"sc":25,"rsc":3.57},"sum":{"filename":0,"name":0,"loc":271,"logicalLoc":61,"volume":2728.47,"length":425,"vocabulary":112,"effort":66709.02,"difficulty":26.34,"time":3706,"bugs":0.91,"intelligentContent":203.8,"maintainabilityIndexWithoutComment":102.86,"maintainabilityIndex":191.56,"commentWeight":88.7,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":2,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":13,"cyclomaticComplexity":22,"myerInterval":22,"myerDistance":4,"operators":4,"lcom":1,"sysc":40.83,"rsysc":5.93,"dc":15.83,"rdc":2.36,"sc":25,"rsc":3.57}},{"name":"src\/Encoder","childs":[{"filename":"src\/Encoder\/StreamEncoder.php","name":"src\/Encoder\/StreamEncoder.php","loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":"14.55","time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":"49.05","maintainabilityIndex":"85.99","commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":"13:13","myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6}],"depth":2,"abstractness":0,"instability":1,"average":{"filename":0,"name":0,"loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":14.55,"time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":49.05,"maintainabilityIndex":85.99,"commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":13,"myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6},"min":{"filename":"src\/Encoder\/StreamEncoder.php","name":"src\/Encoder\/StreamEncoder.php","loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":"14.55","time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":"49.05","maintainabilityIndex":"85.99","commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":"13:13","myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6},"max":{"filename":"src\/Encoder\/StreamEncoder.php","name":"src\/Encoder\/StreamEncoder.php","loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":"14.55","time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":"49.05","maintainabilityIndex":"85.99","commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":"13:13","myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6},"sum":{"filename":0,"name":0,"loc":66,"logicalLoc":20,"volume":942.36,"length":163,"vocabulary":55,"effort":13709.12,"difficulty":14.55,"time":762,"bugs":0.31,"intelligentContent":64.78,"maintainabilityIndexWithoutComment":49.05,"maintainabilityIndex":85.99,"commentWeight":36.94,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":13,"myerInterval":13,"myerDistance":0,"operators":0,"lcom":3,"sysc":8.5,"rsysc":1.7,"dc":5.5,"rdc":1.1,"sc":3,"rsc":0.6}},{"name":"src\/AllDocs","childs":[{"filename":"src\/AllDocs\/AllDocs.php","name":"src\/AllDocs\/AllDocs.php","loc":191,"logicalLoc":49,"volume":2196.08,"length":332,"vocabulary":98,"effort":29570.52,"difficulty":"13.47","time":1643,"bugs":0.73,"intelligentContent":163.09,"maintainabilityIndexWithoutComment":"37.98","maintainabilityIndex":"78.29","commentWeight":40.31,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":9,"cyclomaticComplexity":13,"myerInterval":"13:14","myerDistance":1,"operators":1,"lcom":7,"sysc":33.83,"rsysc":3.76,"dc":8.83,"rdc":0.98,"sc":25,"rsc":2.78},{"filename":"src\/AllDocs\/AllDocsInterface.php","name":"src\/AllDocs\/AllDocsInterface.php","loc":57,"logicalLoc":11,"volume":178.62,"length":38,"vocabulary":26,"effort":96.45,"difficulty":"0.54","time":5,"bugs":0.06,"intelligentContent":330.77,"maintainabilityIndexWithoutComment":"61.38","maintainabilityIndex":"106.86","commentWeight":45.48,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":8,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":7,"rsysc":0.88,"dc":7,"rdc":0.88,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":1,"average":{"filename":0,"name":0,"loc":124,"logicalLoc":30,"volume":1187.35,"length":185,"vocabulary":62,"effort":14833.49,"difficulty":7.01,"time":824,"bugs":0.4,"intelligentContent":246.93,"maintainabilityIndexWithoutComment":49.68,"maintainabilityIndex":92.58,"commentWeight":42.9,"instability":0.5,"afferentCoupling":0,"efferentCoupling":2.5,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":8.5,"cyclomaticComplexity":7,"myerInterval":7,"myerDistance":0.5,"operators":0.5,"lcom":3.5,"sysc":20.42,"rsysc":2.32,"dc":7.92,"rdc":0.93,"sc":12.5,"rsc":1.39},"min":{"filename":"src\/AllDocs\/AllDocs.php","name":"src\/AllDocs\/AllDocs.php","loc":57,"logicalLoc":11,"volume":178.62,"length":38,"vocabulary":26,"effort":96.45,"difficulty":"0.54","time":5,"bugs":0.06,"intelligentContent":163.09,"maintainabilityIndexWithoutComment":"37.98","maintainabilityIndex":"78.29","commentWeight":40.31,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":8,"cyclomaticComplexity":1,"myerInterval":"13:14","myerDistance":0,"operators":0,"lcom":0,"sysc":7,"rsysc":0.88,"dc":7,"rdc":0.88,"sc":0,"rsc":0},"max":{"filename":"src\/AllDocs\/AllDocsInterface.php","name":"src\/AllDocs\/AllDocsInterface.php","loc":191,"logicalLoc":49,"volume":2196.08,"length":332,"vocabulary":98,"effort":29570.52,"difficulty":"13.47","time":1643,"bugs":0.73,"intelligentContent":330.77,"maintainabilityIndexWithoutComment":"61.38","maintainabilityIndex":"106.86","commentWeight":45.48,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":9,"cyclomaticComplexity":13,"myerInterval":"1:1","myerDistance":1,"operators":1,"lcom":7,"sysc":33.83,"rsysc":3.76,"dc":8.83,"rdc":0.98,"sc":25,"rsc":2.78},"sum":{"filename":0,"name":0,"loc":248,"logicalLoc":60,"volume":2374.7,"length":370,"vocabulary":124,"effort":29666.97,"difficulty":14.01,"time":1648,"bugs":0.79,"intelligentContent":493.86,"maintainabilityIndexWithoutComment":99.36,"maintainabilityIndex":185.15,"commentWeight":85.79,"instability":1,"afferentCoupling":0,"efferentCoupling":5,"noc":2,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":17,"cyclomaticComplexity":14,"myerInterval":14,"myerDistance":1,"operators":1,"lcom":7,"sysc":40.83,"rsysc":4.64,"dc":15.83,"rdc":1.86,"sc":25,"rsc":2.78}},{"name":"src\/BulkDocs","childs":[{"filename":"src\/BulkDocs\/BulkDocs.php","name":"src\/BulkDocs\/BulkDocs.php","loc":235,"logicalLoc":69,"volume":3415.9,"length":499,"vocabulary":115,"effort":89376.84,"difficulty":"26.16","time":4965,"bugs":1.14,"intelligentContent":130.55,"maintainabilityIndexWithoutComment":"32.99","maintainabilityIndex":"72.28","commentWeight":39.29,"instability":1,"afferentCoupling":0,"efferentCoupling":8,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":6,"cyclomaticComplexity":16,"myerInterval":"16:17","myerDistance":1,"operators":1,"lcom":1,"sysc":71.89,"rsysc":11.98,"dc":7.89,"rdc":1.32,"sc":64,"rsc":10.67},{"filename":"src\/BulkDocs\/BulkDocsInterface.php","name":"src\/BulkDocs\/BulkDocsInterface.php","loc":39,"logicalLoc":6,"volume":60.94,"length":17,"vocabulary":12,"effort":30.47,"difficulty":"0.5","time":2,"bugs":0.02,"intelligentContent":121.89,"maintainabilityIndexWithoutComment":"70.39","maintainabilityIndex":"115.75","commentWeight":45.36,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":5,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":2,"rsysc":0.4,"dc":2,"rdc":0.4,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":1,"average":{"filename":0,"name":0,"loc":137,"logicalLoc":37.5,"volume":1738.42,"length":258,"vocabulary":63.5,"effort":44703.66,"difficulty":13.33,"time":2483.5,"bugs":0.58,"intelligentContent":126.22,"maintainabilityIndexWithoutComment":51.69,"maintainabilityIndex":94.02,"commentWeight":42.33,"instability":0.5,"afferentCoupling":0,"efferentCoupling":4,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":5.5,"cyclomaticComplexity":8.5,"myerInterval":8.5,"myerDistance":0.5,"operators":0.5,"lcom":0.5,"sysc":36.95,"rsysc":6.19,"dc":4.95,"rdc":0.86,"sc":32,"rsc":5.34},"min":{"filename":"src\/BulkDocs\/BulkDocs.php","name":"src\/BulkDocs\/BulkDocs.php","loc":39,"logicalLoc":6,"volume":60.94,"length":17,"vocabulary":12,"effort":30.47,"difficulty":"0.5","time":2,"bugs":0.02,"intelligentContent":121.89,"maintainabilityIndexWithoutComment":"32.99","maintainabilityIndex":"72.28","commentWeight":39.29,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":1,"myerInterval":"16:17","myerDistance":0,"operators":0,"lcom":0,"sysc":2,"rsysc":0.4,"dc":2,"rdc":0.4,"sc":0,"rsc":0},"max":{"filename":"src\/BulkDocs\/BulkDocsInterface.php","name":"src\/BulkDocs\/BulkDocsInterface.php","loc":235,"logicalLoc":69,"volume":3415.9,"length":499,"vocabulary":115,"effort":89376.84,"difficulty":"26.16","time":4965,"bugs":1.14,"intelligentContent":130.55,"maintainabilityIndexWithoutComment":"70.39","maintainabilityIndex":"115.75","commentWeight":45.36,"instability":1,"afferentCoupling":0,"efferentCoupling":8,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":6,"cyclomaticComplexity":16,"myerInterval":"1:1","myerDistance":1,"operators":1,"lcom":1,"sysc":71.89,"rsysc":11.98,"dc":7.89,"rdc":1.32,"sc":64,"rsc":10.67},"sum":{"filename":0,"name":0,"loc":274,"logicalLoc":75,"volume":3476.84,"length":516,"vocabulary":127,"effort":89407.31,"difficulty":26.66,"time":4967,"bugs":1.16,"intelligentContent":252.44,"maintainabilityIndexWithoutComment":103.38,"maintainabilityIndex":188.03,"commentWeight":84.65,"instability":1,"afferentCoupling":0,"efferentCoupling":8,"noc":2,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":11,"cyclomaticComplexity":17,"myerInterval":17,"myerDistance":1,"operators":1,"lcom":1,"sysc":73.89,"rsysc":12.38,"dc":9.89,"rdc":1.72,"sc":64,"rsc":10.67}},{"name":"src\/Entity","childs":[{"filename":"src\/Entity\/ReplicationLog.php","name":"src\/Entity\/ReplicationLog.php","loc":139,"logicalLoc":26,"volume":1498.3,"length":258,"vocabulary":56,"effort":26553.16,"difficulty":"17.72","time":1475,"bugs":0.5,"intelligentContent":84.54,"maintainabilityIndexWithoutComment":"46.63","maintainabilityIndex":"85.21","commentWeight":38.58,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":8,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":8,"sysc":23.5,"rsysc":2.94,"dc":10.5,"rdc":1.31,"sc":13,"rsc":1.63},{"filename":"src\/Entity\/ReplicationSettings.php","name":"src\/Entity\/ReplicationSettings.php","loc":67,"logicalLoc":9,"volume":164.23,"length":38,"vocabulary":20,"effort":362.28,"difficulty":"2.21","time":20,"bugs":0.05,"intelligentContent":74.45,"maintainabilityIndexWithoutComment":"63.54","maintainabilityIndex":"110.61","commentWeight":47.07,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Entity\/ReplicationSettingsInterface.php","name":"src\/Entity\/ReplicationSettingsInterface.php","loc":26,"logicalLoc":4,"volume":53.15,"length":16,"vocabulary":10,"effort":35.43,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":79.73,"maintainabilityIndexWithoutComment":"74.65","maintainabilityIndex":"119.11","commentWeight":44.46,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},{"filename":"src\/Entity\/ReplicationLogInterface.php","name":"src\/Entity\/ReplicationLogInterface.php","loc":63,"logicalLoc":8,"volume":104,"length":26,"vocabulary":16,"effort":62.4,"difficulty":"0.6","time":3,"bugs":0.03,"intelligentContent":173.33,"maintainabilityIndexWithoutComment":"66.04","maintainabilityIndex":"113.72","commentWeight":47.68,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":6,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":3,"rsysc":0.5,"dc":3,"rdc":0.5,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":0.83,"average":{"filename":0,"name":0,"loc":73.75,"logicalLoc":11.75,"volume":454.92,"length":84.5,"vocabulary":25.5,"effort":6753.32,"difficulty":5.3,"time":375,"bugs":0.15,"intelligentContent":103.01,"maintainabilityIndexWithoutComment":62.72,"maintainabilityIndex":107.16,"commentWeight":44.45,"instability":0.21,"afferentCoupling":0.25,"efferentCoupling":1.25,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":4.5,"cyclomaticComplexity":1.25,"myerInterval":1.25,"myerDistance":0,"operators":0,"lcom":2,"sysc":7.13,"rsysc":1.11,"dc":3.88,"rdc":0.7,"sc":3.25,"rsc":0.41},"min":{"filename":"src\/Entity\/ReplicationLog.php","name":"src\/Entity\/ReplicationLog.php","loc":26,"logicalLoc":4,"volume":53.15,"length":16,"vocabulary":10,"effort":35.43,"difficulty":"0.6","time":2,"bugs":0.02,"intelligentContent":74.45,"maintainabilityIndexWithoutComment":"46.63","maintainabilityIndex":"85.21","commentWeight":38.58,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/Entity\/ReplicationSettingsInterface.php","name":"src\/Entity\/ReplicationSettingsInterface.php","loc":139,"logicalLoc":26,"volume":1498.3,"length":258,"vocabulary":56,"effort":26553.16,"difficulty":"17.72","time":1475,"bugs":0.5,"intelligentContent":173.33,"maintainabilityIndexWithoutComment":"74.65","maintainabilityIndex":"119.11","commentWeight":47.68,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":8,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":8,"sysc":23.5,"rsysc":2.94,"dc":10.5,"rdc":1.31,"sc":13,"rsc":1.63},"sum":{"filename":0,"name":0,"loc":295,"logicalLoc":47,"volume":1819.68,"length":338,"vocabulary":102,"effort":27013.27,"difficulty":21.2,"time":1500,"bugs":0.6,"intelligentContent":412.05,"maintainabilityIndexWithoutComment":250.86,"maintainabilityIndex":428.65,"commentWeight":177.79,"instability":0.83,"afferentCoupling":1,"efferentCoupling":5,"noc":4,"noca":2,"nocc":2,"noc-anon":0,"noi":2,"nom":18,"cyclomaticComplexity":5,"myerInterval":5,"myerDistance":0,"operators":0,"lcom":8,"sysc":28.5,"rsysc":4.44,"dc":15.5,"rdc":2.81,"sc":13,"rsc":1.63}},{"name":"src\/Annotation","childs":[{"filename":"src\/Annotation\/ReplicationFilter.php","name":"src\/Annotation\/ReplicationFilter.php","loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":"72.35","maintainabilityIndex":"120.32","commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0}],"depth":2,"abstractness":0,"instability":0,"average":{"filename":0,"name":0,"loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":0.67,"time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":72.35,"maintainabilityIndex":120.32,"commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":1,"myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"min":{"filename":"src\/Annotation\/ReplicationFilter.php","name":"src\/Annotation\/ReplicationFilter.php","loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":"72.35","maintainabilityIndex":"120.32","commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"max":{"filename":"src\/Annotation\/ReplicationFilter.php","name":"src\/Annotation\/ReplicationFilter.php","loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":"0.67","time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":"72.35","maintainabilityIndex":"120.32","commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0},"sum":{"filename":0,"name":0,"loc":48,"logicalLoc":5,"volume":56.47,"length":17,"vocabulary":10,"effort":37.65,"difficulty":0.67,"time":2,"bugs":0.02,"intelligentContent":84.71,"maintainabilityIndexWithoutComment":72.35,"maintainabilityIndex":120.32,"commentWeight":47.97,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":0,"cyclomaticComplexity":1,"myerInterval":1,"myerDistance":0,"operators":0,"lcom":0,"sysc":0,"rsysc":0,"dc":0,"rdc":0,"sc":0,"rsc":0}},{"name":"src\/RevisionDiff","childs":[{"filename":"src\/RevisionDiff\/RevisionDiff.php","name":"src\/RevisionDiff\/RevisionDiff.php","loc":73,"logicalLoc":17,"volume":726.1,"length":133,"vocabulary":44,"effort":7188.43,"difficulty":"9.9","time":399,"bugs":0.24,"intelligentContent":73.34,"maintainabilityIndexWithoutComment":"52.45","maintainabilityIndex":"92.37","commentWeight":39.92,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":5,"myerInterval":"5:5","myerDistance":0,"operators":0,"lcom":1,"sysc":8.67,"rsysc":2.17,"dc":4.67,"rdc":1.17,"sc":4,"rsc":1},{"filename":"src\/RevisionDiff\/RevisionDiffInterface.php","name":"src\/RevisionDiff\/RevisionDiffInterface.php","loc":32,"logicalLoc":7,"volume":123.19,"length":29,"vocabulary":19,"effort":75.28,"difficulty":"0.61","time":4,"bugs":0.04,"intelligentContent":201.58,"maintainabilityIndexWithoutComment":"66.79","maintainabilityIndex":"109.52","commentWeight":42.73,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1,"rsysc":0.33,"dc":1,"rdc":0.33,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":1,"average":{"filename":0,"name":0,"loc":52.5,"logicalLoc":12,"volume":424.65,"length":81,"vocabulary":31.5,"effort":3631.86,"difficulty":5.26,"time":201.5,"bugs":0.14,"intelligentContent":137.46,"maintainabilityIndexWithoutComment":59.62,"maintainabilityIndex":100.95,"commentWeight":41.33,"instability":0.5,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":3.5,"cyclomaticComplexity":3,"myerInterval":3,"myerDistance":0,"operators":0,"lcom":0.5,"sysc":4.84,"rsysc":1.25,"dc":2.84,"rdc":0.75,"sc":2,"rsc":0.5},"min":{"filename":"src\/RevisionDiff\/RevisionDiff.php","name":"src\/RevisionDiff\/RevisionDiff.php","loc":32,"logicalLoc":7,"volume":123.19,"length":29,"vocabulary":19,"effort":75.28,"difficulty":"0.61","time":4,"bugs":0.04,"intelligentContent":73.34,"maintainabilityIndexWithoutComment":"52.45","maintainabilityIndex":"92.37","commentWeight":39.92,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":1,"rsysc":0.33,"dc":1,"rdc":0.33,"sc":0,"rsc":0},"max":{"filename":"src\/RevisionDiff\/RevisionDiffInterface.php","name":"src\/RevisionDiff\/RevisionDiffInterface.php","loc":73,"logicalLoc":17,"volume":726.1,"length":133,"vocabulary":44,"effort":7188.43,"difficulty":"9.9","time":399,"bugs":0.24,"intelligentContent":201.58,"maintainabilityIndexWithoutComment":"66.79","maintainabilityIndex":"109.52","commentWeight":42.73,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":4,"cyclomaticComplexity":5,"myerInterval":"5:5","myerDistance":0,"operators":0,"lcom":1,"sysc":8.67,"rsysc":2.17,"dc":4.67,"rdc":1.17,"sc":4,"rsc":1},"sum":{"filename":0,"name":0,"loc":105,"logicalLoc":24,"volume":849.29,"length":162,"vocabulary":63,"effort":7263.71,"difficulty":10.51,"time":403,"bugs":0.28,"intelligentContent":274.92,"maintainabilityIndexWithoutComment":119.24,"maintainabilityIndex":201.89,"commentWeight":82.65,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":2,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":7,"cyclomaticComplexity":6,"myerInterval":6,"myerDistance":0,"operators":0,"lcom":1,"sysc":9.67,"rsysc":2.5,"dc":5.67,"rdc":1.5,"sc":4,"rsc":1}},{"name":"src\/ReplicationTask","childs":[{"filename":"src\/ReplicationTask\/ReplicationTaskInterface.php","name":"src\/ReplicationTask\/ReplicationTaskInterface.php","loc":91,"logicalLoc":8,"volume":123.19,"length":29,"vocabulary":19,"effort":137.68,"difficulty":"1.12","time":8,"bugs":0.04,"intelligentContent":110.22,"maintainabilityIndexWithoutComment":"65.53","maintainabilityIndex":"114.41","commentWeight":48.88,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":0,"noc-anon":0,"noi":1,"nom":7,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":5,"rsysc":0.71,"dc":5,"rdc":0.71,"sc":0,"rsc":0},{"filename":"src\/ReplicationTask\/ReplicationTask.php","name":"src\/ReplicationTask\/ReplicationTask.php","loc":82,"logicalLoc":15,"volume":519.57,"length":103,"vocabulary":33,"effort":5260.67,"difficulty":"10.13","time":292,"bugs":0.17,"intelligentContent":51.32,"maintainabilityIndexWithoutComment":"54.93","maintainabilityIndex":"96.94","commentWeight":42.01,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":7,"cyclomaticComplexity":3,"myerInterval":"3:3","myerDistance":0,"operators":0,"lcom":1,"sysc":12,"rsysc":1.71,"dc":12,"rdc":1.71,"sc":0,"rsc":0}],"depth":2,"abstractness":0.5,"instability":0,"average":{"filename":0,"name":0,"loc":86.5,"logicalLoc":11.5,"volume":321.38,"length":66,"vocabulary":26,"effort":2699.18,"difficulty":5.63,"time":150,"bugs":0.11,"intelligentContent":80.77,"maintainabilityIndexWithoutComment":60.23,"maintainabilityIndex":105.68,"commentWeight":45.45,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0.5,"nocc":0.5,"noc-anon":0,"noi":0.5,"nom":7,"cyclomaticComplexity":2,"myerInterval":2,"myerDistance":0,"operators":0,"lcom":0.5,"sysc":8.5,"rsysc":1.21,"dc":8.5,"rdc":1.21,"sc":0,"rsc":0},"min":{"filename":"src\/ReplicationTask\/ReplicationTask.php","name":"src\/ReplicationTask\/ReplicationTask.php","loc":82,"logicalLoc":8,"volume":123.19,"length":29,"vocabulary":19,"effort":137.68,"difficulty":"1.12","time":8,"bugs":0.04,"intelligentContent":51.32,"maintainabilityIndexWithoutComment":"54.93","maintainabilityIndex":"96.94","commentWeight":42.01,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":0,"noc-anon":0,"noi":0,"nom":7,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":0,"sysc":5,"rsysc":0.71,"dc":5,"rdc":0.71,"sc":0,"rsc":0},"max":{"filename":"src\/ReplicationTask\/ReplicationTaskInterface.php","name":"src\/ReplicationTask\/ReplicationTaskInterface.php","loc":91,"logicalLoc":15,"volume":519.57,"length":103,"vocabulary":33,"effort":5260.67,"difficulty":"10.13","time":292,"bugs":0.17,"intelligentContent":110.22,"maintainabilityIndexWithoutComment":"65.53","maintainabilityIndex":"114.41","commentWeight":48.88,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":7,"cyclomaticComplexity":3,"myerInterval":"3:3","myerDistance":0,"operators":0,"lcom":1,"sysc":12,"rsysc":1.71,"dc":12,"rdc":1.71,"sc":0,"rsc":0},"sum":{"filename":0,"name":0,"loc":173,"logicalLoc":23,"volume":642.76,"length":132,"vocabulary":52,"effort":5398.35,"difficulty":11.25,"time":300,"bugs":0.21,"intelligentContent":161.54,"maintainabilityIndexWithoutComment":120.46,"maintainabilityIndex":211.35,"commentWeight":90.89,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":2,"noca":1,"nocc":1,"noc-anon":0,"noi":1,"nom":14,"cyclomaticComplexity":4,"myerInterval":4,"myerDistance":0,"operators":0,"lcom":1,"sysc":17,"rsysc":2.42,"dc":17,"rdc":2.42,"sc":0,"rsc":0}},{"name":"src\/Form","childs":[{"filename":"src\/Form\/SettingsForm.php","name":"src\/Form\/SettingsForm.php","loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":"28.5","time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":"45.67","maintainabilityIndex":"75.88","commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":"12:14","myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4}],"depth":2,"abstractness":0,"instability":1,"average":{"filename":0,"name":0,"loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":28.5,"time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":45.67,"maintainabilityIndex":75.88,"commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":12,"myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4},"min":{"filename":"src\/Form\/SettingsForm.php","name":"src\/Form\/SettingsForm.php","loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":"28.5","time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":"45.67","maintainabilityIndex":"75.88","commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":"12:14","myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4},"max":{"filename":"src\/Form\/SettingsForm.php","name":"src\/Form\/SettingsForm.php","loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":"28.5","time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":"45.67","maintainabilityIndex":"75.88","commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":"12:14","myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4},"sum":{"filename":0,"name":0,"loc":114,"logicalLoc":26,"volume":1318.05,"length":225,"vocabulary":58,"effort":37564.3,"difficulty":28.5,"time":2087,"bugs":0.44,"intelligentContent":46.25,"maintainabilityIndexWithoutComment":45.67,"maintainabilityIndex":75.88,"commentWeight":30.21,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":5,"cyclomaticComplexity":12,"myerInterval":12,"myerDistance":2,"operators":2,"lcom":5,"sysc":21.17,"rsysc":4.23,"dc":4.17,"rdc":0.83,"sc":17,"rsc":3.4}},{"name":"src\/Normalizer","childs":[{"filename":"src\/Normalizer\/ContentEntityNormalizer.php","name":"src\/Normalizer\/ContentEntityNormalizer.php","loc":552,"logicalLoc":171,"volume":14043.24,"length":1827,"vocabulary":206,"effort":701856.54,"difficulty":"49.98","time":38992,"bugs":4.68,"intelligentContent":280.99,"maintainabilityIndexWithoutComment":"7.45","maintainabilityIndex":"40.51","commentWeight":33.06,"instability":0.92,"afferentCoupling":1,"efferentCoupling":11,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":110,"myerInterval":"110:129","myerDistance":19,"operators":19,"lcom":1,"sysc":61.56,"rsysc":15.39,"dc":8.56,"rdc":2.14,"sc":53,"rsc":13.25},{"filename":"src\/Normalizer\/CommentItemNormalizer.php","name":"src\/Normalizer\/CommentItemNormalizer.php","loc":53,"logicalLoc":12,"volume":482.81,"length":92,"vocabulary":38,"effort":4655.66,"difficulty":"9.64","time":259,"bugs":0.16,"intelligentContent":50.07,"maintainabilityIndexWithoutComment":"57.13","maintainabilityIndex":"96.38","commentWeight":39.25,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":4,"myerInterval":"4:5","myerDistance":1,"operators":1,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/EntityReferenceItemNormalizer.php","name":"src\/Normalizer\/EntityReferenceItemNormalizer.php","loc":80,"logicalLoc":22,"volume":1031,"length":176,"vocabulary":58,"effort":13849.83,"difficulty":"13.43","time":769,"bugs":0.34,"intelligentContent":76.75,"maintainabilityIndexWithoutComment":"48.14","maintainabilityIndex":"83.11","commentWeight":34.97,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":11,"myerInterval":"11:13","myerDistance":2,"operators":2,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/ChangesNormalizer.php","name":"src\/Normalizer\/ChangesNormalizer.php","loc":51,"logicalLoc":12,"volume":557.41,"length":107,"vocabulary":37,"effort":8652,"difficulty":"15.52","time":481,"bugs":0.19,"intelligentContent":35.91,"maintainabilityIndexWithoutComment":"56.02","maintainabilityIndex":"90.16","commentWeight":34.14,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":9,"myerInterval":"9:10","myerDistance":1,"operators":1,"lcom":1,"sysc":1,"rsysc":1,"dc":1,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/FileItemNormalizer.php","name":"src\/Normalizer\/FileItemNormalizer.php","loc":79,"logicalLoc":21,"volume":1052,"length":176,"vocabulary":63,"effort":15329.16,"difficulty":"14.57","time":852,"bugs":0.35,"intelligentContent":72.2,"maintainabilityIndexWithoutComment":"49.19","maintainabilityIndex":"83.63","commentWeight":34.44,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":6,"myerInterval":"6:6","myerDistance":0,"operators":0,"lcom":2,"sysc":2.5,"rsysc":1.25,"dc":1.5,"rdc":0.75,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/RevsDiffNormalizer.php","name":"src\/Normalizer\/RevsDiffNormalizer.php","loc":49,"logicalLoc":13,"volume":545.94,"length":100,"vocabulary":44,"effort":5641.41,"difficulty":"10.33","time":313,"bugs":0.18,"intelligentContent":52.83,"maintainabilityIndexWithoutComment":"56","maintainabilityIndex":"92.83","commentWeight":36.83,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":3,"cyclomaticComplexity":4,"myerInterval":"4:4","myerDistance":0,"operators":0,"lcom":2,"sysc":4.5,"rsysc":1.5,"dc":1.5,"rdc":0.5,"sc":3,"rsc":1},{"filename":"src\/Normalizer\/ReplicationLogNormalizer.php","name":"src\/Normalizer\/ReplicationLogNormalizer.php","loc":97,"logicalLoc":27,"volume":1532.29,"length":246,"vocabulary":75,"effort":22008.12,"difficulty":"14.36","time":1223,"bugs":0.51,"intelligentContent":106.68,"maintainabilityIndexWithoutComment":"45.26","maintainabilityIndex":"80.09","commentWeight":34.83,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":9,"myerInterval":"9:11","myerDistance":2,"operators":2,"lcom":3,"sysc":12.67,"rsysc":3.17,"dc":7.67,"rdc":1.92,"sc":5,"rsc":1.25},{"filename":"src\/Normalizer\/LocalSequenceItemListNormalizer.php","name":"src\/Normalizer\/LocalSequenceItemListNormalizer.php","loc":33,"logicalLoc":7,"volume":255.41,"length":55,"vocabulary":25,"effort":948.67,"difficulty":"3.71","time":53,"bugs":0.09,"intelligentContent":68.76,"maintainabilityIndexWithoutComment":"64.58","maintainabilityIndex":"104.79","commentWeight":40.21,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/WorkspaceNormalizer.php","name":"src\/Normalizer\/WorkspaceNormalizer.php","loc":65,"logicalLoc":22,"volume":988.54,"length":177,"vocabulary":48,"effort":11186.09,"difficulty":"11.32","time":621,"bugs":0.33,"intelligentContent":87.36,"maintainabilityIndexWithoutComment":"48.8","maintainabilityIndex":"82.67","commentWeight":33.87,"instability":1,"afferentCoupling":0,"efferentCoupling":3,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":7,"myerInterval":"7:7","myerDistance":0,"operators":0,"lcom":2,"sysc":5.83,"rsysc":2.92,"dc":0.83,"rdc":0.42,"sc":5,"rsc":2.5},{"filename":"src\/Normalizer\/RevisionInfoItemListNormalizer.php","name":"src\/Normalizer\/RevisionInfoItemListNormalizer.php","loc":28,"logicalLoc":6,"volume":209.59,"length":47,"vocabulary":22,"effort":1556.98,"difficulty":"7.43","time":86,"bugs":0.07,"intelligentContent":28.21,"maintainabilityIndexWithoutComment":"66.5","maintainabilityIndex":"104.98","commentWeight":38.48,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":2,"rsysc":2,"dc":1,"rdc":1,"sc":1,"rsc":1},{"filename":"src\/Normalizer\/LinkItemNormalizer.php","name":"src\/Normalizer\/LinkItemNormalizer.php","loc":133,"logicalLoc":34,"volume":2190.62,"length":335,"vocabulary":93,"effort":41195,"difficulty":"18.81","time":2289,"bugs":0.73,"intelligentContent":116.49,"maintainabilityIndexWithoutComment":"41.05","maintainabilityIndex":"80.86","commentWeight":39.81,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":16,"myerInterval":"16:20","myerDistance":4,"operators":4,"lcom":1,"sysc":11.67,"rsysc":2.92,"dc":7.67,"rdc":1.92,"sc":4,"rsc":1},{"filename":"src\/Normalizer\/AttachmentNormalizer.php","name":"src\/Normalizer\/AttachmentNormalizer.php","loc":75,"logicalLoc":22,"volume":1241.89,"length":212,"vocabulary":58,"effort":19373.51,"difficulty":"15.6","time":1076,"bugs":0.41,"intelligentContent":79.61,"maintainabilityIndexWithoutComment":"47.17","maintainabilityIndex":"81.58","commentWeight":34.41,"instability":1,"afferentCoupling":0,"efferentCoupling":1,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":14,"myerInterval":"14:14","myerDistance":0,"operators":0,"lcom":2,"sysc":4,"rsysc":2,"dc":3,"rdc":1.5,"sc":1,"rsc":0.5},{"filename":"src\/Normalizer\/DeletedFlagItemListNormalizer.php","name":"src\/Normalizer\/DeletedFlagItemListNormalizer.php","loc":28,"logicalLoc":6,"volume":236.84,"length":51,"vocabulary":25,"effort":834.57,"difficulty":"3.52","time":46,"bugs":0.08,"intelligentContent":67.21,"maintainabilityIndexWithoutComment":"66.26","maintainabilityIndex":"104.74","commentWeight":38.48,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":1,"myerInterval":"1:1","myerDistance":0,"operators":0,"lcom":2,"sysc":2,"rsysc":1,"dc":2,"rdc":1,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/BulkDocsNormalizer.php","name":"src\/Normalizer\/BulkDocsNormalizer.php","loc":73,"logicalLoc":18,"volume":1083.43,"length":191,"vocabulary":51,"effort":22120.1,"difficulty":"20.42","time":1229,"bugs":0.36,"intelligentContent":53.07,"maintainabilityIndexWithoutComment":"49.35","maintainabilityIndex":"78.73","commentWeight":29.38,"instability":1,"afferentCoupling":0,"efferentCoupling":2,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2,"cyclomaticComplexity":15,"myerInterval":"15:20","myerDistance":5,"operators":5,"lcom":2,"sysc":5.33,"rsysc":2.67,"dc":1.33,"rdc":0.67,"sc":4,"rsc":2},{"filename":"src\/Normalizer\/TextItemNormalizer.php","name":"src\/Normalizer\/TextItemNormalizer.php","loc":35,"logicalLoc":6,"volume":252.01,"length":53,"vocabulary":27,"effort":1367.15,"difficulty":"5.43","time":76,"bugs":0.08,"intelligentContent":46.45,"maintainabilityIndexWithoutComment":"65.94","maintainabilityIndex":"108.39","commentWeight":42.45,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":4,"rsysc":4,"dc":4,"rdc":4,"sc":0,"rsc":0},{"filename":"src\/Normalizer\/AllDocsNormalizer.php","name":"src\/Normalizer\/AllDocsNormalizer.php","loc":34,"logicalLoc":8,"volume":290.05,"length":61,"vocabulary":27,"effort":1878.06,"difficulty":"6.48","time":104,"bugs":0.1,"intelligentContent":44.8,"maintainabilityIndexWithoutComment":"62.79","maintainabilityIndex":"88.13","commentWeight":25.34,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":2,"myerInterval":"2:2","myerDistance":0,"operators":0,"lcom":1,"sysc":1,"rsysc":1,"dc":1,"rdc":1,"sc":0,"rsc":0}],"depth":2,"abstractness":0,"instability":0.97,"average":{"filename":0,"name":0,"loc":91.56,"logicalLoc":25.44,"volume":1624.57,"length":244.13,"vocabulary":56.06,"effort":54528.3,"difficulty":13.78,"time":3029.31,"bugs":0.54,"intelligentContent":79.21,"maintainabilityIndexWithoutComment":51.98,"maintainabilityIndex":87.6,"commentWeight":35.62,"instability":0.62,"afferentCoupling":0.06,"efferentCoupling":1.75,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":2.19,"cyclomaticComplexity":13.31,"myerInterval":13.31,"myerDistance":2.13,"operators":2.13,"lcom":1.69,"sysc":7.88,"rsysc":2.8,"dc":3,"rdc":1.33,"sc":4.88,"rsc":1.47},"min":{"filename":"src\/Normalizer\/AllDocsNormalizer.php","name":"src\/Normalizer\/AllDocsNormalizer.php","loc":28,"logicalLoc":6,"volume":209.59,"length":47,"vocabulary":22,"effort":834.57,"difficulty":"3.52","time":46,"bugs":0.07,"intelligentContent":28.21,"maintainabilityIndexWithoutComment":"7.45","maintainabilityIndex":"40.51","commentWeight":25.34,"instability":0,"afferentCoupling":0,"efferentCoupling":0,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":1,"cyclomaticComplexity":1,"myerInterval":"110:129","myerDistance":0,"operators":0,"lcom":1,"sysc":1,"rsysc":1,"dc":0.83,"rdc":0.42,"sc":0,"rsc":0},"max":{"filename":"src\/Normalizer\/WorkspaceNormalizer.php","name":"src\/Normalizer\/WorkspaceNormalizer.php","loc":552,"logicalLoc":171,"volume":14043.24,"length":1827,"vocabulary":206,"effort":701856.54,"difficulty":"49.98","time":38992,"bugs":4.68,"intelligentContent":280.99,"maintainabilityIndexWithoutComment":"66.5","maintainabilityIndex":"108.39","commentWeight":42.45,"instability":1,"afferentCoupling":1,"efferentCoupling":11,"noc":1,"noca":0,"nocc":1,"noc-anon":0,"noi":0,"nom":4,"cyclomaticComplexity":110,"myerInterval":"9:11","myerDistance":19,"operators":19,"lcom":3,"sysc":61.56,"rsysc":15.39,"dc":8.56,"rdc":4,"sc":53,"rsc":13.25},"sum":{"filename":0,"name":0,"loc":1465,"logicalLoc":407,"volume":25993.07,"length":3906,"vocabulary":897,"effort":872452.85,"difficulty":220.55,"time":48469,"bugs":8.66,"intelligentContent":1267.39,"maintainabilityIndexWithoutComment":831.63,"maintainabilityIndex":1401.58,"commentWeight":569.95,"instability":9.92,"afferentCoupling":1,"efferentCoupling":28,"noc":16,"noca":0,"nocc":16,"noc-anon":0,"noi":0,"nom":35,"cyclomaticComplexity":213,"myerInterval":213,"myerDistance":34,"operators":34,"lcom":27,"sysc":126.06,"rsysc":44.82,"dc":48.06,"rdc":21.32,"sc":78,"rsc":23.5}}]
+    var ruleSet = {"cyclomaticComplexity":[10,6,2],"maintainabilityIndex":[0,69,85],"logicalLoc":[800,400,200],"volume":[1300,1000,300],"bugs":[0.35,0.25,0.15],"commentWeight":[36,38,41],"vocabulary":[51,34,27],"difficulty":[18,15,5.8],"instability":[1,0.95,0.45],"afferentCoupling":[20,15,9],"efferentCoupling":[15,11,7],"myerDistance":[10,5,2],"lcom":[3,2,1.5]}
+    
+    // accessibility for colorblinds
+    var accessibilityEnabled = false;
+
+    // fixes links to tab
+    // Javascript to enable link to tab
+//    var hash = document.location.hash;
+//    var prefix = "tab_";
+//    if (hash) {
+//        $('#menu a[href='+hash.replace(prefix,"")+']').tab('show');
+//    }
+//    // Change hash for page-reload
+//    $('#menu a').on('shown', function (e) {
+//        window.location.hash = e.target.hash.replace("#", "#" + prefix);
+//    });
+
+</script>
+
+
+</body>
+</html>
