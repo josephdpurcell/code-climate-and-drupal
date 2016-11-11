@@ -14,16 +14,15 @@ engines:
       ignore_warnings: true
 ratings:
   paths:
-  - "core/lib/Drupal/Core/**.php"
-  - "core/lib/Drupal/Core/**.inc"
-  - "core/lib/Drupal/Core/**.module"
-  - "core/lib/Drupal/Core/**.install"
+  - "core/lib/**.php"
+  - "core/lib/**.inc"
+  - "core/lib/**.module"
+  - "core/lib/**.install"
 exclude_paths:
 - "**/Test/**/*"
 - core/assets
 - core/config
 - core/includes
-- core/lib/Drupal/Component
 - core/misc
 - core/modules
 - core/profiles
