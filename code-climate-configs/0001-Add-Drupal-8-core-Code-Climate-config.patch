@@ -1,9 +1,9 @@
 diff --git a/.codeclimate.yml b/.codeclimate.yml
 new file mode 100644
-index 0000000..03bdef2
+index 0000000..79c63e5
 --- /dev/null
 +++ b/.codeclimate.yml
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,35 @@
 +---
 +engines:
 +  phpmd:
@@ -20,16 +20,15 @@ index 0000000..03bdef2
 +      ignore_warnings: true
 +ratings:
 +  paths:
-+  - "core/lib/Drupal/Core/**.php"
-+  - "core/lib/Drupal/Core/**.inc"
-+  - "core/lib/Drupal/Core/**.module"
-+  - "core/lib/Drupal/Core/**.install"
++  - "core/lib/**.php"
++  - "core/lib/**.inc"
++  - "core/lib/**.module"
++  - "core/lib/**.install"
 +exclude_paths:
 +- "**/Test/**/*"
 +- core/assets
 +- core/config
 +- core/includes
-+- core/lib/Drupal/Component
 +- core/misc
 +- core/modules
 +- core/profiles
