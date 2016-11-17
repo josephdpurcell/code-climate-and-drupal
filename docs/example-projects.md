@@ -32,6 +32,9 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 ## Other
 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/symfony/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/symfony) [GitHub fork for symfony/symfony:master](https://github.com/josephdpurcell/symfony)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/magento2/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/magento2) [GitHub fork for magento/magento2:master](https://github.com/josephdpurcell/magento2)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/platform/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/platform) [GitHub fork for orocrm/platform:master](https://github.com/josephdpurcell/platform)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/orocommerce/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/orocommerce) [GitHub fork for orocommerce/orocommerce:master](https://github.com/josephdpurcell/orocommerce)
 * [![Code Climate](https://codeclimate.com/repos/5730fdf0d132d84858004be5/badges/9503049144363360d9c2/gpa.svg)](https://codeclimate.com/repos/5730fdf0d132d84858004be5/feed) [GitHub fork for wordpress/wordpress:master](https://github.com/josephdpurcell/wordpress) ...is this number right???
 * [![Code Climate](https://codeclimate.com/github/18F/micropurchase/badges/gpa.svg)](https://codeclimate.com/github/18F/micropurchase) [github.com/18F/micropurchase](https://github.com/18F/micropurchase)
 
