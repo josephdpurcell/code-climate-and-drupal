@@ -12,16 +12,18 @@ Currently, I've identified in the [How To's](docs/how-tos.md) a few examples of 
 * [Example Projects](docs/example-projects.md)
 * [Code Climate config examples](code-climate-configs/README.md)
 * [Contributing](CONTRIBUTING.md)
+* [Code Climate's Community Slack](https://codeclimate-community.slack.com/)
 
 # Getting Started
 
-To get started using Code Climate on your Drupal project or contrib module:
+To get started using Code Climate on your Drupal project or contrib module if you're using GitHub:
 
 1. Grab the right patch for the Code Climate config from [code-climate-configs/README.md](/code-climate-configs).
 1. Apply the patch to your repository like: `git am --signoff < 0001-THE-PATCH.patch`
 1. Push the code to your GitHub repository. (Currently, Code Climate is free only for github.com)
 1. Go to [codeclimate.com](https://codeclimate.com/) and add your repository.
-1. Go to the repo on Code Climate, click "Integrations", click "GitHub Pull Requests" to enable the checks to show up on each pull request.
+1. Go to the repo on GitHub, click "Settings", then "Webhooks & Services", and follow [these instructions](https://docs.codeclimate.com/docs/github#section-pull-requests) to add the webhook to allow Code Climate to get notified every time a commit is made.
+1. Go to the repo on Code Climate, click "Integrations", click "GitHub Pull Requests" to enable the checks to show up on each pull request. (see [instructions](https://docs.codeclimate.com/docs/github#section-pull-requests))
 
 # Roadmap
 
