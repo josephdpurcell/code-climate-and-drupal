@@ -11,6 +11,7 @@ Note: these GPA's are likely out of date, so verify the commit Code Climate has 
 ## Drupal Core
 
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-7.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-7.x) [GitHub fork for drupal/drupal:7.x](https://github.com/josephdpurcell/drupal-7.x)
+* [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.0.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.0.x) [GitHub fork for drupal/drupal:8.0.x](https://github.com/josephdpurcell/drupal-8.0.x)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.1.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.1.x) [GitHub fork for drupal/drupal:8.1.x](https://github.com/josephdpurcell/drupal-8.1.x)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.2.x) [GitHub fork for drupal/drupal:8.2.x](https://github.com/josephdpurcell/drupal-8.2.x)
 * [![Code Climate](https://codeclimate.com/github/josephdpurcell/drupal-8.3.x/badges/gpa.svg)](https://codeclimate.com/github/josephdpurcell/drupal-8.3.x) [GitHub fork for drupal/drupal:8.3.x](https://github.com/josephdpurcell/drupal-8.3.x)
