@@ -6,6 +6,7 @@ Currently, I've identified in the [How To's](docs/how-tos.md) a few examples of 
 
 # Resources
 
+* [Presentations](//josephdpurcell.github.io/code-climate-and-drupal/presentations/)
 * [Persuasive Essay](persuasive-essay.md)
 * [How Tos](docs/how-tos.md)
 * [Example Projects](docs/example-projects.md)
