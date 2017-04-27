@@ -878,6 +878,7 @@ exclude_paths:
 
           <section>
             <h3>Don't avoid static analyisis<br>because there's too much to tackle.</h3>
+            <i>100% compliance with static analysis is a good goal <b>sometimes</b></i>
             <aside class="notes">
               <ul>
                 <li>Clean code is hard work, static analysis makes it easier.</li>
@@ -925,15 +926,26 @@ exclude_paths:
           <section>
             <h2>What's next?</h2>
             <ul>
-              <li>Agree on static analysis config for D7 and D8, core, contrib, projects</li>
-              <li class="fragment">Code Climate (or other) support for Drupal.org</li>
-              <li class="fragment">Start using static analysis on Drupal Core and Contrib<br>(see #<a href="https://www.drupal.org/node/1299710">1299710</a>)</li>
+              <li class="fragment">Agree on static analysis tool and config for D7 and D8, core, contrib, projects<br><i>(phpcs can work but is missing phpmd and phpcpd)</i></li>
+              <li class="fragment">Agree on process for versioning the checks and rolling out updates</li>
+              <li class="fragment">Start using static analysis on Drupal Core and Contrib<br>(see #<a href="https://www.drupal.org/node/1299710">1299710</a>, Code Climate can solve this now?)</li>
+              <li class="fragment">Ensure the community can use the same checks on their projects, e.g. Drupal engine on Code Climate</li>
+              <li class="fragment">Ensure editors can integrate with the same checks, e.g. PHPStorm plugin for Code Climate</li>
               <li class="fragment">Add GPAs to compare contrib modules</li>
-              <li class="fragment">Every PHP or Drupal CVE gets a check written for PHPCS (see Ruby's <a href="http://brakemanscanner.org/">Brakeman</a>)</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h2>Longer term ideas</h2>
+            <ul>
+              <li class="fragment">Every PHP or Drupal CVE gets a check written for PHPCS<br>(ease workload on security team? e.g. see Ruby's <a href="http://brakemanscanner.org/">Brakeman</a>)</li>
               <li class="fragment">Automated code quality spike tickets: CVEs or GPA threshold</li>
+              <li class="fragment">Use static analysis reporting as a way to deprecate Drupal API calls or indicate improper usage</li>
               <li class="fragment">Use these checks in autocorrect: PHP Code Beautifier and Fixer (PHPCBF)</li>
-              <li class="fragment">Community available static analysis tool, e.g. Drupal engine on Code Climate</li>
-              <li class="fragment">Integration of static analysis tool in editor, e.g. PHPStorm plugin for Code Climate</li>
             </ul>
             <aside class="notes">
               <ul>
