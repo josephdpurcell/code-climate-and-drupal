@@ -112,8 +112,8 @@ use highlighted red for code samples
             <h2>Who are you?</h2>
             <aside class="notes">
               <ul>
-                <li>dev/pm/leader: how do I quantify "good" code?</li>
-                <li>someone is using static analysis and you don't understand</li>
+                <li>Who knows what cyclomatic complexity is?</li>
+                <li>Assume you value code quality</li>
                 <li>takeaway: what it is and how to change your process to improve quality</li>
               </ul>
             </aside>
@@ -353,7 +353,7 @@ protected function doLoadMultiple(array $names, $immutable = TRUE) {
 
           <section>
             <img src="img/baby-diaper.jpg" style="width:50%;border:none" />
-            <blockquote>If it stinks, change it.</blockquote>
+            <blockquote class="fragment">If it stinks, change it.</blockquote>
             <aside class="notes">
               <ul>
                 <li>Point: get rid of the smell</li>
@@ -446,7 +446,7 @@ protected function doLoadMultiple(array $names, $immutable = TRUE) {
 </pre>
             <div style="text-align:left"><strong>Smells:</strong></div>
             <ul>
-              <li>Readability: It's unclear what <code>$entity</code> is supposed to do.</li>
+              <li>Maintainability: It's unclear what <code>$entity</code> is supposed to do.</li>
               <li>Correctness: Is the lack of use of <code>$entity</code> a bug?</li>
             </ul>
             <aside class="notes">
@@ -469,7 +469,7 @@ protected function doLoadMultiple(array $names, $immutable = TRUE) {
 </pre>
             <div style="text-align:left"><strong>Smells:</strong></div>
             <ul>
-              <li>Readability: Why is this method still here?</li>
+              <li>Maintainability: Why is this method still here?</li>
               <li>Testability: You can't test code that can't be executed.</li>
               <li>Correctness: Code that isn't executed is usually a bug.</li>
             </ul>
@@ -553,7 +553,7 @@ class WorkspaceController extends ControllerBase {
 </pre>
             <div style="text-align:left"><strong>Smells:</strong></div>
             <ul>
-              <li>Readability: <code>update</code> is generic, why is it just a wrapper to <code>doReplication</code>?</li>
+              <li>Maintainability: <code>update</code> is generic, why is it just a wrapper to <code>doReplication</code>?</li>
               <li>Extensibility: How do you know you've changed this class according to author's intent?</li>
             </ul>
             <aside class="notes">
@@ -631,6 +631,29 @@ class MultiversionManager implements MultiversionManagerInterface, ContainerAwar
               <ul>
                 <li>15; High coupling means tests change, architecture changes</li>
                 <li>Similar smells: inappropriate intimacy, indecent exposure</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Check: Space before parenthesis</h3>
+<pre>
+...
+    $promotion->apply($this->order);
+    
+    $this->assertEquals(1, count($this->order->getAdjustments()));
+    $this->assertEquals(new Price('39.00', 'USD'), $this->order->getTotalPrice
+    ());
+...
+</pre>
+            <div style="text-align:left"><strong>Smells:</strong></div>
+            <ul>
+              <li>Readability: This looks different... but why?</li>
+              <li>Maintainability: Fixing creates merge conflict<br><i>(Drupal's strict "only change what you have to")</i></li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Code style is a valid code quality metric</li>
               </ul>
             </aside>
           </section>
@@ -746,12 +769,12 @@ exclude_paths:
           <section>
             <h2>Features of a good static analysis tool for dev workflow:</h2>
             <ul>
-              <li>Isolation of violations by commit or PR</li>
-              <li>Ability to address false positives, e.g. dismiss</li>
-              <li>Indicator of overall health, e.g. GPA</li>
-              <li>Weighted impact of violations on overall health</li>
-              <li>Open source or integration with open source tools like phpcs and phpmd</li>
-              <li>Ability to run static analysis locally, e.g. in PHPStorm</li>
+              <li class="fragment">Isolation of violations by commit or PR</li>
+              <li class="fragment">Ability to address false positives, e.g. dismiss</li>
+              <li class="fragment">Indicator of overall health, e.g. GPA</li>
+              <li class="fragment">Weighted impact of violations on overall health</li>
+              <li class="fragment">Open source or integration with open source tools like phpcs and phpmd</li>
+              <li class="fragment">Ability to run static analysis locally, e.g. in PHPStorm</li>
             </ul>
             <p class="fragment"><i>Code Climate is a good fit.</i></p>
           </section>
@@ -798,6 +821,10 @@ exclude_paths:
               <li>Planned refactoring</li>
               <li>Sprint retrospectives</li>
             </ol>
+          </section>
+
+          <section>
+            <img src="img/drupal-8.3-code-climate-list.png" style="background:transparent;border:none;width:85%">
           </section>
 
           <section>
@@ -914,14 +941,13 @@ exclude_paths:
           </section>
 
           <section>
-            <h2>You are the Lorax.</h2>
-            <p>Speak for the code.</p>
+            <img src="img/mariner-2-launch.jpg" style="width:70%;margin-top:-20%;border:none">
             <aside class="notes">
               <ul>
-                <li>Zendoodles / Technical Pollution</li>
-                <li>Don't let Drupal have the next goto fail</li>
-                <li>Stop wasting time</li>
-                <li>Clean up your code</li>
+                <li>36 days after Mariner 1 failure</li>
+                <li>First successful interplanetary mission</li>
+                <li>We learned many things; atmosphere can melt lead</li>
+                <li>With discipline in our craft we can do extraordinary things</li>
               </ul>
             </aside>
           </section>
