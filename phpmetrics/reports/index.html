@@ -4,4 +4,18 @@
 <li><a href="drupal/replication/8.x-1.x-f34637f149652ab777f43b01ec2bedcb2214cd39.html">drupal/replication:8.x-1.x</a></li>
 <li><a href="drupal/drupal/8.3.x-8a84ec5556f354861f1ddc5d7a80081b91ca42df.html">drupal/drupal:8.3.x</a></li>
 <li><a href="drupal/drupal/8.5.x-9792ce922070ca1fdf944ce69413b8e06139e283.html">drupal/drupal:8.5.x</a></li>
+<li><a href="drupal/drupal/8.6.x-59c2334aa636b3ced5d273c08ce6a9789af728d0.html">drupal/drupal:8.6.x</a></li>
 </ul>
+
+<h2>How To</h2>
+
+<p>The Drupal core reports were generated like so:</p>
+
+<pre>
+composer global require phpmetrics/phpmetrics:1.10.0
+git clone --branch=8.6.x git@github.com:drupal/drupal.git
+cd drupal
+php -dmemory_limit=4096M ~/.composer/vendor/bin/phpmetrics --report-html=8.6.x-59c2334aa636b3ced5d273c08ce6a9789af728d0.html core/lib/Drupal/Core
+</pre>
+
+<p>Note: newer versions of phpmetrics do not have the adjustable graph.</p>
